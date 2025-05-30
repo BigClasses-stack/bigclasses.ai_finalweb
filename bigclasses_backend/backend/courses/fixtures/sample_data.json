@@ -1,0 +1,74 @@
+[
+  {
+    "model": "courses.course",
+    "pk": 1,
+    "fields": {
+      "title": "Python Programming",
+      "slug": "python-programming",
+      "description": "Learn Python programming from scratch with hands-on projects",
+      "image": "https://math.duke.edu/sites/math.duke.edu/files/styles/large/public/images/Featured%20Courses%20MTH%20260%20Python%20Programming%20in%20Math%20image.jpg.png",
+      "students_enrolled": 2345,
+      "duration": "8 weeks",
+      "level": "Beginner",
+      "rating": 4.9,
+      "modules_count": 12
+    }
+  },
+  {
+    "model": "courses.overview",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "average_package": "₹12.5L",
+      "average_hike": "150%",
+      "transitions": "500+",
+      "salary_min": "8L",
+      "salary_avg": "12.5L",
+      "salary_max": "25L",
+      "priority_percentage": "89%"
+    }
+  },
+  {
+    "model": "courses.highlight",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "point": "Build 10+ real-world projects",
+      "is_bullet": true
+    }
+  },
+  {
+    "model": "courses.highlight",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "point": "Industry-standard best practices",
+      "is_bullet": true
+    }
+  },
+  {
+    "model": "courses.module",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "Python Basics",
+      "description": "Learn fundamental Python concepts"
+    }
+  },
+  {
+    "model": "courses.topic",
+    "pk": 1,
+    "fields": {
+      "module": 1,
+      "title": "Variables and Data Types"
+    }
+  },
+  {
+    "model": "courses.topic",
+    "pk": 2,
+    "fields": {
+      "module": 1,
+      "title": "Control Flow and Loops"
+    }
+  }
+]

@@ -1,0 +1,500 @@
+/* General styles */
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.custom-shadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.back-button {
+  color: black;
+  border-radius: 30px;
+  padding: 0.5rem 0.5rem;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  outline: 1px 1px black;
+
+}
+
+.back-button:hover {
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+.nav-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.nav-scroller {
+  display: flex;
+  padding: 0.5rem 1rem;
+  min-width: 100%;
+}
+
+.feature-nav-button {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.25rem;
+  white-space: nowrap;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  margin-right: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.feature-nav-button span {
+  display: flex;
+  align-items: center;
+}
+
+.feature-nav-button span:first-child {
+  margin-right: 0.5rem;
+}
+
+.feature-nav-button-active {
+  background-color: #3b82f6;
+  /* primary color */
+  color: white;
+}
+
+.feature-nav-button-inactive {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.feature-nav-button-inactive:hover {
+  background-color: #e5e7eb;
+}
+
+/* Feature content section */
+.feature-section {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background-color: white;
+  transition: opacity 0.3s ease;
+}
+
+.feature-section-active {
+  opacity: 1;
+}
+
+.custom-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.feature-content {
+  padding: 2rem;
+}
+
+/* Feature content section */
+.feature-section {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.feature-section-active {
+  display: block;
+}
+
+.feature-content {
+  padding: 2rem;
+}
+
+.feature-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.feature-icon-container {
+  background-color: #eef2ff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: #4f46e5;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+/* Feature main image */
+.feature-image-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 600px;
+  width: 100%;
+}
+
+.feature-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feature-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.feature-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.feature-action-button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.feature-action-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.action-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 0.5rem;
+}
+
+/* Feature tabs */
+.feature-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.feature-tab {
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.feature-tab:hover {
+  color: #111827;
+}
+
+.feature-tab-active {
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+.feature-tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4f46e5;
+}
+
+/* Tab content */
+.tab-content {
+  margin-bottom: 2rem;
+}
+
+/* Section Layout - Left image, right content */
+.section-image-container {
+  float: left;
+  width: 20%;
+  margin-right: 2%;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* After the float, ensure content flows properly */
+.feature-description,
+.benefits-container h3,
+.benefits-list,
+.examples-container h3,
+.faqs-container h3,
+.faq-list,
+.usage-examples {
+  overflow: auto;
+  /* Clear the float */
+}
+
+/* Use flexbox for the benefits list for better alignment */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-benefit-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.benefit-icon {
+  color: #10b981;
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+  width: 20px;
+  height: 20px;
+}
+
+/* FAQ styling */
+.faq-item {
+  margin-bottom: 1.5rem;
+}
+
+.faq-question {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.faq-answer {
+  color: #4b5563;
+}
+
+/* Example cards */
+.example-card {
+  background-color: #f9fafb;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.example-card h4 {
+  margin-top: 0;
+  color: #111827;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Related features section */
+/* .related-features {
+  margin-top: 3rem;
+} */
+.related-features {
+  margin-top: 3rem;
+  clear: both;
+  /* Add this to ensure it always starts below the floated elements */
+}
+
+.related-features h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #111827;
+}
+
+.related-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.related-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.related-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.related-card-image {
+  height: 150px;
+  overflow: hidden;
+}
+
+.related-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.related-card-content {
+  padding: 1.5rem;
+}
+
+.related-card-icon {
+  background-color: #eef2ff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: #4f46e5;
+}
+
+.related-card-content h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.related-card-content p {
+  color: #6b7280;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+}
+
+.learn-more-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #4f46e5;
+  font-weight: 500;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.learn-more-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 0.25rem;
+}
+
+/* CTA section */
+.cta-container {
+  margin-top: 3rem;
+  text-align: center;
+  background-color: #f3f4f6;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.cta-container h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.cta-container p {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cta-primary {
+  background-color: #4f46e5;
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cta-primary:hover {
+  background-color: #4338ca;
+}
+
+.cta-secondary {
+  background-color: white;
+  color: #4f46e5;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #4f46e5;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cta-secondary:hover {
+  background-color: #eef2ff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section-image-container {
+    float: none;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-tabs {
+    flex-wrap: wrap;
+  }
+
+  .feature-tab {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .related-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    width: 100%;
+  }
+}
