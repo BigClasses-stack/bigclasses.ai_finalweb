@@ -1,0 +1,24 @@
+
+name: Deploy to stage
+
+on:
+  push:
+    branches:
+      - stage
+
+jobs:
+  deploy:
+    name: Build and Deploy to EC2
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy via SSH to EC2
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd /home/ubuntu/stage/bigclasses.ai_finalweb
+          git pull origin stage
+          ./deploy.sh
