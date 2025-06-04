@@ -10,7 +10,8 @@ from .views import (
 urlpatterns = [
     # Existing URLs
     path('', CourseListView.as_view(), name='course-list'),
-    path('<int:id>/', CourseDetailView.as_view(), name='course-detail'),
+    # path('<int:id>/', CourseDetailView.as_view(), name='course-detail'),
+    path('<slug:slug>/', CourseDetailView.as_view(), name='course-detail'),    
     
     # Existing download URLs
     path('<int:id>/download-curriculum/', CurriculumDownloadView.as_view(), name='curriculum-download'),

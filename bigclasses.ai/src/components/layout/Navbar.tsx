@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -162,70 +162,77 @@ const Navbar = () => {
               </a>
               <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 <a
-                  href="/course-details/1"
+                  href="/course-details/data-analytics"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
-                  Python Programming
+                  Data Analytics
                 </a>
                 <a
-                  href="/course-details/2"
+                  href="/course-details/python-programming"
+                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+                >
+                  Python Programming 
+                </a>
+                <a
+                  href="/course-details/machine-learning"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   Machine Learning
                 </a>
                 <a
-                  href="/course-details/3"
+                  href="/course-details/deep-learning"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   Deep Learning
                 </a>
                 <a
-                  href="/course-details/4"
+                  href="/course-details/natural-language-processing"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
-                  NLP
+                  Natural Language Processing (NLP)
                 </a>
                 <a
-                  href="/course-details/5"
+                  href="/course-details/generative-ai"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
-                  Generative AI
+                 Generative AI
                 </a>
                 <a
-                  href="/course-details/6"
+                  href="/course-details/langchain"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
-                  LangChain
+                  Langchain
                 </a>
                 <a
-                  href="/course-details/7"
+                  href="/course-details/langgraph"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   LangGraph
                 </a>
                 <a
-                  href="/course-details/8"
+                  href="/course-details/mlops"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   MLOps
                 </a>
                 <a
-                  href="/course-details/9"
+                  href="/course-details/llmops"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   LLMOps
                 </a>
+               
                 <a
-                  href="/course-details/10"
+                  href="/course-details/ai-agents"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
                   Agents
                 </a>
-                <a
-                  href="/course-details/11"
+                  <a
+                  href="/course-details/ai-ethics"
                   className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
                 >
-                  Ethics in AI and Scaling AI systems
+                  Ethics AI and Scaling AI system
                 </a>
               </div>
             </div>

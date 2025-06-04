@@ -27,11 +27,15 @@ class CourseListView(ListAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
+# class CourseDetailView(RetrieveAPIView):
+#     queryset = Course.objects.all()
+#     serializer_class = CourseDetailSerializer
+#     lookup_field = 'id'
 class CourseDetailView(RetrieveAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseDetailSerializer
-    lookup_field = 'id'
-    
+    lookup_field = 'slug'
+
     def get_queryset(self):
         return Course.objects.prefetch_related(
             'highlights',
