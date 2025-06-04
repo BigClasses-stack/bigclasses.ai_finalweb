@@ -1,6 +1,6 @@
 import  { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -9,6 +9,7 @@ const Navbar = () => {
   const [mobileFeatureDropdownOpen, setMobileFeatureDropdownOpen] = useState(false);
   const [mobileCourseDropdownOpen, setMobileCourseDropdownOpen] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(true);
+  const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +41,10 @@ const Navbar = () => {
     setMobileFeatureDropdownOpen(!mobileFeatureDropdownOpen);
   };
 
+  const togglePhoneDropdown = () => {
+    setIsPhoneDropdownOpen(!isPhoneDropdownOpen);
+  };
+
   const handleScrollTo = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
@@ -64,6 +69,11 @@ const Navbar = () => {
 
   const handleStartNowClick = () => {
     navigate("/signup");
+  };
+
+  const handlePhoneCall = (phoneNumber: string) => {
+    window.open(`tel:${phoneNumber}`, '_self');
+    setIsPhoneDropdownOpen(false);
   };
 
   return (
@@ -110,6 +120,113 @@ const Navbar = () => {
         .gradient-button-floating:hover {
           transform: scale(1.1);
           box-shadow: 0 6px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Phone floating button styles - Updated for smaller size */
+        .phone-floating-button {
+          background: linear-gradient(135deg, #7c3aed, #8b5cf6, #a855f7);
+          box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+          color: white;
+          transition: all 0.3s ease;
+          animation: phoneVibration 2s ease-in-out infinite;
+          border-radius: 50% 50% 50% 0%;
+          position: relative;
+        }
+        .phone-floating-button:hover {
+          transform: scale(1.1);
+          box-shadow: 0 12px 35px rgba(139, 92, 246, 0.7);
+          animation: phoneVibrationFast 0.5s ease-in-out infinite;
+        }
+        .phone-floating-button:active {
+          transform: scale(1.05);
+        }
+
+        @keyframes phoneVibration {
+          0%, 100% { transform: translateY(0px); }
+          25% { transform: translateY(-3px); }
+          50% { transform: translateY(0px); }
+          75% { transform: translateY(3px); }
+        }
+
+        @keyframes phoneVibrationFast {
+          0%, 100% { transform: translateY(0px) scale(1.1); }
+          25% { transform: translateY(-2px) scale(1.1); }
+          50% { transform: translateY(0px) scale(1.1); }
+          75% { transform: translateY(2px) scale(1.1); }
+        }
+
+        /* Phone dropdown styles */
+        .phone-dropdown {
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          border: 1px solid #e5e7eb;
+          overflow: hidden;
+          animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .phone-dropdown-header {
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          padding: 12px 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .phone-number-item {
+          padding: 12px 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          transition: background-color 0.2s ease;
+          cursor: pointer;
+          border-bottom: 1px solid #f3f4f6;
+        }
+
+        .phone-number-item:hover {
+          background-color: #f8fafc;
+        }
+
+        .phone-number-item:last-child {
+          border-bottom: none;
+        }
+
+        .phone-icon {
+          background: #10b981;
+          color: white;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 14px;
+        }
+
+        .close-button {
+          background: none;
+          border: none;
+          color: white;
+          cursor: pointer;
+          padding: 4px;
+          border-radius: 4px;
+          transition: background-color 0.2s ease;
+        }
+
+        .close-button:hover {
+          background-color: rgba(255, 255, 255, 0.2);
         }
       `}</style>
 
@@ -506,9 +623,49 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Floating Enroll Now Button - Now easily customizable */}
+      {/* Floating Contact Buttons - Updated positioning to move leftward */}
       {!isLoggedIn && showFloatingButton && (
-        <div className="fixed bottom-20 right-6 z-50">
+        <div className="fixed bottom-16 right-6 z-50 flex flex-col space-y-3 items-end">
+          {/* Phone Contact Button - Moved leftward from right-2 to right-6 */}
+          <div className="relative">
+            <Button
+              onClick={togglePhoneDropdown}
+              className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
+            >
+              <Phone size={20} />
+            </Button>
+
+            {/* Phone Dropdown - Adjusted positioning */}
+            {isPhoneDropdownOpen && (
+              <div className="phone-dropdown absolute bottom-16 right-0 w-64 mb-2">
+                <div className="phone-dropdown-header">
+                  <span className="font-medium">Call Us (Or) WhatsApp Us</span>
+                  <button 
+                    onClick={togglePhoneDropdown}
+                    className="close-button"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+                
+                <div className="phone-number-item" onClick={() => handlePhoneCall('+919666717099')}>
+                  <div className="phone-icon">
+                    <Phone size={16} />
+                  </div>
+                  <span className="font-medium text-gray-800">+91 9666717099</span>
+                </div>
+                
+                <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
+                  <div className="phone-icon">
+                    <Phone size={16} />
+                  </div>
+                  <span className="font-medium text-gray-800">+91 9666523199</span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Enroll Now Button - Also moved leftward */}
           <Button
             className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
             onClick={() => navigate("/signup")}
