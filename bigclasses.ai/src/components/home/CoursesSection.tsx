@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import {
   Users,
@@ -11,7 +11,18 @@ import {
 
 export const courses = [
   {
-    id: 1,
+    id: "data-analytics",
+    title: "Data Analytics",
+    description: "Master data analysis techniques, statistical methods, and visualization tools to extract insights from data.",
+    image: "https://i.pinimg.com/736x/43/8e/c0/438ec085495d683eaa3a6a10260ae1cb.jpg",
+    students: "2893+",
+    duration: "8-12 weeks",
+    level: "Beginner",
+    rating: 4.8,
+    modules: 5,
+  },
+  {
+    id: "python-programming",
     title: "Python Programming",
     description: "Learn the core concepts and algorithms behind machine learning with hands-on projects.",
     image: "https://math.duke.edu/sites/math.duke.edu/files/styles/large/public/images/Featured%20Courses%20MTH%20260%20Python%20Programming%20in%20Math%20image.jpg.png?itok=kTIwZdBL",
@@ -22,7 +33,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 2,
+    id: "machine-learning",
     title: "Machine Learning",
     description: "Build solid foundations in machine learning with practical use cases and algorithms.",
     image: "https://media.istockphoto.com/id/1387900612/photo/automation-data-analytic-with-robot-and-digital-visualization-for-big-data-scientist.jpg?s=612x612&w=0&k=20&c=50maOJU6CpVC55mYnUqtff2aiaJZ7KlmMn4jNhWD_eo=",
@@ -33,7 +44,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 3,
+    id: "deep-learning",
     title: "Deep Learning",
     description: "Explore neural networks, CNNs, RNNs, and advanced architectures like Transformers.",
     image: "https://miro.medium.com/v2/resize:fit:1024/1*tWLecb8_qosGJNHFAF43qA.jpeg",
@@ -44,7 +55,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 4,
+    id: "natural-language-processing",
     title: "Natural Language Processing",
     description: "Understand natural language processing from tokenization to transformers.",
     image: "https://media.istockphoto.com/id/1420753803/photo/ai-and-nlp-natural-language-processing-cognitive-computing-technology-concept.jpg?s=612x612&w=0&k=20&c=sNQoIU4pZRg4kLcu8OkKO9yXPZiZIr0ZwkKCoYSaB5I=",
@@ -55,7 +66,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 5,
+    id: "generative-ai",
     title: "Generative AI",
     description: "Learn how to build and evaluate generative models like GANs and VAEs.",
     image: "https://prescienceds.com/wp-content/uploads/2024/10/GenAI.webp",
@@ -66,10 +77,10 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 6,
+    id: "langchain",
     title: "LangChain",
     description: "Master building LLM applications with LangChain and real-world integrations.",
-    image: "/lovable-uploads/langchain.png", // Updated image path
+    image: "/lovable-uploads/langchain.png",
     students: "2167+",
     duration: "4 weeks",
     level: "Intermediate",
@@ -77,7 +88,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 7,
+    id: "langgraph",
     title: "LangGraph",
     description: "Create powerful AI workflows with LangGraph's graph-based programming paradigm.",
     image: "https://cdn.prod.website-files.com/6583e2b6af21ee3aa85c3013/671f853754d6970c274a7136_66824dd409fe46033e194223_lang%2520Graph.png",
@@ -88,7 +99,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 8,
+    id: "mlops",
     title: "MLOps",
     description: "Implement ML systems at scale with CI/CD, monitoring, and deployment strategies.",
     image: "https://www.marktechpost.com/wp-content/uploads/2022/08/Blog-Banner-2.png",
@@ -99,7 +110,7 @@ export const courses = [
     modules: 6,
   },
   {
-    id: 9,
+    id: "llmops",
     title: "LLMOps",
     description: "Deploy, fine-tune, and scale large language models efficiently in production.",
     image: "https://markovate.com/wp-content/uploads/2024/05/LLMOps_-Streamlining-AI-Workflows-for-Optimal-Results-1280x960.webp",
@@ -110,7 +121,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 10,
+    id: "ai-agents",
     title: "Agents",
     description: "Build autonomous AI agents capable of decision-making and task execution.",
     image: "https://i0.wp.com/www.lyzr.ai/wp-content/uploads/2024/08/Understanding-AI-agents-scaled.webp",
@@ -121,7 +132,7 @@ export const courses = [
     modules: 5,
   },
   {
-    id: 11,
+    id: "ai-ethics",
     title: "Ethics in AI and Scaling AI systems",
     description: "Explore ethical AI practices and the challenges in scaling responsible AI systems.",
     image: "https://innovationatwork.ieee.org/wp-content/uploads/2020/10/bigstock-Teamwork-Business-Team-Repair-300147874_1024X684.png",
@@ -130,29 +141,16 @@ export const courses = [
     level: "Beginner",
     rating: 4.7,
     modules: 5,
-  },
-  {
-    id: 12,
-    title: "Data Analytics",
-    description: "Master data analysis techniques, statistical methods, and visualization tools to extract insights from data.",
-    image: "https://i.pinimg.com/736x/43/8e/c0/438ec085495d683eaa3a6a10260ae1cb.jpg",
-    students: "2893+",
-    duration: "8-12 weeks",
-    level: "Beginner",
-    rating: 4.8,
-    modules: 5,
   }
 ];
 
-
 const CoursesSection = () => {
-  const navigate = useNavigate(); // Add this line to define navigate
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [showAllCourses, setShowAllCourses] = useState(false);
 
-  const handleViewCourse = (courseId: number) => {
+  const handleViewCourse = (courseId: string) => {
     navigate(`/course-details/${courseId}`);
-    // Remove the scroll behavior from here as we'll handle it in CourseDetails
   };
 
   const visibleCourses = showAllCourses ? courses : courses.slice(0, 8);
@@ -175,7 +173,6 @@ const CoursesSection = () => {
               help you master the skills that matter.
             </p>
           </div>
-
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -208,13 +205,13 @@ const CoursesSection = () => {
                       : "translate-y-full"
                   }`}
                 >
-            <Button
-              className="w-full rounded-md"
-              size="sm"
-              onClick={() => handleViewCourse(course.id)}
-            >
-              View Course
-            </Button>
+                  <Button
+                    className="w-full rounded-md"
+                    size="sm"
+                    onClick={() => handleViewCourse(course.id)}
+                  >
+                    View Course
+                  </Button>
                 </div>
               </div>
 

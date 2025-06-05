@@ -467,51 +467,66 @@ const Navbar = () => {
 
                 {mobileCourseDropdownOpen && (
                   <div className="pl-4 flex flex-col space-y-2 mt-2">
-                    <a
-                      href="/course-details/1"
-                      className="text-gray-700 hover:text-blue-500"
-                      onClick={() => setIsMenuOpen(false)}
+                    <button
+                      className="text-left text-gray-700 hover:text-blue-500"
+                      onClick={() => {
+                        navigate("/course-details/data-analytics");
+                        setIsMenuOpen(false);
+                        setMobileCourseDropdownOpen(false);
+                      }}
+                    >
+                      Data Analytics
+                    </button>
+                    <button
+                      className="text-left text-gray-700 hover:text-blue-500"
+                      onClick={() => {
+                        navigate("/course-details/python-programming");
+                        setIsMenuOpen(false);
+                        setMobileCourseDropdownOpen(false);
+                      }}
                     >
                       Python Programming
-                    </a>
-                    <a
-                      href="/course-details/2"
-                      className="text-gray-700 hover:text-blue-500"
-                      onClick={() => setIsMenuOpen(false)}
+                    </button>
+                    <button
+                      className="text-left text-gray-700 hover:text-blue-500"
+                      onClick={() => {
+                        navigate("/course-details/machine-learning");
+                        setIsMenuOpen(false);
+                        setMobileCourseDropdownOpen(false);
+                      }}
                     >
                       Machine Learning
-                    </a>
-                    <a
-                      href="/course-details/3"
-                      className="text-gray-700 hover:text-blue-500"
-                      onClick={() => setIsMenuOpen(false)}
+                    </button>
+                    <button
+                      className="text-left text-gray-700 hover:text-blue-500"
+                      onClick={() => {
+                        navigate("/course-details/deep-learning");
+                        setIsMenuOpen(false);
+                        setMobileCourseDropdownOpen(false);
+                      }}
                     >
                       Deep Learning
-                    </a>
-                    <a
-                      href="/course-details/4"
-                      className="text-gray-700 hover:text-blue-500"
-                      onClick={() => setIsMenuOpen(false)}
+                    </button>
+                    <button
+                      className="text-left text-gray-700 hover:text-blue-500"
+                      onClick={() => {
+                        navigate("/course-details/natural-language-processing");
+                        setIsMenuOpen(false);
+                        setMobileCourseDropdownOpen(false);
+                      }}
                     >
                       NLP
-                    </a>
-                    <a
-                      href="/course-details/5"
-                      className="text-gray-700 hover:text-blue-500"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Generative AI
-                    </a>
-                    <a
-                      href="#courses"
-                      className="text-blue-600 font-medium"
+                    </button>
+                    <button
+                      className="text-left text-blue-600 font-medium"
                       onClick={() => {
+                        handleScrollTo("courses");
                         setIsMenuOpen(false);
                         setMobileCourseDropdownOpen(false);
                       }}
                     >
                       View All Courses
-                    </a>
+                    </button>
                   </div>
                 )}
               </div>
