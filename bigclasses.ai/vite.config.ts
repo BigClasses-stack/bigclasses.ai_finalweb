@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     proxy: {
       '/api': {
-        target: 'https:/www.stage.bigclasses.ai',
+        target: 'https:/www.bigclasses.ai',
         // target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
