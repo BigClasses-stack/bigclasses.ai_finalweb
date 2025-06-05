@@ -8,15 +8,11 @@ from .views import (
 )
 
 urlpatterns = [
-    # Existing URLs
     path('', CourseListView.as_view(), name='course-list'),
-    # path('<int:id>/', CourseDetailView.as_view(), name='course-detail'),
     path('<slug:slug>/', CourseDetailView.as_view(), name='course-detail'),    
     
-    # Existing download URLs
-    path('<int:id>/download-curriculum/', CurriculumDownloadView.as_view(), name='curriculum-download'),
-    path('<int:id>/curriculum-info/', CurriculumInfoView.as_view(), name='curriculum-info'),
-    
-    # NEW ENROLLMENT URL
-    path('<int:id>/enroll-download/', EnrollDownloadView.as_view(), name='enroll-download'),
+    # Change these to use slug instead of id
+    path('<slug:slug>/download-curriculum/', CurriculumDownloadView.as_view(), name='curriculum-download'),
+    path('<slug:slug>/curriculum-info/', CurriculumInfoView.as_view(), name='curriculum-info'),
+    path('<slug:slug>/enroll-download/', EnrollDownloadView.as_view(), name='enroll-download'),
 ]
