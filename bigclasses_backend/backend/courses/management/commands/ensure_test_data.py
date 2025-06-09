@@ -32,7 +32,8 @@ class Command(BaseCommand):
                     'package': "12.5",
                     'hike': "150",
                     'transitions': "500",
-                    'image': "https://grras.com/files/hiclvxrtdz6derhkzc6a/python%20(1).png",  # <-- Add this
+                    'image': "https://grras.com/files/hiclvxrtdz6derhkzc6a/python%20(1).png",
+
 
                     'highlights': [
                         "Basics of Python Programming",
