@@ -40,7 +40,7 @@ class Command(BaseCommand):
                         'topics': ["Variables", "Data Types", "Control Flow"]
                     },
                     {
-                        'title': "Advanced Python",
+                        'title': "Advanced Python ",
                         'description': "Advanced Python features",
                         'topics': ["OOP", "Decorators", "Generators"]
                     }

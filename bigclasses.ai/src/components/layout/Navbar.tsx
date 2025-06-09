@@ -422,7 +422,7 @@ const Navbar = () => {
             ) : (
               <Button
                 onClick={handleStartNowClick}
-                className="vibrate-button gradient-button-primary rounded-full px-6 py-2 font-medium"
+                className="vibrate-button gradient-button-primary rounded-full px-3 py-2` font-medium"
               >
                 ⭐ Start Now
               </Button>

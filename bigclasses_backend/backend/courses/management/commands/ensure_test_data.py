@@ -32,28 +32,30 @@ class Command(BaseCommand):
                     'package': "12.5",
                     'hike': "150",
                     'transitions': "500",
+                    'image': "https://grras.com/files/hiclvxrtdz6derhkzc6a/python%20(1).png",  # <-- Add this
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
-                    ],
+                        "Basics of Python Programming",
+                        "Data Structures and Algorithms",
+                        "Object-Oriented Programming (OOP)",
+                        "File Handling and Exceptions",
+                        "Advanced Python"
+                   ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Python Basics", "Core Python concepts", ["Variables", "Data Types", "Control Flow"]),
-                        ("Advanced Python", "Advanced features", ["OOP", "Decorators", "Generators"]),
-                        ("Machine Learning", "ML models overview", ["Regression", "Classification", "Clustering"]),
-                        ("Data Analysis", "Working with data", ["NumPy", "Pandas", "DataFrames"]),
-                        ("Web Development", "Building applications", ["Flask", "Django", "APIs"])
+                        ("Basics of Python Programming", "Basic Python covers variables, data types, loops, functions, and I/O.", ["Python Syntax and Variables", "Data Types and Operators", "Conditional Statements and Loops","Project : Create a basic calculator with conditional operations."]),
+                        ("Data Structures and Algorithms", "DSA focuses on efficient data storage and problem-solving methods.", ["Lists, Tuples, and Dictionaries", "Stack, Queue, and Tree Implementations", "Sorting and Searching Algorithms","Project :Develop a to-do list application with priority sorting."]),
+                        ("Object-Oriented Programming (OOP)", "OOP is a programming style based on classes and objects.", ["Classes and Objects","Polymorphism and Inheritance", "Encapsulation", "Project :Create a library management system using OOP principles."]),
+                        ("File Handling and Exceptions", "File handling manages data files; exceptions handle runtime errors.", ["Reading and Writing Files", "Exception Handling", "Logging and Debugging","Project : Build a file organizer that categorizes files into folders based on type."]),
+                        ("Advanced Python", "Advanced Python includes decorators, generators, and context managers.", ["Python Modules and Packages", "Decorators and Generators", "Multithreading and Multiprocessing","Project :Design a multithreaded web scraper for extracting headlines."])
                     ]
                 },
                 {
@@ -62,29 +64,33 @@ class Command(BaseCommand):
                     'package': "15.5",
                     'hike': "180",
                     'transitions': "600",
+                    'image': "https://www.digitaledify.ai/images/aibnr.jpg",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Introduction to Machine Learning",
+                        "Supervised Learning",
+                        "Unsupervised Learning",
+                        "Model Evaluation and Optimization",
+                        "Deployment"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Feature Engineering", "Techniques for feature transformation", ["Normalization", "Encoding", "Feature Selection"]),
-                        ("Model Evaluation", "Evaluating model performance", ["Accuracy", "Precision", "Recall"]),
-                        ("Unsupervised Learning", "Exploring unsupervised algorithms", ["K-Means", "PCA", "Anomaly Detection"]),
-                        ("Model Optimization", "Tuning models", ["Grid Search", "Random Search", "Cross Validation"]),
-                        ("Deployment", "Deploying ML models", ["Flask", "FastAPI", "Docker"])
+                        ("Introduction to Machine Learning", "Getting started with algorithms that enable data-driven predictions.", ["Supervised vs. Unsupervised Learning", "Machine Learning Lifecycle", "Data Preprocessing", "Project : Implement a simple house price prediction model."]),
+                        ("Supervised Learning", "Learning from labeled data to predict outcomes.", ["Linear and Logistic Regression","Decision Trees and Random Forests", "Gradient Boosting (XGBoost, LightGBM)", "Project : Develop a spam email detection system."]),
+                        ("Unsupervised Learning", "Identifying patterns in unlabeled data.", ["K-Means Clustering","Hierarchical Clustering","Dimensionality Reduction (PCA)","Project : Create a customer segmentation model for a retail store."]),
+                        ("Model Evaluation and Optimization", "Enhancing model performance through evaluation and fine-tuning.", ["Cross-Validation and Hyperparameter Tuning","Confusion Matrix and AUC-ROC","Overfitting and Regularization Techniques","Project : Optimize a model to predict employee attrition rates."]),
+                        ("Deployment", "Delivering models for real-world use.", ["Flask/FastAPI for ML Model Deployment", "Monitoring and Updating Models", "Deployment on Cloud Platforms (AWS/GCP)", "Project : Deploy a loan approval prediction model on a cloud platform."])
                     ]
+
                 },
                 {
                     'id': 3,
@@ -92,29 +98,85 @@ class Command(BaseCommand):
                     'package': "18.5",
                     'hike': "200",
                     'transitions': "400",
+                    'image': "https://public.softmaxdata.com/imgs/home/data_discussion.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Basics of Neural Networks",
+                        "Convolutional Neural Networks (CNNs)",
+                        "Recurrent Neural Networks (RNNs)",
+                        "Transformers",
+                        "Deployment and Real-World Applications"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Neural Networks", "Basic concepts of neural networks", ["Perceptrons", "Backpropagation", "CNN"]),
-                        ("Advanced DL", "Deep architectures", ["RNN", "LSTM", "Transformers"]),
-                        ("Convolutional Networks", "CNNs in image processing", ["Filters", "Pooling", "Feature Maps"]),
-                        ("Recurrent Networks", "Sequence-based models", ["RNN", "LSTM", "GRU"]),
-                        ("Optimization & Training", "Improving model performance", ["SGD", "Adam", "Dropout"])
-                    ]
+    (
+        "Basics of Neural Networks",
+        "Basics of neural networks cover layers, neurons, and learning processes.",
+        [
+            "Perceptrons and Activation Functions",
+            "Forward and Backward Propagation",
+            "Loss Functions",
+            "Project : Build a simple neural network for digit classification (MNIST)."
+
+
+        ]
+    ),
+    (
+        "Convolutional Neural Networks (CNNs)",
+        "CNNs are neural networks specialized for image processing tasks.",
+        [
+            "Convolution and Pooling Operations",
+            "Transfer Learning with Pretrained Models",
+            "Applications in Image Recognition",
+            "Project : Create a face detection system using CNNs."
+
+
+        ]
+    ),
+    (
+        "Recurrent Neural Networks (RNNs)",
+        "RNNs are neural networks designed for sequential data and time series.",
+        [
+            "LSTMs and GRUs",
+            "Applications in Text and Time-Series Data",
+            "Attention Mechanism Basics",
+            "Project :Build a text sentiment analysis tool using RNNs."
+
+
+        ]
+    ),
+    (
+        "Transformers",
+        "Transformers are models that use attention to process sequence data efficiently.",
+        [
+            "Introduction to Transformers and BERT",
+            "Sequence-to-Sequence Models",
+            "Applications in NLP",
+            "Project :Develop a text summarization tool using BERT."
+
+
+        ]
+    ),
+    (
+        "Deployment and Real-World Applications",
+        "Deployment and real-world applications involve launching models for practical use.",
+        [
+            "Model Deployment with TensorFlow Serving",
+            "Real-Time Analytics with Deep Learning",
+            "Industry Case Studies",
+            "Project : Deploy an image recognition model on a cloud platform"
+        ]
+    )
+]
                 },
                 {
                     'id': 4,
@@ -122,29 +184,84 @@ class Command(BaseCommand):
                     'package': "17",
                     'hike': "190",
                     'transitions': "350",
+                    'image': "https://cdn.prod.website-files.com/634054bf0f60201ce9b30604/6489540e67c5fbe5900c09cf_home%20large%20down.svg",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Text Preprocessing",
+                        "Classical NLP Approaches",
+                        "Advanced NLP Techniques",
+                        "Applications of NLP",
+                        "Deployment and Integration"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Text Preprocessing", "Cleaning and preparing text data", ["Tokenization", "Lemmatization", "Stopwords Removal"]),
-                        ("Embeddings", "Converting text to vectors", ["Word2Vec", "GloVe", "BERT"]),
-                        ("NER & POS", "Named Entity Recognition & POS tagging", ["SpaCy", "NLTK"]),
-                        ("Sentiment Analysis", "Analyzing sentiments", ["Lexicon-based", "ML models", "Deep Learning"]),
-                        ("Chatbots", "Building conversational bots", ["DialogFlow", "Rasa", "Custom Bots"])
-                    ]
+    (
+        "Text Preprocessing",
+        "Preparing text data for analysis and modeling.",
+        [
+            "Tokenization and Stopword Removal",
+            "Lemmatization and Stemming",
+            "N-Grams and Bag of Words",
+            "Project : Develop a keyword extractor from text documents."
+        ]
+    ),
+    (
+        "Classical NLP Approaches",
+        "Traditional methods for text analysis using statistical and rule-based techniques.",
+        [
+            "Sentiment Analysis",
+            "Named Entity Recognition (NER)",
+            "Text Classification",
+            "Project : Build a sentiment analysis model for product reviews."
+
+
+        ]
+    ),
+    (
+        "Advanced NLP Techniques",
+        "Cutting-edge methods like transformers for deep text understanding.",
+        [
+            "Word Embeddings (Word2Vec, GloVe)",
+            "Transformers (BERT, GPT)",
+            "Sequence-to-Sequence Models",
+            "Project : Create a machine translation system."
+
+
+        ]
+    ),
+    (
+        "Applications of NLP",
+        "Real-world uses of NLP, including chatbots, sentiment analysis, and translation.",
+        [
+            "Chatbots and Virtual Assistants",
+            "Text Summarization",
+            "Topic Modeling",
+            "Project : Develop a chatbot for customer support."
+
+
+        ]
+    ),
+    (
+        "Deployment and Integration",
+        "Implementing models into systems for seamless real-world use.",
+        [
+            "Deployment of NLP Models",
+            "Integration with Web Applications",
+            "NLP in Real-Time Systems",
+            "Project : Deploy a language detection model for a multilingual website"
+        ]
+    )
+]
+
                 },
                 {
                     'id': 5,
@@ -152,29 +269,77 @@ class Command(BaseCommand):
                     'package': "20",
                     'hike': "210",
                     'transitions': "300",
+                    'image': "https://img.freepik.com/premium-photo/abstract-ai-illustration-with-futuristic-design-elements-vibrant-colors-showcasing-artificial-intelligence-digital-connectivity_124865-93745.jpg",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Fundamentals of Generative AI",
+                        "Text Generation",
+                        "Image and Video Generation",
+                        "Multi-Modal Models",
+                        "Real-World Applications and Deployment",
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Text Generation", "Generating text with models like GPT", ["Beam Search", "Top-k Sampling", "Temperature"]),
-                        ("Image Synthesis", "Creating images from text", ["DALL·E", "Stable Diffusion", "ControlNet"]),
-                        ("Audio Generation", "Generating audio from text", ["Tacotron", "WaveNet", "TTS"]),
-                        ("Reinforcement for GenAI", "Reinforcement learning in GenAI", ["RLHF", "Rewards", "Feedback Loops"]),
-                        ("Fine-tuning Generators", "Improving generative models", ["LoRA", "DreamBooth", "PEFT"])
-                    ]
+    (
+        "Fundamentals of Generative AI",
+        "Exploring models like GANs, VAEs, and Diffusion for generative tasks.",
+        [
+            "Introduction to GANs",
+            "Variational Autoencoders (VAEs)",
+            "Diffusion Models",
+            "Project : Build a basic GAN for image generation."
+        ]
+    ),
+    (
+        "Text Generation",
+        "Text generation is creating written content using AI models.",
+        [
+            "GPT Models and Their Applications",
+            "Fine-Tuning Pretrained Models",
+            "Text-Based Content Creation",
+            "Project : Develop an AI writer for automated blog generation."
+        ]
+    ),
+    (
+        "Image and Video Generation",
+        "Image and video generation use AI to create visual content.",
+        [
+            "DALL-E and Stable Diffusion",
+            "GANs for Image-to-Image Translation",
+            "Applications in Video Synthesis",
+            "Project: Create an AI-powered image-to-art converter."
+        ]
+    ),
+    (
+        "Multi-Modal Models",
+        "Multi-modal models process and combine different data types like text and images.",
+        [
+            "Combining Text, Image, and Audio Data",
+            "CLIP and Other Multi-Modal Models",
+            "Use Cases in Interactive Media",
+            "Project : Develop a multi-modal system that generates captions for images."
+        ]
+    ),
+    (
+        "Real-World Applications and Deployment",
+        "Real-world applications and deployment bring AI models into practical use.",
+        [
+            "Deployment of Generative AI Models",
+            "Ethical Considerations in Generative AI",
+            "Industry Applications",
+            "Project : Deploy a generative AI model for creating virtual environments"
+        ]
+    )
+]
                 },
                 {
                     'id': 6,
@@ -182,29 +347,78 @@ class Command(BaseCommand):
                     'package': "16",
                     'hike': "170",
                     'transitions': "320",
+                    'image': "https://cdn.prod.website-files.com/62a8969da1ab56329dc8c41e/664eeed26a136d6160434321_Amazon_Lamd-03%201.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Introduction to LangChain",
+                        "Working with Language Models",
+                        "Building Knowledge-Based Systems",
+                        "Deployment and Scaling",
+                        "Advanced Features of LangChain"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("LangChain Basics", "Foundations", ["Chains", "Agents", "Callbacks"]),
-                        ("Advanced LangChain", "Use cases", ["QA Systems", "Chatbots", "Custom Tools"]),
-                        ("Integration", "Working with APIs", ["REST APIs", "GraphQL", "Webhooks"]),
-                        ("Data Management", "Storing and using data", ["SQL", "NoSQL", "Data pipelines"]),
-                        ("Deployment", "Deploying LangChain systems", ["Docker", "Kubernetes", "CI/CD"])
-                    ]
+    (
+        "Introduction to LangChain",
+        "Overview of LangChain for building language model-powered applications.",
+        [
+            "Overview of LangChain",
+            "Core Concepts: Chains and Agents",
+            "Setting Up LangChain Environment",
+            "Project : Build a simple conversational chain using LangChain."
+        ]
+    ),
+    (
+        "Working with Language Models",
+        "Using language models to generate, understand, and analyze text.",
+        [
+            "Integrating OpenAI APIs (GPT, BERT)",
+            "Fine-Tuning LLMs",
+            "Prompt Engineering Techniques",
+            "Project : Create a question-answering system using GPT."
+        ]
+    ),
+    (
+        "Building Knowledge-Based Systems",
+        "Developing intelligent systems using structured data and rules.",
+        [
+            "Workflow Automation with Chains",
+            "Memory Management in LangChain",
+            "Developing Custom Agents",
+            "Project : Build a workflow automation tool with LangChain agents."
+        ]
+    ),
+    (
+        "Deployment and Scaling",
+        "Launching applications and expanding capacity to handle growth.",
+        [
+            "Deployment of LangChain Applications",
+            "Monitoring and Optimization of Chains",
+            "Scaling for High-Volume Requests",
+            "Project : Deploy a customer support system powered by LangChain."
+        ]
+    ),
+    (
+        "Advanced Features of LangChain",
+        "Creating systems that leverage structured information for intelligent responses.",
+        [
+            "Utilizing External Data Sources",
+            "Building a Context-Aware Chatbot",
+            "Semantic Search and Retrieval-Augmented Generation (RAG)",
+            "Project: Develop a chatbot for FAQ retrieval"
+        ]
+    )
+]
+
                 },
                 {
                     'id': 7,
@@ -212,29 +426,78 @@ class Command(BaseCommand):
                     'package': "15",
                     'hike': "160",
                     'transitions': "290",
+                    'image': "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*GuAKET2lI82IcBrW.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Fundamentals of LangGraph",
+                        "Advanced Graph-Based Workflows",
+                        "Integration with External Services",
+                        "Complex Graph Applications",
+                        "Deployment and Monitoring",
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Intro to LangGraph", "Workflow principles", ["Nodes", "Edges", "Flow Execution"]),
-                        ("Advanced LangGraph", "Real applications", ["Tooling", "Visualization", "Monitoring"]),
-                        ("API Integration", "Connecting systems", ["REST", "GraphQL", "Webhooks"]),
-                        ("Memory Management", "Handling data within LangGraph", ["State", "Persistence", "Snapshots"]),
-                        ("Deployment", "Deployment strategies", ["Scaling", "Fault Tolerance", "CI/CD"])
-                    ]
+    (
+        "Fundamentals of LangGraph",
+        "LangGraph fundamentals cover building and managing AI workflows with graph-based structures.",
+        [
+            "Introduction to LangGraph",
+            "Creating Graph-Based Workflows",
+            "Data Modeling in LangGraph",
+            "Project : Build a simple graph for task prioritization."
+        ]
+    ),
+    (
+        "Advanced Graph-Based Workflows",
+        "Advanced Graph-Based Workflows.",
+        [
+            "Creating Custom Nodes and Edges",
+            "Optimizing Workflow Execution",
+            "Handling Errors in LangGraph Workflows",
+            "Project : Develop a document approval workflow."
+        ]
+    ),
+    (
+        "Integration with External Services",
+        "Integration with external services connects AI workflows to APIs and third-party tools.",
+        [
+            "Connecting APIs and Databases",
+            "Dynamic Updates in Graphs",
+            "Real-Time Graph Visualization",
+            "Project : Build a real-time data processing pipeline using LangGraph."
+        ]
+    ),
+    (
+        "Complex Graph Applications",
+        "Complex graph applications solve intricate problems using advanced graph structures.",
+        [
+            "Multi-Step Graph Workflows",
+            "Recursive Workflows and Loops",
+            "Parallel Processing in LangGraph",
+            "Project : Create a knowledge graph for content recommendation."
+        ]
+    ),
+    (
+        "Deployment and Monitoring",
+        "Deployment and monitoring ensure AI models run smoothly and perform well in production.",
+        [
+            "Deploying LangGraph Applications",
+            "Performance Monitoring and Debugging",
+            "Scaling Graph-Based Solutions",
+            "Project: Deploy a graph-based project management system"
+        ]
+    )
+]
+
                 },
                 {
                     'id': 8,
@@ -242,29 +505,228 @@ class Command(BaseCommand):
                     'package': "19",
                     'hike': "210",
                     'transitions': "380",
+                    'image': "https://miro.medium.com/v2/resize:fit:800/1*0DmXy4etGIxtI9nbYqMBAw.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Introduction to MLOps",
+                        "Introduction to MLflow",
+                        "MLflow Tracking component",
+                        "MLflow Logging function",
+                        "Launch multiple Experiments and Runs",
+                        "Autologging in MLflow",
+                        "Tracking Server of MLflow",
+                        "MLflow Model component",
+                        "Handling Customized models in MLflow",
+                        "MLflow Model Evaluation",
+                        "Git and Github",
+                        "Docker",
+                        "Kubernetes",
+                        "Terraform",
+                        "Azure Essentials",
+                        "Azure MLops"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Model Development", "Building and training models", ["Data Preprocessing", "Model Selection"]),
-                        ("CI/CD for AI", "Automating workflows", ["CI Tools", "CD Pipelines", "Testing"]),
-                        ("Model Monitoring", "Continuous model evaluation", ["MLflow", "Kubeflow", "Prometheus"]),
-                        ("Model Deployment", "Bringing models into production", ["Docker", "Kubernetes", "Cloud"]),
-                        ("Model Lifecycle", "Managing model lifecycle", ["Versioning", "Model Registries", "Rollback"])
-                    ]
+    (
+        "Introduction to MLOps",
+        "Introduction to MLOps covers the basics of deploying and managing machine learning models efficiently.",
+        [
+            "What is MLOps?",
+            "Traditional Machine Learning Lifecycle",
+            "Challenges in traditional ML lifecycle - Part 1",
+            "Challenges in traditional ML lifecycle - Part 2",
+            "How MLOps address the challenges"
+        ]
+    ),
+    (
+        "Introduction to MLFlow",
+        "Getting started with MLflow for tracking and managing ML experiments.",
+        [
+            "What is MLFlow",
+            "Components of MLFlow",
+            "MLflow Setup"
+        ]
+    ),
+    (
+        "MLflow Tracking Components",
+        "MLflow Tracking lets you log and manage experiments with APIs, a central server, metadata store, and artifact storage.",
+        [
+            "Sklearn regression model",
+            "Sklearn regression model with MLflow",
+            "MLruns directory",
+            "MLflow UI tour"
+        ]
+    ),
+    (
+        "MLflow Logging Functions",
+        "MLflow logging functions record experiment data like parameters, metrics, tags, and artifacts during model training.",
+        [
+            "Setting and Getting Tracking Uri - Part 1",
+            "Setting and Getting Tracking Uri - Part 2",
+            "Create MLflow experiment function",
+            "Set MLflow experiment function",
+            "Start and End run functions - Part 1",
+            "Start and End run functions - Part 2",
+            "Active & Last active run functions",
+            "Log multiple parameters & metrics function",
+            "Log multiple artifacts function",
+            "Set tags function"
+            ]
+    ),
+    (
+        "Launch Multiple Experiments and Runs",
+        "MLflow allows launching multiple experiments and runs to track and compare different model training workflows.",
+        [
+            "Launch multiple Runs in a program",
+            "Launch multiple Experiments in a program"
+        ]
+    ),
+    (
+        "Autologging in MLflow",
+        "MLflow autologging automatically logs parameters, metrics, and artifacts during training.",
+        [
+            "Introduction to Autologging",
+            "implement autolog() function",
+            "Implement library specific autolog function"
+        ]
+    ),
+    (
+        "Tracking Server of MLflow",
+        "The MLflow Tracking Server stores and manages experiment runs, parameters, metrics, and artifacts centrally.",
+        [
+            "What is MLflow Tracking server",
+            "Implement Tracking Server in MLflow",
+            "Local Tracking server scenarios",
+            "Remote Tracking server scenarios"
+        ]
+    ),
+    (
+        "MLflow Model Component",
+        "The MLflow Model component packages machine learning models for easy deployment and reuse across platforms.",
+        [
+            "Introduction to Model component",
+            "Model components",
+            "Storage format",
+            "MLmodel file explained",
+            "What are Model Signatures",
+            "What is Signature Enforcement in MLflow",
+            "Log Signatures & input example in MLflow",
+            "Model API (save_model, log_model) explained"
+        ]
+    ),
+    (
+        "Handling Customized Models in MLflow",
+        "MLflow handles custom models by packaging and logging them with their code and dependencies.",
+        [
+            "What is Model customization in MLflow",
+            "Implement Custom Python model - Part 1",
+            "Implement Custom Python model - Part 2",
+            "Implement Custom Python model - Part 3",
+            "Loading the customized Python model",
+            "Custom Flavors in MLflow"
+        ]
+    ),
+    (
+        "MLflow Model Evaluation",
+        "MLflow Model Evaluation tracks and compares model performance using logged metrics and visualizations.",
+        [
+            "Introduction to Model evaluation in MLflow",
+            "Evaluate function parameters",
+            "Implement evaluate() function",
+            "Comparing Runs of an Experiment",
+            "Create Custome metrics and artifacts",
+            "Setting Validation thresholds in evaluate()"
+
+        ]
+    ),
+    (
+        "Git and GitHub",
+        "Git and GitHub enable efficient version control and collaboration for software development projects.",
+        [
+            "Introduction to Git and GitHub",
+            "Basic Git Commands",
+            "Working with Remote Repositories",
+            "Git Ignore and Managing Sensitive Files",
+            "Collaboration using Pull Requests",
+            "Resolving Merge Conflicts",
+            "Advanced Git Operations",
+            "GitHub Actions and Automation"
+
+        ]
+    ),
+    (
+        "Docker",
+        "Docker simplifies application deployment by containerizing applications and their dependencies for portability and scalability.",
+        [
+            "Introduction to Docker and Containerization",
+            "Installing and Setting Up Docker",
+            "Docker Images and Containers",
+            "Creating Custom Docker Images with Dockerfile",
+            "Working with Docker Hub",
+            "Docker Compose Basics",
+            "Networking in Docker",
+            "Docker Volumes and Data Persistence",
+            "Managing and Monitoring Docker Containers"
+
+        ]
+    ),
+    (
+        "Kubernetes",
+        "Kubernetes orchestrates containerized applications, providing scalability, availability, and manageability.",
+        [
+            "Introduction to Kubernetes and Container Orchestration",
+            "Setting Up a Kubernetes Cluster",
+            "Understanding Pods and Deployments",
+            "Kubernetes Services and Networking",
+            "Managing Configuration with ConfigMaps and Secrets",
+            "Persistent Storage in Kubernetes",
+            "Scaling and Autoscaling Applications",
+            "Kubernetes Ingress and Load Balancing",
+            "Monitoring and Logging in Kubernetes"
+
+        ]
+    ),
+    (
+        "Terraform",
+        "Terraform enables Infrastructure as Code (IaC), allowing declarative provisioning and management of cloud infrastructure.",
+        [
+            "Introduction to Infrastructure as Code and Terraform",
+            "Setting Up Terraform and Providers",
+            "Writing and Organizing Terraform Configuration Files",
+            "Managing Resources with Terraform",
+            "Variables, Outputs, and Sensitive Data",
+            "Terraform State and Remote Backends",
+            "Terraform Modules for Reusable Configurations",
+            "Conditional Logic and Dynamic Blocks",
+            "Provisioners and Resource Dependencies"
+
+        ]
+    ),
+    (
+        "Azure Essentials",
+        "Introduction to Azure cloud platform.",
+        [
+            "Introduction to Azure and Cloud Computing",
+            "Azure Computing Services",
+            "Azure Networking Services",
+            "Azure Storage Services",
+            "Azure Database Services",
+            "Azure Security Services",
+            "Azure Monitoring and Management Services",
+            "Azure DevOps"
+        ]
+    )
+]
+
                 },
                 {
                     'id': 9,
@@ -272,29 +734,81 @@ class Command(BaseCommand):
                     'package': "22",
                     'hike': "220",
                     'transitions': "410",
+                    'image': "https://littlebigcode.fr/wp-content/uploads/2022/02/image-20211203-161343.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Basics of LLMOps",
+                        "Data Management for LLMs",
+                        "Model Training and Optimization",
+                        "Deployment and Monitoring",
+                        "Advanced MLOps Practices"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("LLM Basics", "Introduction to large language models", ["GPT-3", "T5", "BERT"]),
-                        ("Fine-tuning", "Improving LLM performance", ["Transfer Learning", "Few-shot learning"]),
-                        ("Scaling LLMs", "Scaling large models", ["Distributed Training", "Parallelism"]),
-                        ("Inference Optimization", "Optimizing LLMs for inference", ["Latency Reduction", "Distillation"]),
-                        ("Deployment", "Deploying LLMs in production", ["Cloud", "Edge", "On-prem"])
-                    ]
+    (
+        "Basics of LLMOps",
+        "Managing and optimizing workflows for large language models.",
+        [
+            "Understanding LLM Workflows",
+            "Setting Up LLM Pipelines",
+            "Fine-Tuning vs Prompt Engineering",
+            "Project :Build a text summarization pipeline with LLMs."
+        ]
+    ),
+    (
+        "Data Management for LLMs",
+        "Data management for LLMs involves organizing and processing data for effective model training and updates.",
+        [
+            "Preprocessing Text Data for LLMs",
+            "Dataset Versioning and Tokenization",
+            "Handling Large Text Corpora",
+            "Project : Create a preprocessing pipeline for a sentiment dataset."
+
+
+        ]
+    ),
+    (
+        "Model Training and Optimization",
+        "Model training and optimization focus on improving AI performance through data and tuning.",
+        [
+            "Fine-Tuning Large Models",
+            "Parameter Optimization Techniques",
+            "Distributed Training for LLMs",
+            "Project : Fine-tune a BERT model for a classification task."
+        ]
+    ),
+    (
+        "Deployment and Monitoring",
+        "Deployment and monitoring ensure AI models run reliably and stay effective over time.",
+        [
+            "Model Deployment (Docker, Kubernetes)",
+            "Monitoring Models in Production",
+            "Handling Model Drift",
+            "Project : Deploy and monitor a churn prediction model in production."
+        ]
+    ),
+    (
+        "Advanced MLOps Practices",
+        "Advanced MLOps practices automate, scale, and secure AI workflows for production.",
+        [
+            "Continuous Monitoring and Feedback Loops",
+            "Scaling MLOps Pipelines",
+            "Case Studies of MLOps in Industry",
+            "Project : Implement an end-to-end MLOps pipeline for a retail use case."
+
+        ]
+    )
+]
+
                 },
                 {
                     'id': 10,
@@ -302,29 +816,78 @@ class Command(BaseCommand):
                     'package': "24",
                     'hike': "230",
                     'transitions': "350",
+                    'image': "https://miro.medium.com/v2/resize:fit:1400/0*P8FHyPOLd8mpNHY8",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Basics of Agents",
+                        "Reinforcement Learning for Agents",
+                        "Multi-Agent Systems",
+                        "Autonomous Decision-Making",
+                        "Agent Deployment"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
                     ],
                     'modules': [
-                        ("Agent Architecture", "Building AI agents", ["Reactive", "Deliberative"]),
-                        ("Agent Training", "Training intelligent agents", ["Reinforcement Learning", "Supervised"]),
-                        ("Autonomous Systems", "Autonomous agents", ["Robotics", "Control Systems"]),
-                        ("Multi-agent Systems", "Multiple agents working together", ["Coordination", "Communication"]),
-                        ("Deployment", "Deploying AI agents", ["Cloud", "Edge", "Distributed"])
-                    ]
+    (
+        "Basics of Agents",
+        "Understanding autonomous programs that perform tasks independently.",
+        [
+            "Introduction to AI Agents",
+            "Rule-Based vs Learning-Based Agents",
+            "Setting Up Simple AI Agents",
+            "Project : Build a basic rule-based agent for a game."
+        ]
+    ),
+    (
+        "Reinforcement Learning for Agents",
+        "Training agents to learn optimal actions through rewards and feedback.",
+        [
+            "Q-Learning and SARSA Algorithms",
+            "Deep Q-Networks (DQN)",
+            "Policy Gradient Methods",
+            "Project : Create an agent to play a simple grid-based game."
+        ]
+    ),
+    (
+        "Multi-Agent Systems",
+        "Coordinating multiple agents to solve complex tasks collaboratively.",
+        [
+            "Communication in Multi-Agent Systems",
+            "Coordination and Conflict Resolution",
+            "Applications of Multi-Agent Systems",
+            "Project : Build a multi-agent system for resource allocation."
+        ]
+    ),
+    (
+        "Autonomous Decision-Making",
+        "Enabling systems to make choices without human intervention.",
+        [
+            "Planning and Scheduling for Agents",
+            "Probabilistic Models in Decision-Making",
+            "Game-Theoretic Approaches",
+            "Project : Develop an agent for automated task scheduling."
+        ]
+    ),
+    (
+        "Agent Deployment",
+        "Launching and managing agents in real-world environments.",
+        [
+            "Deploying Agents in Real-World Applications",
+            "Monitoring Agent Behavior",
+            "Ethical Considerations in Autonomous Agents",
+            "Project : Deploy an agent for inventory management in a warehouse."
+
+        ]
+    )
+]
+
                 },
                 {
                     'id': 11,
@@ -332,29 +895,194 @@ class Command(BaseCommand):
                     'package': "13",
                     'hike': "140",
                     'transitions': "450",
+                    'image': "https://aicontentfy.com/hubfs/Blog/Robot%20with%20a%20toolbox%20in%20flat%20illustration%20style%20with%20gradients%20and%20white%20background_a1a8948e-7a01-4f70-86f6-791a47ffe3e5.png",  # <-- Add this line
+
                     'highlights': [
-                        "Fundamentals of IT & AI",
-                        "Python for AI",
-                        "Math & Stat for AI",
-                        "Machine Learning",
-                        "Deep Learning",
-                        "AI Application & GEN AI"
+                        "Introduction to AI Ethics",
+                        "Responsible AI Development",
+                        "Scaling AI Systems",
+                        "AI in High-Stakes Applications",
+                        "Future of Ethical AI"
+
                     ],
                     'features': [
-                        "Cloud & DevOps for AI",
-                        "Gen AI & AI Agents",
-                        "Online & ClassRoom Real-Time training",
-                        "Project & Task Based Learning",
-                        "24/7 Learning Support with Dedicated Mentors",
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
                         "Interviews, Jobs and Placement Support"
+
                     ],
                     'modules': [
-                        ("Ethical AI Design", "Designing ethical AI systems", ["Fairness", "Transparency", "Bias"]),
-                        ("AI in Society", "Impact of AI on society", ["Privacy", "Social Good", "AI Governance"]),
-                        ("AI Regulation", "Global regulation of AI", ["GDPR", "AI Act", "Policy"]),
-                        ("AI and Human Rights", "Balancing AI with human rights", ["Justice", "Accountability"]),
-                        ("AI and Bias", "Reducing bias in AI systems", ["Discrimination", "Equal Opportunity"])
-                    ]
+    (
+        "Introduction to AI Ethics",
+        "Exploring moral principles guiding responsible AI development and use.",
+        [
+            "Key Ethical Principles",
+            "Bias and Fairness in AI Systems",
+            "Privacy and Data Protection",
+            "Project : Analyze a biased dataset and propose improvements."
+        ]
+    ),
+    (
+        "Responsible AI Development",
+        "Building AI systems that are fair, transparent, and accountable.",
+        [
+            "Transparent AI Models",
+            "Ethical AI Governance",
+            "Tools for Ethical AI Development",
+            "Project : Build a transparent ML model with explainability features."
+        ]
+    ),
+    (
+        "Scaling AI Systems",
+        "Expanding AI capabilities to handle larger data and users efficiently.",
+        [
+            "Distributed Training and Model Parallelism",
+            "Load Balancing for AI Workloads",
+            "Optimizing Resource Usage",
+            "Project : Scale a deep learning model for real-time inference."
+        ]
+    ),
+    (
+        "AI in High-Stakes Applications",
+        "Applying AI responsibly in critical areas like healthcare and finance.",
+        [
+            "AI in Healthcare, Finance, and Law",
+            "Ethical Challenges in Critical Domains",
+            "Case Studies of AI Failures",
+            "Project : Propose an ethical framework for deploying AI in healthcare."
+        ]
+    ),
+    (
+        "Future of Ethical AI",
+        "Advancing AI with fairness, transparency, and societal benefit in mind.",
+        [
+            "AI Policy and Regulation Trends",
+            "AI for Social Good",
+            "Long-Term Implications of AI Systems",
+            "Project : Create a roadmap for implementing AI ethics in an organization."
+        ]
+    )
+]
+
+                },
+            {
+                    'id': 12,
+                    'title': "data-analytics",
+                    'package': "13",
+                    'hike': "140",
+                    'transitions': "450",
+                    'image': "https://www.oxfordinstitute.in/img/all-software-development/data-analayes.jpg",  # <-- Add this line
+
+                    'highlights': [
+                        "Excel with Project",
+                        "SQL Server with Project",
+                        "PowerBI with Project",
+                        "Python with Project",
+                        "Git and Github",
+                        "Interview Preparation"
+
+                    ],
+                    'features': [
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
+                        "Interviews, Jobs and Placement Support"
+
+                    ],
+                    'modules': [
+    (
+        "Excel with Project",
+        "Learn the fundamentals of Microsoft Excel through hands-on projects, mastering data organization, formulas, charts, and essential tools for real-world tasks.",
+        [
+            "Introduction to Excel",
+            "Personalizing Excel",
+            "Lookup and Referencing",
+            "Arithmetic Functions",
+            "Text Functions",
+            "Data Cleaning Functions",
+            "Mathematical Functions",
+            "General Formatting",
+            "Conditional Formatting",
+            "Database Functions",
+            "Text and Data Manipulation",
+            "Protecting Excel - Excel Security",
+            "Printing Workbooks",
+            "Advance Paste Special Techniques",
+            "Date, Time, Financial,& Statistical Functions",
+            "Error Handling, Filtering and Sorting",
+            "Advanced Excel Functions",
+            "What if Analysis and Data Validation",
+            "Logical Analysis, Array & Lookup Functions",
+            "Pivot Tables, Slicers & Charts, Addins & Dashboards"
+        ]
+    ),
+    (
+        "SQL Server with Project",
+        "Learn the fundamentals of SQL Server through hands-on projects, covering database design, queries, and performance optimization.",
+        [
+            "Introduction to Data & Database Systems",
+            "Complete Introduction to SQL Server",
+            "SQL Server Software installation",
+            "SSMS Window",
+            "Datatypes & Sub- Languages in SQL",
+            "Renaming & Copying Data",
+            "Arithmetic, Comparision, Logical, Set & Special Operators, Schemas",
+            "Functions, Special Clauses, Ranking Functions",
+            "Constraints, Joins, Views, Synonyms, Indexes & Sub Queries",
+            "TCL Commands, CTE, Duplicates, Normalization",
+            "ER Modelling, Relationships, OLTPS, Temporary Tables",
+            "TSQL, Variables, Control Statements, Cursors, Stored Procedures, Stored Functions",
+            "Triggers"
+        ]
+    ),
+    (
+        "PowerBI with Project",
+        "Gain hands-on experience in data analysis and visualization by learning Power BI tools and techniques through a practical, real-world project.",
+        [
+            "Power BI Complete Introduction",
+            "PowerBI Desktop installation & PowerBI Service",
+            "PowerBI Desktop User Interface",
+            "Building Blocks of PowerBI",
+            "Power Query (Transformation, Merge, Append)",
+            "Power Pivot (Data Modelling, DAX, Quick Measures)",
+            "Power View (Report View, Visual Interaction, Filters, Hierarchy, Visualizations",
+            "Grouping, Binning, Sorting, Tooltip Page & Bookmarks",
+            "PowerBI Service (Datasets, Dashboards, Data Connectivity modes, Gateways)",
+            "Understanding Sub Folder in Workspace",
+            "Dataflows, Dataset actions, Excel Workbooks, Report & Dashboard actions",
+            "Row Level Security, Deployment Pipelines, ADD ONs"
+        ]
+    ),
+    (
+        "Python with Project",
+        "Learn Python fundamentals through hands-on coding and build a complete project to apply your skills in a real-world context.",
+        [
+            "Python Basics",
+            "Core Python (Conditional & Iterative Statements, Data Structures, Functions & Modules)",
+            "Exception Handling, Regular Expressions, Exporting Data to .txt Files",
+            "Object Oriented Programming",
+            "Python for Data Analytics",
+            "Using Pandas Library (Data Structures, Data import & export)",
+            "Using Matplotlib Library (NumPy, Database Connections)"
+        ]
+    ),
+    (
+        "Interview Preparation",
+        "This module provides essential strategies and practical skills to help you confidently prepare for and succeed in job interviews.",
+        [
+            "Basic Self introduction",
+            "Interview Skills (Preparation, Post Interview)",
+            "Personal Branding",
+            "Mock Interviews"
+        ]
+    )
+]
+
                 }
             ]
 
@@ -370,9 +1098,11 @@ class Command(BaseCommand):
                 course = Course.objects.create(
                     id=course_data['id'],
                     title=course_data['title'],
-                    slug=f"{slugify(course_data['title'])}-{int(time.time())}",
+                    # slug=f"{slugify(course_data['title'])}-{int(time.time())}",
+                    slug=slugify(course_data['title']),
                     description=f"Complete {course_data['title']} bootcamp with hands-on projects",
-                    image="https://example.com/course-image.jpg",
+                    # image="https://example.com/course-image.jpg",
+                    image=course_data['image'],  # <-- Use this
                     students_enrolled=2000 + hash(course_data['title']) % 1000,
                     duration="8-12 weeks",
                     level=get_level(course_data['id']),

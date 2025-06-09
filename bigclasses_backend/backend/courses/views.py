@@ -254,6 +254,7 @@ class CurriculumInfoView(APIView):
                 p = math.pow(1024, i)
                 s = round(size_bytes / p, 2)
                 return f"{s} {size_names[i]}"
+                
 
             return Response({
                 "has_file": True,
