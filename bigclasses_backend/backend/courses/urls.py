@@ -15,4 +15,4 @@ urlpatterns = [
     path('<slug:slug>/download-curriculum/', CurriculumDownloadView.as_view(), name='curriculum-download'),
     path('<slug:slug>/curriculum-info/', CurriculumInfoView.as_view(), name='curriculum-info'),
     path('<slug:slug>/enroll-download/', EnrollDownloadView.as_view(), name='enroll-download'),
-]
+
