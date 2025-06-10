@@ -30,7 +30,7 @@ const Enroll = () => {
     }
     try {
       // const response = await axios.post("http://13.204.9.172:8001/api/enroll/", formData);
-      const response = await axios.post("http://localhost:8000/api/enroll/", formData);
+      const response = await axios.post("https://www.stage.bigclasses.ai/api/enroll/", formData);
       setSuccess("Enrollment successful!");
       setFormData({ student_name: "", email: "", course_title: "", phone: "" }); 
     } catch (err: any) {
