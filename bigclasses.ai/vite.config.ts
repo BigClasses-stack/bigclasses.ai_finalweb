@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
     proxy: {
       '/api': {
         // target: 'http://13.204.9.172:8001',
-        target: 'https://www.stage.bigclasses.ai',
+        target: 'https://www.bigclasses.ai',
         changeOrigin: true,
         secure: false,
       }
