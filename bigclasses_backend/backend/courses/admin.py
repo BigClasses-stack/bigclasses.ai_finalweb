@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from .models import Course, Overview, Highlight, Module, Topic
+from .models import Course, Overview, Highlight, Module, Topic, BatchSchedule
 
 class OverviewInline(admin.StackedInline):
     model = Overview
@@ -12,6 +12,64 @@ class OverviewInline(admin.StackedInline):
 class HighlightInline(admin.TabularInline):
     model = Highlight
     extra = 1
+
+class BatchScheduleInline(admin.TabularInline):
+    model = BatchSchedule
+    extra = 0
+    min_num = 0
+    max_num = 4  # Limit to 4 batches as per your frontend
+    fields = ['batch_number', 'title', 'subtitle', 'start_date', 'start_day', 'time_slot', 'duration', 'is_active']
+    ordering = ['batch_number']
+    
+    class Media:
+        css = {
+            'all': ('admin/css/batch_schedule_inline.css',)  # Optional: custom styling
+        }
+
+class BatchScheduleAdmin(admin.ModelAdmin):
+    list_display = [
+        'course', 
+        'batch_number', 
+        'title', 
+        'start_date', 
+        'time_slot', 
+        'duration',
+        'is_active',
+        'created_at'
+    ]
+    list_filter = ['is_active', 'start_date', 'course']
+    search_fields = ['course__title', 'title', 'time_slot']
+    ordering = ['course', 'batch_number']
+    list_editable = ['is_active']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('course', 'batch_number', 'title', 'subtitle')
+        }),
+        ('Schedule Details', {
+            'fields': ('start_date', 'start_day', 'time_slot', 'duration')
+        }),
+        ('Status', {
+            'fields': ('is_active',)
+        }),
+    )
+    
+    def is_active_display(self, obj):
+        """Display active status with colored indicator"""
+        if obj.is_active:
+            return format_html(
+                '<span style="color: #28a745; font-weight: bold;">✓ Active</span>'
+            )
+        return format_html(
+            '<span style="color: #dc3545; font-weight: bold;">✗ Inactive</span>'
+        )
+    
+    is_active_display.short_description = 'Status'
+    is_active_display.admin_order_field = 'is_active'
+    
+    def get_queryset(self, request):
+        """Optimize queryset with select_related"""
+        return super().get_queryset(request).select_related('course')
 
 class TopicInline(admin.TabularInline):
     model = Topic
@@ -28,13 +86,14 @@ class CourseAdmin(admin.ModelAdmin):
         'students_enrolled', 
         'rating', 
         'duration',
+        'batch_count',
         'curriculum_file_status',
         'file_uploaded_date'
     ]
     list_filter = ['level', 'rating', 'file_uploaded_at']
     search_fields = ['title', 'description']
     prepopulated_fields = {'slug': ('title',)}
-    inlines = [OverviewInline, HighlightInline]
+    inlines = [OverviewInline, HighlightInline, BatchScheduleInline]
     
     # Organize fields in fieldsets for better admin interface
     fieldsets = (
@@ -52,6 +111,22 @@ class CourseAdmin(admin.ModelAdmin):
     
     # Make slug read-only if you want it auto-generated
     readonly_fields = ['file_uploaded_at']
+    
+    def batch_count(self, obj):
+        """Display number of active batches for this course"""
+        active_count = obj.batch_schedules.filter(is_active=True).count()
+        total_count = obj.batch_schedules.count()
+        
+        if total_count == 0:
+            return format_html('<span style="color: #999;">No batches</span>')
+        
+        return format_html(
+            '<span style="color: #28a745; font-weight: bold;">{}</span> / {} batches',
+            active_count,
+            total_count
+        )
+    
+    batch_count.short_description = 'Active Batches'
     
     def curriculum_file_status(self, obj):
         """Display curriculum file status in admin list"""
@@ -101,6 +176,10 @@ class CourseAdmin(admin.ModelAdmin):
                 readonly.append('file_uploaded_at')
         return readonly
 
+    def get_queryset(self, request):
+        """Optimize queryset with prefetch_related for batch schedules"""
+        return super().get_queryset(request).prefetch_related('batch_schedules')
+
     class Media:
         """Add custom CSS/JS if needed"""
         css = {
@@ -120,6 +199,7 @@ class CourseWithModulesAdmin(CourseAdmin):
 
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Module, ModuleAdmin)
+admin.site.register(BatchSchedule, BatchScheduleAdmin)
 
 # Optional: Customize admin site headers
 admin.site.site_header = "Course Management Admin"

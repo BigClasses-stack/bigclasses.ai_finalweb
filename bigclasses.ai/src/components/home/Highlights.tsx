@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from '@/lib/axiosConfig';
-import { CheckCircle2, Star, Clock, Users, Loader2, AlertCircle, Download, X } from "lucide-react";
+import { CheckCircle2, Star, Clock, Users, Loader2, AlertCircle, Download, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -39,10 +39,11 @@ const Highlights: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [data, setData] = useState<HighlightsData | null>(null);
+  const [batchSchedules, setBatchSchedules] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [downloadLoading, setDownloadLoading] = useState(false);
-  
+
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -61,20 +62,20 @@ const Highlights: React.FC = () => {
   // Form validation
   const validateForm = (): boolean => {
     const errors: FormErrors = {};
-    
+
     if (!formData.name || formData.name.trim().length < 2) {
       errors.name = "Name must be at least 2 characters";
     }
-    
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailRegex.test(formData.email)) {
       errors.email = "Please enter a valid email address";
     }
-    
+
     if (!formData.phone || formData.phone.trim().length < 10) {
       errors.phone = "Please enter a valid phone number";
     }
-    
+
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -111,12 +112,16 @@ const Highlights: React.FC = () => {
         if (res.data && res.data.highlights) {
           setData(res.data.highlights as HighlightsData);
         } else {
-          console.warn("Fetched data but 'highlights' key is missing or empty.", res.data);
           setData(null);
+        }
+        // Fetch batch schedules from backend
+        if (res.data && res.data.batch_schedules) {
+          setBatchSchedules(res.data.batch_schedules);
+        } else {
+          setBatchSchedules([]);
         }
       })
       .catch(err => {
-        console.error('Failed to fetch highlights:', err);
         setError(err.response?.data?.message || "Failed to load highlights data. Please try again later.");
       })
       .finally(() => setLoading(false));
@@ -135,29 +140,28 @@ const Highlights: React.FC = () => {
 
   const handleEnrollmentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm() || !id) return;
 
     setIsSubmitting(true);
     try {
       const response = await axiosInstance.post(`/courses/${id}/enroll-download/`, formData);
-      
+
       if (response.data.success) {
         setEnrollmentSuccess(true);
         setShowSuccessMessage(true);
-        
+
         toast({
           title: "Enrollment Successful!",
           description: "Thank you for enrolling. Your download will begin shortly.",
         });
-        
+
         // Auto-download after 2 seconds
         setTimeout(() => {
           downloadCurriculum();
         }, 2000);
       }
     } catch (error: any) {
-      console.error('Enrollment failed:', error);
       toast({
         title: "Enrollment Failed",
         description: error.response?.data?.error || "Please try again later.",
@@ -195,16 +199,15 @@ const Highlights: React.FC = () => {
       link.click();
       link.remove();
       window.URL.revokeObjectURL(url);
-      
+
       // Close modal after successful download
       setTimeout(() => {
         setIsModalOpen(false);
         setShowSuccessMessage(false);
         setEnrollmentSuccess(false);
       }, 1000);
-      
+
     } catch (error) {
-      console.error('Download failed:', error);
       toast({
         title: "Download Failed",
         description: "Failed to download curriculum. Please try again.",
@@ -270,6 +273,46 @@ const Highlights: React.FC = () => {
 
   return (
     <>
+      <style>{`
+        @keyframes vibrate {
+          0%, 100% { transform: translateX(0) translateY(0); }
+          10% { transform: translateX(-1px) translateY(-1px); }
+          20% { transform: translateX(1px) translateY(1px); }
+          30% { transform: translateX(-1px) translateY(1px); }
+          40% { transform: translateX(1px) translateY(-1px); }
+          50% { transform: translateX(-1px) translateY(-1px); }
+          60% { transform: translateX(1px) translateY(1px); }
+          70% { transform: translateX(-1px) translateY(1px); }
+          80% { transform: translateX(1px) translateY(-1px); }
+          90% { transform: translateX(-1px) translateY(-1px); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
+        }
+        @keyframes pulse-glow {
+          0%, 100% { box-shadow: 0 0 16px rgba(59, 130, 246, 0.18), 0 0 32px rgba(147, 51, 234, 0.08); }
+          50% { box-shadow: 0 0 24px rgba(59, 130, 246, 0.22), 0 0 48px rgba(147, 51, 234, 0.12); }
+        }
+        .batch-card {
+          animation: float 3s ease-in-out infinite;
+          transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, z-index 0.25s;
+          cursor: pointer;
+        }
+        .batch-card:nth-child(1) { animation-delay: 0s; }
+        .batch-card:nth-child(2) { animation-delay: 0.5s; }
+        .batch-card:nth-child(3) { animation-delay: 1s; }
+        .batch-card:nth-child(4) { animation-delay: 1.5s; }
+        .batch-card:focus,
+        .batch-card:hover {
+          transform: scale(1.08) translateY(-10px);
+          z-index: 30;
+          box-shadow: 0 12px 36px 0 rgba(59,130,246,0.18), 0 0 0 4px rgba(59,130,246,0.10);
+          animation: vibrate 0.7s ease-in-out infinite, pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite;
+          outline: none;
+        }
+      `}</style>
+
       <section id="highlights" className="bg-white py-15 md:py-5 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text Content Column */}
@@ -367,6 +410,170 @@ const Highlights: React.FC = () => {
         </div>
       </section>
 
+      {/* Upcoming Batch Schedule Section */}
+      <section className="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-20 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-7xl">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+              Upcoming Batch Schedule
+            </h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Choose your preferred batch timing and start your learning journey with our expert-led sessions
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+            {batchSchedules.map((batch, index) => (
+              <div
+                key={batch.id}
+                className={`batch-card relative backdrop-blur-sm border rounded-2xl shadow-lg transition-all duration-300 transform overflow-hidden group ${
+                  index === 0 ? 'bg-gradient-to-br from-blue-100/80 to-indigo-100/80 border-blue-200/60' :
+                  index === 1 ? 'bg-gradient-to-br from-emerald-100/80 to-teal-100/80 border-emerald-200/60' :
+                  index === 2 ? 'bg-gradient-to-br from-purple-100/80 to-pink-100/80 border-purple-200/60' :
+                  'bg-gradient-to-br from-yellow-100/80 to-red-100/80 border-yellow-200/60'
+                }`}
+                tabIndex={0}
+                aria-pressed={false}
+              >
+                {/* Card Header */}
+                <div className={`backdrop-blur-sm border-b p-6 ${
+                  index === 0 ? 'bg-gradient-to-r from-blue-200/60 to-indigo-200/60 border-blue-300/50 text-blue-900' :
+                  index === 1 ? 'bg-gradient-to-r from-emerald-200/60 to-teal-200/60 border-emerald-300/50 text-emerald-900' :
+                  index === 2 ? 'bg-gradient-to-r from-purple-200/60 to-pink-200/60 border-purple-300/50 text-purple-900' :
+                  'bg-gradient-to-r from-yellow-200/60 to-red-200/60 border-yellow-300/50 text-yellow-900'
+                }`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <Calendar className={`h-6 w-6 ${
+                      index === 0 ? 'text-blue-700' :
+                      index === 1 ? 'text-emerald-700' :
+                      index === 2 ? 'text-purple-700' :
+                      'text-yellow-700'
+                    }`} />
+                    <div className="text-right">
+                      <div className="text-2xl font-bold">{batch.date}</div>
+                      <div className="text-sm opacity-80">{batch.day}</div>
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-bold mb-1">{batch.title}</h3>
+                  <p className="text-sm opacity-80">{batch.subtitle}</p>
+                </div>
+
+                {/* Card Body */}
+                <div className={`p-6 ${
+                  index === 0 ? 'bg-blue-50/60' :
+                  index === 1 ? 'bg-emerald-50/60' :
+                  index === 2 ? 'bg-purple-50/60' :
+                  'bg-yellow-50/60'
+                } backdrop-blur-sm`}>
+                  <div className="space-y-4 mb-6">
+                    <div className={`flex items-center justify-between p-3 rounded-lg border ${
+                      index === 0 ? 'bg-blue-100/70 border-blue-200/50' :
+                      index === 1 ? 'bg-emerald-100/70 border-emerald-200/50' :
+                      index === 2 ? 'bg-purple-100/70 border-purple-200/50' :
+                      'bg-yellow-100/70 border-yellow-200/50'
+                    } backdrop-blur-sm`}>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border ${
+                          index === 0 ? 'bg-blue-200/80 border-blue-300/50' :
+                          index === 1 ? 'bg-emerald-200/80 border-emerald-300/50' :
+                          index === 2 ? 'bg-purple-200/80 border-purple-300/50' :
+                          'bg-yellow-200/80 border-yellow-300/50'
+                        } backdrop-blur-sm`}>
+                          <Calendar className={`h-5 w-5 ${
+                            index === 0 ? 'text-blue-700' :
+                            index === 1 ? 'text-emerald-700' :
+                            index === 2 ? 'text-purple-700' :
+                            'text-yellow-700'
+                          }`} />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">Start Date</p>
+                          <p className="text-sm text-gray-600">{batch.day}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`flex items-center justify-between p-3 rounded-lg border ${
+                      index === 0 ? 'bg-blue-100/70 border-blue-200/50' :
+                      index === 1 ? 'bg-emerald-100/70 border-emerald-200/50' :
+                      index === 2 ? 'bg-purple-100/70 border-purple-200/50' :
+                      'bg-yellow-100/70 border-yellow-200/50'
+                    } backdrop-blur-sm`}>
+                      <div className="flex items-center space-x-3">
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border ${
+                          index === 0 ? 'bg-blue-200/80 border-blue-300/50' :
+                          index === 1 ? 'bg-emerald-200/80 border-emerald-300/50' :
+                          index === 2 ? 'bg-purple-200/80 border-purple-300/50' :
+                          'bg-yellow-200/80 border-yellow-300/50'
+                        } backdrop-blur-sm`}>
+                          <Clock className={`h-5 w-5 ${
+                            index === 0 ? 'text-blue-700' :
+                            index === 1 ? 'text-emerald-700' :
+                            index === 2 ? 'text-purple-700' :
+                            'text-yellow-700'
+                          }`} />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-gray-900">{batch.time}</p>
+                          <p className="text-sm text-gray-600">{batch.duration}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Action Button */}
+                  <Button
+                    className={`w-full bg-gradient-to-r text-white border-0 font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-200 hover:scale-105 backdrop-blur-sm ${
+                      index === 0 ? 'from-blue-500/90 to-indigo-600/90 hover:from-blue-600/95 hover:to-indigo-700/95' :
+                      index === 1 ? 'from-emerald-500/90 to-teal-600/90 hover:from-emerald-600/95 hover:to-teal-700/95' :
+                      index === 2 ? 'from-purple-500/90 to-pink-600/90 hover:from-purple-600/95 hover:to-pink-700/95' :
+                      'from-yellow-500/90 to-red-600/90 hover:from-yellow-600/95 hover:to-red-700/95'
+                    }`}
+                    onClick={() => navigate('/signup')}
+                  >
+                    <span className="flex items-center justify-center space-x-2">
+                      <span>Get Free Course Demo</span>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </Button>
+                </div>
+
+                {/* Decorative Elements */}
+                <div className={`absolute top-0 right-0 w-32 h-32 opacity-10 transform rotate-12 translate-x-8 -translate-y-8 ${
+                  index === 0 ? 'text-blue-400' :
+                  index === 1 ? 'text-emerald-400' :
+                  index === 2 ? 'text-purple-400' :
+                  'text-yellow-400'
+                }`}>
+                  <svg viewBox="0 0 100 100" className="w-full h-full">
+                    <circle cx="50" cy="50" r="40" fill="currentColor" />
+                  </svg>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-16">
+            <p className="text-gray-600 mb-6">
+              Can't find a suitable time? We also offer flexible scheduling options.
+            </p>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-xl font-semibold"
+              onClick={scrollToFooter}
+            >
+              Contact Us for Custom Schedule
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Enrollment Modal */}
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent className="sm:max-w-md mx-auto">
@@ -375,7 +582,7 @@ const Highlights: React.FC = () => {
               {showSuccessMessage ? "Enrollment Successful!" : "Download Curriculum"}
             </DialogTitle>
           </DialogHeader>
-          
+
           {showSuccessMessage ? (
             <div className="text-center py-8">
               <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />

@@ -84,6 +84,33 @@ class Course(models.Model):
             return os.path.splitext(self.curriculum_file.name)[1].lower()
         return None
 
+class BatchSchedule(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='batch_schedules')
+    batch_number = models.PositiveIntegerField(help_text="Batch number (1, 2, 3, 4)")
+    title = models.CharField(max_length=100, help_text="e.g., 'Batch 1', 'Morning Batch'")
+    subtitle = models.CharField(max_length=100, default="(Mon-Fri)", help_text="e.g., '(Mon-Fri)', '(Weekends)'")
+    start_date = models.DateField(help_text="Batch start date")
+    start_day = models.CharField(max_length=50, help_text="e.g., 'Monday', '15th January'")
+    time_slot = models.CharField(max_length=100, help_text="e.g., '10:00 AM - 12:00 PM'")
+    duration = models.CharField(max_length=100, help_text="e.g., '2 hours', '3 months'")
+    is_active = models.BooleanField(default=True, help_text="Show this batch on frontend")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['batch_number']
+        unique_together = ['course', 'batch_number']
+        verbose_name = "Batch Schedule"
+        verbose_name_plural = "Batch Schedules"
+
+    def __str__(self):
+        return f"{self.course.title} - {self.title}"
+
+    @property
+    def formatted_date(self):
+        """Return formatted date string for frontend"""
+        return self.start_date.strftime("%d %b %Y") if self.start_date else ""
+
 class Overview(models.Model):
     course = models.OneToOneField(Course, on_delete=models.CASCADE, related_name='overview')
     average_package = models.CharField(max_length=50)

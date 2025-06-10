@@ -15,8 +15,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Course
-from .serializers import CourseSerializer, CourseDetailSerializer
+from .models import Course, BatchSchedule
+from .serializers import CourseSerializer, CourseDetailSerializer, BatchScheduleSerializer
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,8 @@ class CourseDetailView(RetrieveAPIView):
             'highlights',
             'overview',
             'curriculum',
-            'curriculum__topics'
+            'curriculum__topics',
+            'batch_schedules'
         ).all()
 
     def retrieve(self, request, *args, **kwargs):
@@ -52,6 +53,93 @@ class CourseDetailView(RetrieveAPIView):
             )
         except Exception as e:
             logger.error(f"Error retrieving course: {str(e)}", exc_info=True)
+            return Response(
+                {"error": "Internal server error"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class CourseBatchSchedulesView(APIView):
+    """
+    API endpoint to get batch schedules for a specific course
+    """
+    def get(self, request, slug):
+        try:
+            course = get_object_or_404(Course, slug=slug)
+            
+            # Get active batch schedules ordered by batch number
+            batch_schedules = course.batch_schedules.filter(is_active=True).order_by('batch_number')
+            
+            if not batch_schedules.exists():
+                return Response({
+                    "course_title": course.title,
+                    "course_slug": course.slug,
+                    "batch_schedules": [],
+                    "total_batches": 0,
+                    "message": "No active batch schedules available for this course"
+                })
+            
+            serializer = BatchScheduleSerializer(batch_schedules, many=True)
+            
+            return Response({
+                "course_title": course.title,
+                "course_slug": course.slug,
+                "batch_schedules": serializer.data,
+                "total_batches": batch_schedules.count()
+            })
+            
+        except Course.DoesNotExist:
+            logger.error(f"Course with slug {slug} not found for batch schedules")
+            return Response(
+                {"error": "Course not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            logger.error(f"Error retrieving batch schedules for course {slug}: {str(e)}")
+            return Response(
+                {"error": "Internal server error"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class AllBatchSchedulesView(ListAPIView):
+    """
+    API endpoint to get all batch schedules across all courses
+    """
+    def get(self, request):
+        try:
+            # Get all active batch schedules with course information
+            batch_schedules = BatchSchedule.objects.filter(
+                is_active=True
+            ).select_related('course').order_by('course__title', 'batch_number')
+            
+            if not batch_schedules.exists():
+                return Response({
+                    "batch_schedules": [],
+                    "total_count": 0,
+                    "message": "No active batch schedules available"
+                })
+            
+            # Group by course for better organization
+            courses_with_batches = {}
+            for batch in batch_schedules:
+                course_slug = batch.course.slug
+                if course_slug not in courses_with_batches:
+                    courses_with_batches[course_slug] = {
+                        "course_title": batch.course.title,
+                        "course_slug": course_slug,
+                        "batches": []
+                    }
+                
+                batch_data = BatchScheduleSerializer(batch).data
+                courses_with_batches[course_slug]["batches"].append(batch_data)
+            
+            return Response({
+                "courses_with_batches": list(courses_with_batches.values()),
+                "total_courses": len(courses_with_batches),
+                "total_batches": batch_schedules.count()
+            })
+            
+        except Exception as e:
+            logger.error(f"Error retrieving all batch schedules: {str(e)}")
             return Response(
                 {"error": "Internal server error"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR

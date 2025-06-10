@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Course, Overview, Highlight, Module, Topic
+from .models import Course, Overview, Highlight, Module, Topic, BatchSchedule
 
 class OverviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,17 +23,31 @@ class ModuleSerializer(serializers.ModelSerializer):
         model = Module
         fields = ['title', 'description', 'topics']
 
+class BatchScheduleSerializer(serializers.ModelSerializer):
+    date = serializers.SerializerMethodField()
+    day = serializers.CharField(source='start_day')
+    time = serializers.CharField(source='time_slot')
+    
+    class Meta:
+        model = BatchSchedule
+        fields = ['id', 'title', 'subtitle', 'date', 'day', 'time', 'duration']
+    
+    def get_date(self, obj):
+        """Format date for frontend display"""
+        return obj.formatted_date if obj.start_date else ""
+
 class CourseDetailSerializer(serializers.ModelSerializer):
     highlights = serializers.SerializerMethodField()
     overview = serializers.SerializerMethodField()
     curriculum = ModuleSerializer(many=True, read_only=True)
+    batch_schedules = serializers.SerializerMethodField()
     
     # Add curriculum file information
     curriculum_file_info = serializers.SerializerMethodField()
     
     class Meta:
         model = Course
-        fields = ['id', 'title', 'highlights', 'overview', 'curriculum', 'curriculum_file_info']
+        fields = ['id', 'title', 'highlights', 'overview', 'curriculum', 'curriculum_file_info', 'batch_schedules']
 
     def get_highlights(self, obj):
         try:
@@ -83,6 +97,14 @@ class CourseDetailSerializer(serializers.ModelSerializer):
                 },
                 "manager_priority_percentage": "N/A"
             }
+
+    def get_batch_schedules(self, obj):
+        """Get active batch schedules for the course"""
+        try:
+            active_batches = obj.batch_schedules.filter(is_active=True).order_by('batch_number')
+            return BatchScheduleSerializer(active_batches, many=True).data
+        except Exception:
+            return []
 
     def get_curriculum_file_info(self, obj):
         """Add curriculum file information to the response"""
