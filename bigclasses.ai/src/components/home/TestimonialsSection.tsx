@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import Navbar from "../layout/Navbar";
 const TestimonialsSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const slidesRef = useRef(null);
+  <Navbar />; // Navbar component included as per request
   
   // Array of testimonial images with paths updated to vimages folder
   const testimonialImages = [

@@ -1,7 +1,9 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Lottie from "lottie-react";
+import startNowAnimation from "../../assets/animations/start_now_animation.json";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,6 +76,10 @@ const Navbar = () => {
   const handlePhoneCall = (phoneNumber: string) => {
     window.open(`tel:${phoneNumber}`, '_self');
     setIsPhoneDropdownOpen(false);
+  };
+
+  const handleContactClick = () => {
+    setIsPhoneDropdownOpen(true);
   };
 
   return (
@@ -406,13 +412,16 @@ const Navbar = () => {
               </div>
             </div>
 
-            <a href="#testimonials" className="text-black hover:text-primary transition-colors">
+            <button
+              onClick={() => navigate('/testimonials')}
+              className="text-black hover:text-primary transition-colors"
+            >
               Testimonials
-            </a>
+            </button>
           </div>
 
-          {/* Right Auth Buttons - Now easily customizable */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Right Auth Buttons */}
+          <div className="hidden md:flex items-center">
             {isLoggedIn ? (
               <div className="flex items-center space-x-4">
                 <Button variant="outline" className="rounded-full px-6" onClick={handleLogout}>
@@ -420,12 +429,19 @@ const Navbar = () => {
                 </Button>
               </div>
             ) : (
-              <Button
-                onClick={handleStartNowClick}
-                className="vibrate-button gradient-button-primary rounded-full px-3 py-2` font-medium"
-              >
-                ⭐ Start Now
-              </Button>
+              <div className="w-32 h-16 flex items-center"> {/* Changed width from w-24 to w-32 */}
+                <Lottie 
+                  animationData={startNowAnimation}
+                  loop={true}
+                  className="cursor-pointer hover:scale-110 transition-transform"
+                  onClick={(e) => {
+                    const target = e.target as HTMLElement;
+                    if (target.closest('svg')) {
+                      handleStartNowClick();
+                    }
+                  }}
+                />
+              </div>
             )}
           </div>
 
@@ -618,15 +634,20 @@ const Navbar = () => {
                   </>
                 ) : (
                   <div className="flex flex-col space-y-3">
-                    <Button
-                      onClick={() => {
-                        handleStartNowClick();
-                        setIsMenuOpen(false);
-                      }}
-                      className="vibrate-button gradient-button-secondary rounded-full w-full font-medium"
-                    >
-                      ⭐ Start Now
-                    </Button>
+                    <div className="w-32 h-16 mx-auto flex items-center"> {/* Changed width from w-24 to w-32 */}
+                      <Lottie 
+                        animationData={startNowAnimation}
+                        loop={true}
+                        className="cursor-pointer hover:scale-110 transition-transform"
+                        onClick={(e) => {
+                          const target = e.target as HTMLElement;
+                          if (target.closest('svg')) {
+                            handleStartNowClick();
+                            setIsMenuOpen(false);
+                          }
+                        }}
+                      />
+                    </div>
                     <div className="text-center py-2 text-gray-600 text-sm">
                       Welcome! Ready to begin your learning journey?
                     </div>

@@ -10,6 +10,7 @@ import EnrollPage from "./pages/EnrollPage";
 import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
+import TestimonialsSection from "./components/home/TestimonialsSection";
 const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
           <Route path="/features" element={<FeatureOverview />} />
           <Route path="/features/:featureId" element={<FeatureOverview />} />
+          <Route path="/testimonials" element={<TestimonialsSection />} />
          </Routes>
       </BrowserRouter>
     </TooltipProvider>

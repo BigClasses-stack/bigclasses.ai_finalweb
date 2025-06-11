@@ -407,31 +407,44 @@ const Highlights: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Button
                 size="lg"
-                className={`bg-${PRIMARY_COLOR} text-white hover:bg-${PRIMARY_HOVER_COLOR} rounded-lg px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto`}
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
+                transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 
+                flex items-center justify-center space-x-2"
                 onClick={() => navigate('/signup')}
               >
-                Schedule Online Demo
+                <Calendar className="w-5 h-5" />
+                <span>Schedule Online Demo</span>
               </Button>
+
               <Button
                 size="lg"
-                variant="outline"
-                className={`border-${PRIMARY_COLOR} text-${PRIMARY_COLOR} hover:bg-${PRIMARY_COLOR}/10 rounded-lg px-8 py-3 text-base font-semibold transition duration-300 w-full sm:w-auto`}
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
+                transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
+                flex items-center justify-center space-x-2"
                 onClick={handleContactClick}
               >
-                <Phone className="h-4 w-4 mr-2" />
-                Contact Course Adviser
+                <Phone className="w-5 h-5" />
+                <span>Contact Course Adviser</span>
               </Button>
-              <button
+
+              <Button
+                size="lg"
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
+                transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
+                flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed
+                disabled:hover:transform-none disabled:hover:shadow-none"
                 onClick={handleDownloadClick}
                 disabled={downloadLoading}
-                className={`inline-flex items-center justify-center border-${PRIMARY_COLOR} text-black hover:bg-${PRIMARY_COLOR}/10 disabled:border-gray-400 disabled:text-gray-400 rounded-lg px-8 py-3 text-base font-semibold shadow-md hover:shadow-lg transition duration-300 w-full sm:w-auto whitespace-nowrap border`}
               >
-                <Download className="h-5 w-5 mr-2" />
-                Download Curriculum
-              </button>
+                <Download className="w-5 h-5" />
+                <span>{downloadLoading ? 'Downloading...' : 'Download Curriculum'}</span>
+              </Button>
             </div>
           </div>
 
