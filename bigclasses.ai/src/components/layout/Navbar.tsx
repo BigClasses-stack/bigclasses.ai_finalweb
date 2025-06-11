@@ -663,12 +663,12 @@ const Navbar = () => {
                   </button>
                 </div>
                 
-                <div className="phone-number-item" onClick={() => handlePhoneCall('+919666717099')}>
+                {/* <div className="phone-number-item" onClick={() => handlePhoneCall('+919666717099')}>
                   <div className="phone-icon">
                     <Phone size={16} />
                   </div>
                   <span className="font-medium text-gray-800">+91 9666717099</span>
-                </div>
+                </div> */}
                 
                 <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
                   <div className="phone-icon">
