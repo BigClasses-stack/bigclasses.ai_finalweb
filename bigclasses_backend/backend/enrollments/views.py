@@ -53,6 +53,8 @@ class EnrollmentView(APIView):
                 wb.close()
 
                 return Response({
+
+                    
                     'message': 'Enrollment successful',
                     'data': dict(zip(self.EXCEL_HEADERS, enrollment_data))
                 }, status=status.HTTP_201_CREATED)

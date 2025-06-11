@@ -2,7 +2,7 @@ import React from "react";
 
 const Welcome = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="-mt-20 pt-5 pb-20 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         <h2 className="text-3xl lg:text-4xl font-bold text-center mb-6">
           Welcome To <span className="text-blue-600">BigClasses</span>
