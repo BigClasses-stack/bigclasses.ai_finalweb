@@ -1,0 +1,8 @@
+# Ignore build/dependency cache
+node_modules/
+.vite/
+
+# Ignore Python logs and compiled files
+*.log
+__pycache__/
+*.py[cod]
