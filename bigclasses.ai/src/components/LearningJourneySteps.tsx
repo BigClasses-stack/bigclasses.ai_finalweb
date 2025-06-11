@@ -6,7 +6,7 @@ import arrowAnimation from "../assets/animations/arrow.json";
 
 const LearningJourneySteps = () => {
   return (
-    <section className="w-full pt-0 pb-12 -mt-20 sm:pt-8 md:pt-10"> 
+    <section className="w-full pb-12 mt-0 md:-mt-20 pt-8 md:pt-0"> 
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center"> 
         {/* Heading */}
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2 mt-0 inline-block mx-auto px-4">
