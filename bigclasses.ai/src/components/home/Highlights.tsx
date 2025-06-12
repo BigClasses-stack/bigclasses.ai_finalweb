@@ -648,7 +648,7 @@ const Highlights: React.FC = () => {
                 Speak directly with our course adviser for personalized guidance
               </p>
             </div>
-                        {/* Phone Number Display */}
+            {/* Phone Number Display */}
             <div className="bg-gray-100 rounded-lg p-4 flex flex-col items-center mb-4">
               <span className="text-lg font-bold text-gray-800 mb-2">{contactPhoneNumber}</span>
               <div className="flex gap-3">
@@ -700,7 +700,96 @@ const Highlights: React.FC = () => {
               {showSuccessMessage ? "Enrollment Successful!" : "Download Curriculum"}
             </DialogTitle>
           </DialogHeader>
-          {/* ...existing enrollment modal code... */}
+          {!showSuccessMessage ? (
+            <form onSubmit={handleEnrollmentSubmit} className="space-y-5 py-4">
+              <div>
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={e => handleInputChange('name', e.target.value)}
+                  disabled={isSubmitting}
+                  className={formErrors.name ? "border-red-500" : ""}
+                  required
+                />
+                {formErrors.name && (
+                  <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={e => handleInputChange('email', e.target.value)}
+                  disabled={isSubmitting}
+                  className={formErrors.email ? "border-red-500" : ""}
+                  required
+                />
+                {formErrors.email && (
+                  <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={e => handleInputChange('phone', e.target.value)}
+                  disabled={isSubmitting}
+                  className={formErrors.phone ? "border-red-500" : ""}
+                  required
+                />
+                {formErrors.phone && (
+                  <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>
+                )}
+              </div>
+              <div>
+                <Label htmlFor="extra_info">Additional Info (Optional)</Label>
+                <Textarea
+                  id="extra_info"
+                  value={formData.extra_info}
+                  onChange={e => handleInputChange('extra_info', e.target.value)}
+                  disabled={isSubmitting}
+                  rows={2}
+                />
+              </div>
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold py-3"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                    Submitting...
+                  </span>
+                ) : (
+                  "Submit & Download"
+                )}
+              </Button>
+            </form>
+          ) : (
+            <div className="py-8 text-center">
+              <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-green-700 mb-2">
+                Thank you for enrolling!
+              </h3>
+              <p className="text-gray-700 mb-4">
+                Your download will begin shortly. If it doesn't, please check your email for the curriculum link.
+              </p>
+              <Button
+                className="mt-2"
+                onClick={handleModalClose}
+              >
+                Close
+              </Button>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>
@@ -708,4 +797,3 @@ const Highlights: React.FC = () => {
 };
 
 export default Highlights;
-
