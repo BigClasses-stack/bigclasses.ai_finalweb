@@ -39,7 +39,7 @@ const LearningJourneySteps = () => {
   const ErrorFallback = () => (
     <div className="animation-size flex items-center justify-center bg-red-50 rounded-lg border-2 border-red-200">
       <div className="flex flex-col items-center space-y-2">
-        <div className="text-red-500 text-2xl">⚠</div>
+        <div className="text-red-500 text-2xl">⚠️</div>
         <span className="text-sm text-red-600">Failed to load</span>
       </div>
     </div>
