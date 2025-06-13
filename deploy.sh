@@ -5,9 +5,15 @@ echo "=== SWITCHING TO STAGING DIRECTORY ==="
 cd /home/ubuntu/stage/bigclasses.ai_finalweb
 
 echo "=== CLEANING UNNEEDED FILES ==="
-# Clean Python bytecode files
-find . -type f -name '*.pyc' -delete
-find . -type d -name '__pycache__' -exec rm -rf {} +
+# Stop all running Python processes that may lock .pyc files
+if pgrep -f python; then
+  echo "Stopping running Python processes..."
+  pkill -f python
+fi
+
+# Force permissions and remove .pyc files and __pycache__ directories
+find . -type f -name '*.pyc' -exec chmod +w {} \; -exec rm -f {} \;
+find . -type d -name '__pycache__' -exec chmod -R +w {} \; -exec rm -rf {} +
 
 # (Optional) Clean old node_modules cache if it's accidentally committed
 if [ -d "bigclasses.ai/node_modules" ]; then
