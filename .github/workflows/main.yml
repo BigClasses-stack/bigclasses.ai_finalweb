@@ -1,5 +1,4 @@
-
-name: Deploy to stage
+name: Deploy to Stage
 
 on:
   push:
@@ -8,17 +7,26 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
-    - name: Deploy via SSH to EC2
-      uses: appleboy/ssh-action@v0.1.6
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-          cd /home/ubuntu/stage/bigclasses.ai_finalweb
-          git pull origin stage
-          ./deploy.sh
+      - name: SSH Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/ubuntu/stage/bigclasses.ai_finalweb
+
+            echo "Resetting project to match remote 'stage' branch"
+            git fetch origin
+            git reset --hard origin/stage
+            git clean -fd
+
+            # Remove .pyc and __pycache__
+            find . -name "*.pyc" -delete
+            find . -name "__pycache__" -type d -exec rm -rf {} +
+
+            chmod +x deploy.sh
+            ./deploy.sh

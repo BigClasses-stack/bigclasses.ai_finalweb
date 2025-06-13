@@ -1,18 +1,28 @@
+#!/bin/bash
 set -e  # Exit on any error
 
-# Go to staging project folder
+echo "=== SWITCHING TO STAGING DIRECTORY ==="
 cd /home/ubuntu/stage/bigclasses.ai_finalweb
 
-# Pull latest code from stage branch
-git config pull.rebase false
-git pull origin stage
+echo "=== FIXING FILE PERMISSIONS ==="
+sudo chown -R ubuntu:ubuntu .
 
-# Bring down only the STAGING containers
+echo "=== CLEANING BUILD AND CACHE FILES ==="
+find . -type f -name '*.pyc' -delete || true
+find . -type d -name '__pycache__' -exec rm -rf {} + || true
+
+echo "=== FETCHING AND RESETTING TO REMOTE 'stage' ==="
+git fetch origin
+git reset --hard origin/stage
+git clean -fd
+
+echo "=== STOPPING OLD STAGING CONTAINERS ==="
 docker-compose -f docker-compose.stage.yml -p stage down
 
-# Build and start the staging stack
+echo "=== BUILDING & STARTING NEW STAGING CONTAINERS ==="
 docker-compose -f docker-compose.stage.yml -p stage up -d --build
 
-# Test and restart Nginx
-sudo nginx -t
-sudo systemctl restart nginx
+echo "=== RELOADING NGINX ==="
+sudo nginx -t && sudo systemctl restart nginx
+
+echo "=== DEPLOYMENT COMPLETED SUCCESSFULLY ==="
