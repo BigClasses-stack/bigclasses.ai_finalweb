@@ -73,6 +73,17 @@ const Navbar = () => {
     setIsPhoneDropdownOpen(true);
   };
 
+  const handleScrollToSection = (sectionId: string) => {
+    navigate('/#');
+    setTimeout(() => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false);
+      }
+    }, 100);
+  };
+
   return (
     <>
       <style>{`
@@ -401,7 +412,7 @@ const Navbar = () => {
         </div>
       </div>
       <button
-        onClick={() => navigate('/testimonials')}
+        onClick={() => handleScrollToSection('testimonials')}
         className="text-black hover:text-primary transition-colors whitespace-nowrap"
       >
         Testimonials
@@ -593,13 +604,12 @@ const Navbar = () => {
           )}
         </div>
 
-        <a
-          href="#testimonials"
+        <button
+          onClick={() => handleScrollToSection('testimonials')}
           className="text-black hover:text-primary transition-colors py-2"
-          onClick={toggleMenu}
         >
           Testimonials
-        </a>
+        </button>
         <div className="flex flex-col space-y-3 pt-3">
           {isLoggedIn ? (
             <>
