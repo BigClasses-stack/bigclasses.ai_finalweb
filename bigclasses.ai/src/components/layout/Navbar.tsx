@@ -226,9 +226,9 @@ const Navbar = () => {
           background-color: rgba(255, 255, 255, 0.2);
         }
       `}</style>
-<nav className="bg-white py-2 sticky top-0 z-50 shadow-sm ml-0">
-  <div className="max-w-[1100px] mx-auto px-2 md:px-4 flex items-center justify-between">
-    {/* Logo */}
+<nav className="bg-white py-2 sticky top-0 z-50 shadow-sm">
+  <div className="w-full px-4 md:px-8 flex items-center justify-between">
+    {/* Logo - adjusted margin */}
     <div className="flex items-center gap-2">
       <button
         onClick={() => {
@@ -244,179 +244,385 @@ const Navbar = () => {
         />
       </button>
     </div>
-    {/* Center Nav Links */}
-    <div className="hidden md:flex justify-center flex-1 items-center space-x-6">
+
+    {/* Center Nav Links - adjusted spacing and width */}
+    <div className="hidden md:flex justify-center items-center space-x-12 flex-1 max-w-3xl mx-auto px-4">
       <button
         onClick={() => {
           navigate("/#");
           setTimeout(() => handleScrollTo("hero"), 0);
         }}
-        className="text-black hover:text-blue-500 transition-colors"
+        className="text-black hover:text-blue-500 transition-colors whitespace-nowrap"
       >
         Home
       </button>
-            <div className="relative group">
-              <a
-                href="#courses"
-                className="text-black hover:text-primary transition-colors flex items-center space-x-1"
-              >
-                <span>Courses</span>
-                <svg
-                  className="w-4 h-4 mt-[2px] transform group-hover:rotate-180 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19 9l-7 7-7-7" />
-                </svg>
-              </a>
-              <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <a
-                  href="/course-details/data-analytics"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Data Analytics
-                </a>
-                <a
-                  href="/course-details/python-programming"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Python Programming 
-                </a>
-                <a
-                  href="/course-details/machine-learning"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Machine Learning
-                </a>
-                <a
-                  href="/course-details/deep-learning"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Deep Learning
-                </a>
-                <a
-                  href="/course-details/natural-language-processing"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Natural Language Processing (NLP)
-                </a>
-                <a
-                  href="/course-details/generative-ai"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                 Generative AI
-                </a>
-                <a
-                  href="/course-details/langchain"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Langchain
-                </a>
-                <a
-                  href="/course-details/langgraph"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  LangGraph
-                </a>
-                <a
-                  href="/course-details/mlops"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  MLOps
-                </a>
-                <a
-                  href="/course-details/llmops"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  LLMOps
-                </a>
-               
-                <a
-                  href="/course-details/ai-agents"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Agents
-                </a>
-                  <a
-                  href="/course-details/ai-ethics"
-                  className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Ethics AI and Scaling AI system
-                </a>
-              </div>
-            </div>
+      <div className="relative group">
+        <a
+          href="#courses"
+          className="text-black hover:text-primary transition-colors flex items-center space-x-2 whitespace-nowrap"
+        >
+          <span>Courses</span>
+          <svg
+            className="w-4 h-4 transform group-hover:rotate-180 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <a
+            href="/course-details/data-analytics"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Data Analytics
+          </a>
+          <a
+            href="/course-details/python-programming"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Python Programming 
+          </a>
+          <a
+            href="/course-details/machine-learning"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Machine Learning
+          </a>
+          <a
+            href="/course-details/deep-learning"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Deep Learning
+          </a>
+          <a
+            href="/course-details/natural-language-processing"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Natural Language Processing (NLP)
+          </a>
+          <a
+            href="/course-details/generative-ai"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+           Generative AI
+          </a>
+          <a
+            href="/course-details/langchain"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Langchain
+          </a>
+          <a
+            href="/course-details/langgraph"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            LangGraph
+          </a>
+          <a
+            href="/course-details/mlops"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            MLOps
+          </a>
+          <a
+            href="/course-details/llmops"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            LLMOps
+          </a>
+         
+          <a
+            href="/course-details/ai-agents"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Agents
+          </a>
+            <a
+            href="/course-details/ai-ethics"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Ethics AI and Scaling AI system
+          </a>
+        </div>
+      </div>
 
-            <div className="relative group">
-              <a
-                href="#features"
-                className="text-black hover:text-primary transition-colors flex items-center space-x-1"
-              >
-                <span>Features</span>
-                <svg
-                  className="w-4 h-4 mt-[2px] transform group-hover:rotate-180 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M19 9l-7 7-7-7" />
-                </svg>
-              </a>
-              <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                {/* Feature links that navigate to specific feature tabs */}
-                <button
-                  onClick={() => handleFeatureClick("hands-on-projects")}
-                  className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Hands-on Projects
-                </button>
-                <button
-                  onClick={() => handleFeatureClick("mentor-support")}
-                  className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Mentor Support
-                </button>
-                <button
-                  onClick={() => handleFeatureClick("career-services")}
-                  className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Career Services
-                </button>
-                <button
-                  onClick={() => handleFeatureClick("certifications")}
-                  className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-                >
-                  Certifications
-                </button>
-                {/* Link to view all features */}
-                <button
-                  onClick={() => navigate("/features")}
-                  className="block w-full text-left px-6 py-3 bg-gray-50 hover:bg-gray-100 text-sm font-medium text-blue-600"
-                >
-                  View All Features
-                </button>
-              </div>
-            </div>
-            <button
-              onClick={() => navigate('/testimonials')}
-              className="text-black hover:text-primary transition-colors"
+      <div className="relative group">
+        <a
+          href="#features"
+          className="text-black hover:text-primary transition-colors flex items-center space-x-2 whitespace-nowrap"
+        >
+          <span>Features</span>
+          <svg
+            className="w-4 h-4 transform group-hover:rotate-180 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </a>
+        <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          {/* Feature links that navigate to specific feature tabs */}
+          <button
+            onClick={() => handleFeatureClick("hands-on-projects")}
+            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Hands-on Projects
+          </button>
+          <button
+            onClick={() => handleFeatureClick("mentor-support")}
+            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Mentor Support
+          </button>
+          <button
+            onClick={() => handleFeatureClick("career-services")}
+            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Career Services
+          </button>
+          <button
+            onClick={() => handleFeatureClick("certifications")}
+            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Certifications
+          </button>
+          {/* Link to view all features */}
+          <button
+            onClick={() => navigate("/features")}
+            className="block w-full text-left px-6 py-3 bg-gray-50 hover:bg-gray-100 text-sm font-medium text-blue-600"
+          >
+            View All Features
+          </button>
+        </div>
+      </div>
+      <button
+        onClick={() => navigate('/testimonials')}
+        className="text-black hover:text-primary transition-colors whitespace-nowrap"
+      >
+        Testimonials
+      </button>
+    </div>
+
+    {/* Right Auth Buttons - adjusted margin */}
+    <div className="hidden md:flex items-center ml-4">
+      {isLoggedIn ? (
+        <div className="flex items-center space-x-4">
+          <Button variant="outline" className="rounded-full px-6" onClick={handleLogout}>
+            Sign out
+          </Button>
+        </div>
+      ) : (
+        <div className="w-32 h-16 flex items-center"> {/* Changed width from w-24 to w-32 */}
+          <Lottie 
+            animationData={startNowAnimation}
+            loop={true}
+            className="cursor-pointer hover:scale-110 transition-transform"
+            onClick={(e) => {
+              const target = e.target as HTMLElement;
+              if (target.closest('svg')) {
+                handleStartNowClick();
+              }
+            }}
+          />
+        </div>
+      )}
+    </div>
+
+    {/* Mobile Menu Button */}
+    <div className="md:hidden">
+      <Button variant="ghost" size="icon" onClick={toggleMenu}>
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </Button>
+    </div>
+  </div>
+
+  {/* Mobile Dropdown Menu */}
+  {isMenuOpen && (
+    <div className="md:hidden bg-white py-6 px-4 shadow-lg">
+      <div className="flex flex-col space-y-4">
+        <button
+          onClick={() => handleScrollTo("home")}
+          className="text-left text-black hover:text-blue-500 transition-colors py-2"
+        >
+          Home
+        </button>
+        {/* Courses dropdown for mobile */}
+        <div className="py-2">
+          <button
+            onClick={toggleMobileCourseDropdown}
+            className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
+          >
+            <span>Courses</span>
+            <svg
+              className={`w-4 h-4 transform transition-transform ${mobileCourseDropdownOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
             >
-              Testimonials
-            </button>
-          </div>
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
 
-          {/* Right Auth Buttons */}
-          <div className="hidden md:flex items-center">
-            {isLoggedIn ? (
+          {mobileCourseDropdownOpen && (
+            <div className="pl-4 flex flex-col space-y-2 mt-2">
+              <button
+                className="text-left text-gray-700 hover:text-blue-500"
+                onClick={() => {
+                  navigate("/course-details/data-analytics");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                Data Analytics
+              </button>
+              <button
+                className="text-left text-gray-700 hover:text-blue-500"
+                onClick={() => {
+                  navigate("/course-details/python-programming");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                Python Programming
+              </button>
+              <button
+                className="text-left text-gray-700 hover:text-blue-500"
+                onClick={() => {
+                  navigate("/course-details/machine-learning");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                Machine Learning
+              </button>
+              <button
+                className="text-left text-gray-700 hover:text-blue-500"
+                onClick={() => {
+                  navigate("/course-details/deep-learning");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                Deep Learning
+              </button>
+              <button
+                className="text-left text-gray-700 hover:text-blue-500"
+                onClick={() => {
+                  navigate("/course-details/natural-language-processing");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                NLP
+              </button>
+              <button
+                className="text-left text-blue-600 font-medium"
+                onClick={() => {
+                  handleScrollTo("courses");
+                  setIsMenuOpen(false);
+                  setMobileCourseDropdownOpen(false);
+                }}
+              >
+                View All Courses
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Features dropdown for mobile - Now toggleable */}
+        <div className="py-2">
+          <button
+            onClick={toggleMobileFeatureDropdown}
+            className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
+          >
+            <span>Features</span>
+            <svg
+              className={`w-4 h-4 transform transition-transform ${mobileFeatureDropdownOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          {mobileFeatureDropdownOpen && (
+            <div className="pl-4 flex flex-col space-y-2 mt-2">
+              <button
+                onClick={() => handleFeatureClick("hands-on-projects")}
+                className="text-left text-gray-700 hover:text-blue-500"
+              >
+                Hands-on Projects
+              </button>
+              <button
+                onClick={() => handleFeatureClick("mentor-support")}
+                className="text-left text-gray-700 hover:text-blue-500"
+              >
+                Mentor Support
+              </button>
+              <button
+                onClick={() => handleFeatureClick("career-services")}
+                className="text-left text-gray-700 hover:text-blue-500"
+              >
+                Career Services
+              </button>
+              <button
+                onClick={() => handleFeatureClick("certifications")}
+                className="text-left text-gray-700 hover:text-blue-500"
+              >
+                Certifications
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/features");
+                  setIsMenuOpen(false);
+                  setMobileFeatureDropdownOpen(false);
+                }}
+                className="text-left font-medium text-blue-600"
+              >
+                View All Features
+              </button>
+            </div>
+          )}
+        </div>
+
+        <a
+          href="#testimonials"
+          className="text-black hover:text-primary transition-colors py-2"
+          onClick={toggleMenu}
+        >
+          Testimonials
+        </a>
+        <div className="flex flex-col space-y-3 pt-3">
+          {isLoggedIn ? (
+            <>
               <div className="flex items-center space-x-4">
-                <Button variant="outline" className="rounded-full px-6" onClick={handleLogout}>
-                  Sign out
-                </Button>
+                <img
+                  src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff"
+                  alt="User Avatar"
+                  className="h-10 w-10 rounded-full"
+                />
               </div>
-            ) : (
-              <div className="w-32 h-16 flex items-center"> {/* Changed width from w-24 to w-32 */}
+              <Button
+                className="rounded-full w-full"
+                onClick={() => {
+                  toggleMenu();
+                  handleLogout();
+                }}
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <div className="flex flex-col space-y-3">
+              <div className="w-32 h-16 mx-auto flex items-center"> {/* Changed width from w-24 to w-32 */}
                 <Lottie 
                   animationData={startNowAnimation}
                   loop={true}
@@ -425,228 +631,23 @@ const Navbar = () => {
                     const target = e.target as HTMLElement;
                     if (target.closest('svg')) {
                       handleStartNowClick();
+                      setIsMenuOpen(false);
                     }
                   }}
                 />
               </div>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleMenu}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white py-6 px-4 shadow-lg">
-            <div className="flex flex-col space-y-4">
-              <button
-                onClick={() => handleScrollTo("home")}
-                className="text-left text-black hover:text-blue-500 transition-colors py-2"
-              >
-                Home
-              </button>
-              {/* Courses dropdown for mobile */}
-              <div className="py-2">
-                <button
-                  onClick={toggleMobileCourseDropdown}
-                  className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
-                >
-                  <span>Courses</span>
-                  <svg
-                    className={`w-4 h-4 transform transition-transform ${mobileCourseDropdownOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {mobileCourseDropdownOpen && (
-                  <div className="pl-4 flex flex-col space-y-2 mt-2">
-                    <button
-                      className="text-left text-gray-700 hover:text-blue-500"
-                      onClick={() => {
-                        navigate("/course-details/data-analytics");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      Data Analytics
-                    </button>
-                    <button
-                      className="text-left text-gray-700 hover:text-blue-500"
-                      onClick={() => {
-                        navigate("/course-details/python-programming");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      Python Programming
-                    </button>
-                    <button
-                      className="text-left text-gray-700 hover:text-blue-500"
-                      onClick={() => {
-                        navigate("/course-details/machine-learning");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      Machine Learning
-                    </button>
-                    <button
-                      className="text-left text-gray-700 hover:text-blue-500"
-                      onClick={() => {
-                        navigate("/course-details/deep-learning");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      Deep Learning
-                    </button>
-                    <button
-                      className="text-left text-gray-700 hover:text-blue-500"
-                      onClick={() => {
-                        navigate("/course-details/natural-language-processing");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      NLP
-                    </button>
-                    <button
-                      className="text-left text-blue-600 font-medium"
-                      onClick={() => {
-                        handleScrollTo("courses");
-                        setIsMenuOpen(false);
-                        setMobileCourseDropdownOpen(false);
-                      }}
-                    >
-                      View All Courses
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              {/* Features dropdown for mobile - Now toggleable */}
-              <div className="py-2">
-                <button
-                  onClick={toggleMobileFeatureDropdown}
-                  className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
-                >
-                  <span>Features</span>
-                  <svg
-                    className={`w-4 h-4 transform transition-transform ${mobileFeatureDropdownOpen ? 'rotate-180' : ''}`}
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {mobileFeatureDropdownOpen && (
-                  <div className="pl-4 flex flex-col space-y-2 mt-2">
-                    <button
-                      onClick={() => handleFeatureClick("hands-on-projects")}
-                      className="text-left text-gray-700 hover:text-blue-500"
-                    >
-                      Hands-on Projects
-                    </button>
-                    <button
-                      onClick={() => handleFeatureClick("mentor-support")}
-                      className="text-left text-gray-700 hover:text-blue-500"
-                    >
-                      Mentor Support
-                    </button>
-                    <button
-                      onClick={() => handleFeatureClick("career-services")}
-                      className="text-left text-gray-700 hover:text-blue-500"
-                    >
-                      Career Services
-                    </button>
-                    <button
-                      onClick={() => handleFeatureClick("certifications")}
-                      className="text-left text-gray-700 hover:text-blue-500"
-                    >
-                      Certifications
-                    </button>
-                    <button
-                      onClick={() => {
-                        navigate("/features");
-                        setIsMenuOpen(false);
-                        setMobileFeatureDropdownOpen(false);
-                      }}
-                      className="text-left font-medium text-blue-600"
-                    >
-                      View All Features
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <a
-                href="#testimonials"
-                className="text-black hover:text-primary transition-colors py-2"
-                onClick={toggleMenu}
-              >
-                Testimonials
-              </a>
-              <div className="flex flex-col space-y-3 pt-3">
-                {isLoggedIn ? (
-                  <>
-                    <div className="flex items-center space-x-4">
-                      <img
-                        src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff"
-                        alt="User Avatar"
-                        className="h-10 w-10 rounded-full"
-                      />
-                    </div>
-                    <Button
-                      className="rounded-full w-full"
-                      onClick={() => {
-                        toggleMenu();
-                        handleLogout();
-                      }}
-                    >
-                      Sign out
-                    </Button>
-                  </>
-                ) : (
-                  <div className="flex flex-col space-y-3">
-                    <div className="w-32 h-16 mx-auto flex items-center"> {/* Changed width from w-24 to w-32 */}
-                      <Lottie 
-                        animationData={startNowAnimation}
-                        loop={true}
-                        className="cursor-pointer hover:scale-110 transition-transform"
-                        onClick={(e) => {
-                          const target = e.target as HTMLElement;
-                          if (target.closest('svg')) {
-                            handleStartNowClick();
-                            setIsMenuOpen(false);
-                          }
-                        }}
-                      />
-                    </div>
-                    <div className="text-center py-2 text-gray-600 text-sm">
-                      Welcome! Ready to begin your learning journey?
-                    </div>
-                  </div>
-                )}
+              <div className="text-center py-2 text-gray-600 text-sm">
+                Welcome! Ready to begin your learning journey?
               </div>
             </div>
-          </div>
-        )}
-      </nav>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+</nav>
 
-      {/* Floating Contact Buttons - Updated positioning to move leftward */}
+{/* Floating Contact Buttons - Updated positioning to move leftward */}
       {!isLoggedIn && showFloatingButton && (
         <div className="fixed bottom-16 right-6 z-50 flex flex-col space-y-3 items-end">
           {/* Phone Contact Button - Moved leftward from right-2 to right-6 */}
