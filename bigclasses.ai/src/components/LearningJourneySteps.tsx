@@ -90,7 +90,7 @@ const LearningJourneySteps = () => {
     <section className="w-full pb-24 mt-0 md:-mt-20 pt-8 md:pt-0">
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2 mt-0 inline-block mx-auto px-4">
-          AI Training Hub
+          
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-6">

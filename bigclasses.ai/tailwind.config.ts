@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -93,13 +92,18 @@ export default {
         'pulse-glow': {
           '0%, 100%': { opacity: '0.6' },
           '50%': { opacity: '1' }
+        },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'float': 'float 6s ease-in-out infinite',
-        'pulse-glow': 'pulse-glow 3s ease-in-out infinite'
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+        scroll: 'scroll 40s linear infinite'
       }
     }
   },

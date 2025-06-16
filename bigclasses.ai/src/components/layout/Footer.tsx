@@ -89,6 +89,10 @@ const Footer = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <footer className="bg-gradient-to-r from-[#f3e8ff] via-[#fce7f3] to-[#e0f2fe] text-gray-800">
       <div className="container mx-auto">
@@ -156,15 +160,30 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-3">
-              {["Home", "Courses", "Features", "Testimonials"].map((text, idx) => (
+              { [
+                { text: "Home", action: scrollToTop },
+                { text: "Courses", href: "#courses" },
+                { text: "Features", href: "#features" },
+                { text: "Testimonials", href: "#testimonials" },
+              ].map((link, idx) => (
                 <li key={idx}>
-                  <a
-                    href={`#${text.toLowerCase()}`}
-                    className="text-gray-600 hover:text-purple-700 transition-colors flex items-center group"
-                  >
-                    <ArrowRight className="mr-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all" />
-                    {text}
-                  </a>
+                  {link.action ? (
+                    <button
+                      onClick={link.action}
+                      className="text-gray-600 hover:text-purple-700 transition-colors flex items-center group"
+                    >
+                      <ArrowRight className="mr-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all" />
+                      {link.text}
+                    </button>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-gray-600 hover:text-purple-700 transition-colors flex items-center group"
+                    >
+                      <ArrowRight className="mr-2 h-4 w-4 opacity-0 group-hover:opacity-100 transition-all" />
+                      {link.text}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -191,10 +210,10 @@ const Footer = () => {
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-purple-500 flex-shrink-0" />
                 <a
-                  href="tel:+919666717099"
+                  href="tel:+91 9666523199"
                   className="text-gray-600 hover:text-purple-700 transition-colors"
                 >
-                  +91 9666717099
+                  +91 9666523199
                 </a>
               </li>
               <li className="flex items-center">
