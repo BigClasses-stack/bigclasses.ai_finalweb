@@ -413,7 +413,7 @@ const Highlights: React.FC = () => {
                 className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
                 rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
                 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 
-                flex items-center justify-center space-x-2"
+                flex items-center justify-center space-x-1"
                 onClick={() => navigate('/signup')}
               >
                 <Calendar className="w-5 h-5" />
@@ -425,7 +425,7 @@ const Highlights: React.FC = () => {
                 className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
                 rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
                 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
-                flex items-center justify-center space-x-2"
+                flex items-center justify-center space-x-0"
                 onClick={handleContactClick}
               >
                 <Phone className="w-5 h-5" />

@@ -4,7 +4,6 @@ import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import startNowAnimation from "../../assets/animations/start_now_animation.json";
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -13,40 +12,32 @@ const Navbar = () => {
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     setIsLoggedIn(!!token);
   }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setShowFloatingButton(scrollY >= 0);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     setMobileFeatureDropdownOpen(false);
     setMobileCourseDropdownOpen(false);
   };
-
   const toggleMobileCourseDropdown = () => {
     setMobileCourseDropdownOpen(!mobileCourseDropdownOpen);
   };
-
   const toggleMobileFeatureDropdown = () => {
     setMobileFeatureDropdownOpen(!mobileFeatureDropdownOpen);
   };
-
   const togglePhoneDropdown = () => {
     setIsPhoneDropdownOpen(!isPhoneDropdownOpen);
   };
-
   const handleScrollTo = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
@@ -235,38 +226,35 @@ const Navbar = () => {
           background-color: rgba(255, 255, 255, 0.2);
         }
       `}</style>
-
-      <nav className="bg-white py-6 sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center">
-            <button
-              onClick={() => {
-                navigate("/#");
-                setTimeout(() => handleScrollTo("hero"), 0);
-              }}
-              className="flex items-center gap-2"
-            >
-              <img
-                src="\lovable-uploads\Big_Classes_LOGO.webp"
-                alt="BigClasses.AI Logo"
-                className="h-12 w-auto"
-              />
-            </button>
-          </div>
-
-          {/* Center Nav Links */}
-          <div className="hidden md:flex justify-center flex-1 items-center space-x-8">
-            <button
-              onClick={() => {
-                navigate("/#");
-                setTimeout(() => handleScrollTo("hero"), 0);
-              }}
-              className="text-black hover:text-blue-500 transition-colors"
-            >
-              Home
-            </button>
-
+<nav className="bg-white py-2 sticky top-0 z-50 shadow-sm ml-0">
+  <div className="max-w-[1100px] mx-auto px-2 md:px-4 flex items-center justify-between">
+    {/* Logo */}
+    <div className="flex items-center gap-2">
+      <button
+        onClick={() => {
+          navigate("/#");
+          setTimeout(() => handleScrollTo("hero"), 0);
+        }}
+        className="flex items-center gap-2"
+      >
+        <img
+          src="\lovable-uploads\Big_Classes_LOGO.webp"
+          alt="BigClasses.AI Logo"
+          className="h-10 w-auto"
+        />
+      </button>
+    </div>
+    {/* Center Nav Links */}
+    <div className="hidden md:flex justify-center flex-1 items-center space-x-6">
+      <button
+        onClick={() => {
+          navigate("/#");
+          setTimeout(() => handleScrollTo("hero"), 0);
+        }}
+        className="text-black hover:text-blue-500 transition-colors"
+      >
+        Home
+      </button>
             <div className="relative group">
               <a
                 href="#courses"
@@ -411,7 +399,6 @@ const Navbar = () => {
                 </button>
               </div>
             </div>
-
             <button
               onClick={() => navigate('/testimonials')}
               className="text-black hover:text-primary transition-colors"
@@ -701,6 +688,7 @@ const Navbar = () => {
             )}
           </div>
 
+
           {/* Enroll Now Button - Also moved leftward */}
           <Button
             className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
@@ -713,5 +701,6 @@ const Navbar = () => {
     </>
   );
 };
+
 
 export default Navbar;
