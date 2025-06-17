@@ -606,14 +606,14 @@ const Navbar = () => {
 
         <button
           onClick={() => handleScrollToSection('testimonials')}
-          className="text-black hover:text-primary transition-colors py-2"
+          className="text-black hover:text-primary transition-colors py-2 w-full text-left sm:text-center"
         >
           Testimonials
         </button>
-        <div className="flex flex-col space-y-3 pt-3">
+        <div className="flex flex-col items-start sm:items-center space-y-4 pt-4">
           {isLoggedIn ? (
             <>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3">
                 <img
                   src="https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff"
                   alt="User Avatar"
