@@ -25,7 +25,6 @@ const ScrollingTicker = () => {
     // "Live Projects with Industry Experts",
     // "Industry Recognized Certifications",
     // "Latest AI & ML Curriculum Updates",
-    
   ];
 
   return (
@@ -33,9 +32,6 @@ const ScrollingTicker = () => {
       <div
         ref={tickerRef}
         className="whitespace-nowrap inline-block animate-scroll"
-        style={{
-          animation: "scroll 40s linear infinite",
-        }}
       >
         {announcements.map((announcement, index) => (
           <span key={index} className="inline-flex items-center">
@@ -62,3 +58,7 @@ const ScrollingTicker = () => {
 };
 
 export default ScrollingTicker;
+
+
+
+

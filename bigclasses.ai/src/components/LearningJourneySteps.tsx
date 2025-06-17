@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import buildingAnimation from "../assets/animations/building.json";
 import jobAnimation from "../assets/animations/job.json";
@@ -8,6 +8,12 @@ const LearningJourneySteps = () => {
   const [learningAnimationData, setLearningAnimationData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  
+  // Refs to maintain animation instances
+  const learningPlayerRef = useRef(null);
+  const buildingPlayerRef = useRef(null);
+  const jobPlayerRef = useRef(null);
+  const arrowPlayerRefs = useRef([]);
 
   useEffect(() => {
     const loadLearningAnimation = async () => {
@@ -45,110 +51,134 @@ const LearningJourneySteps = () => {
     </div>
   );
 
-  const AnimationPlayer = ({ src, className, fallback = null }) => {
-    const [playerLoaded, setPlayerLoaded] = useState(false);
-    const [playerError, setPlayerError] = useState(false);
+  // Memoized AnimationPlayer component to prevent re-renders
+  const AnimationPlayer = useMemo(() => {
+    return ({ src, className, fallback = null, playerRef = null, id = null }) => {
+      const [playerLoaded, setPlayerLoaded] = useState(false);
+      const [playerError, setPlayerError] = useState(false);
 
-    return (
-      <div className="relative">
-        {!playerLoaded && !playerError && (
-          <div className={`${className} flex items-center justify-center bg-gray-50 rounded-lg absolute inset-0 z-10`}>
-            <div className="animate-pulse bg-gray-200 rounded-full h-6 w-6"></div>
-          </div>
-        )}
-        <Player
-          autoplay
-          loop
-          src={src}
-          className={`${className} ${!playerLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
-          onEvent={(event) => {
-            if (event === 'load' || event === 'ready') {
-              setPlayerLoaded(true);
-            }
-            if (event === 'error') {
-              setPlayerError(true);
-              setPlayerLoaded(true);
-            }
-          }}
-          rendererSettings={{
-            preserveAspectRatio: 'xMidYMid slice',
-            clearCanvas: false,
-            progressiveLoad: true,
-            hideOnTransparent: true
-          }}
+      return (
+        <div className="relative" key={id}>
+          {!playerLoaded && !playerError && (
+            <div className={`${className} flex items-center justify-center bg-gray-50 rounded-lg absolute inset-0 z-10`}>
+              <div className="animate-pulse bg-gray-200 rounded-full h-6 w-6"></div>
+            </div>
+          )}
+          <Player
+            ref={playerRef}
+            autoplay
+            loop
+            src={src}
+            className={`${className} ${!playerLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
+            onEvent={(event) => {
+              if (event === 'load' || event === 'ready') {
+                setPlayerLoaded(true);
+              }
+              if (event === 'error') {
+                setPlayerError(true);
+                setPlayerLoaded(true);
+              }
+            }}
+            rendererSettings={{
+              preserveAspectRatio: 'xMidYMid slice',
+              clearCanvas: false,
+              progressiveLoad: true,
+              hideOnTransparent: true
+            }}
+          />
+          {playerError && fallback && (
+            <div className={`${className} flex items-center justify-center bg-gray-100 rounded-lg`}>
+              {fallback}
+            </div>
+          )}
+        </div>
+      );
+    };
+  }, []);
+
+  // Memoized animation sections to prevent re-rendering
+  const HybridLearningSection = useMemo(() => (
+    <div className="flex flex-col items-center space-y-4 mb-8 md:mb-0 mt-2 md:mt-0">
+      {isLoading && <LoadingSpinner />}
+      {loadError && <ErrorFallback />}
+      {learningAnimationData && !isLoading && !loadError && (
+        <AnimationPlayer
+          src={learningAnimationData}
+          className="animation-size"
+          fallback={<span className="text-gray-500">Animation unavailable</span>}
+          playerRef={learningPlayerRef}
+          id="learning-animation"
         />
-        {playerError && fallback && (
-          <div className={`${className} flex items-center justify-center bg-gray-100 rounded-lg`}>
-            {fallback}
-          </div>
-        )}
-      </div>
-    );
-  };
+      )}
+      <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
+        Hybrid Learning
+      </p>
+    </div>
+  ), [isLoading, loadError, learningAnimationData, AnimationPlayer]);
+
+  const HandsOnProjectsSection = useMemo(() => (
+    <div className="flex flex-col items-center space-y-2 mb-8 md:mb-0 mt-2 md:mt-0">
+      <AnimationPlayer
+        src={buildingAnimation}
+        className="animation-size"
+        fallback={<span className="text-gray-500">Animation unavailable</span>}
+        playerRef={buildingPlayerRef}
+        id="building-animation"
+      />
+      <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
+        Hands-On Projects
+      </p>
+    </div>
+  ), [AnimationPlayer]);
+
+  const CareerSupportSection = useMemo(() => (
+    <div className="flex flex-col items-center space-y-4 mt-2 md:mt-0">
+      <AnimationPlayer
+        src={jobAnimation}
+        className="animation-size"
+        fallback={<span className="text-gray-500">Animation unavailable</span>}
+        playerRef={jobPlayerRef}
+        id="job-animation"
+      />
+      <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
+        Career Support
+      </p>
+    </div>
+  ), [AnimationPlayer]);
+
+  const ArrowSection = useMemo(() => ({ index }) => (
+    <div className="flex flex-col items-center space-y-2 mb-8 md:mb-0" key={`arrow-${index}`}>
+      <AnimationPlayer
+        src={arrowAnimation}
+        className="h-16 w-16 rotation-md"
+        playerRef={(el) => arrowPlayerRefs.current[index] = el}
+        id={`arrow-animation-${index}`}
+      />
+    </div>
+  ), [AnimationPlayer]);
 
   return (
-    <section className="w-full pb-24 mt-0 md:-mt-20 pt-8 md:pt-0">
+    <section className="w-full pb-24 mt-0 md:-mt-16 pt-8 md:pt-4">
       <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-2 mt-0 inline-block mx-auto px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 mt-0 inline-block mx-auto px-4">
           
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center items-center gap-6">
           {/* Hybrid Learning */}
-          <div className="flex flex-col items-center space-y-4 mb-8 md:mb-0 -mt-4 md:-mt-12">
-            {isLoading && <LoadingSpinner />}
-            {loadError && <ErrorFallback />}
-            {learningAnimationData && !isLoading && !loadError && (
-              <AnimationPlayer
-                src={learningAnimationData}
-                className="animation-size"
-                fallback={<span className="text-gray-500">Animation unavailable</span>}
-              />
-            )}
-            <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
-              Hybrid Learning
-            </p>
-          </div>
+          {HybridLearningSection}
 
-          {/* Arrow */}
-          <div className="flex flex-col items-center space-y-2 mb-8 md:mb-0">
-            <AnimationPlayer
-              src={arrowAnimation}
-              className="h-16 w-16 rotation-md"
-            />
-          </div>
+          {/* Arrow 1 */}
+          <ArrowSection index={0} />
 
           {/* Hands-On Projects */}
-          <div className="flex flex-col items-center space-y-2 mb-8 md:mb-0 mt-4 md:mt-6">
-            <AnimationPlayer
-              src={buildingAnimation}
-              className="animation-size"
-              fallback={<span className="text-gray-500">Animation unavailable</span>}
-            />
-            <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
-              Hands-On Projects
-            </p>
-          </div>
+          {HandsOnProjectsSection}
 
-          {/* Arrow */}
-          <div className="flex flex-col items-center space-y-2 mb-8 md:mb-0">
-            <AnimationPlayer
-              src={arrowAnimation}
-              className="h-16 w-16 rotation-md"
-            />
-          </div>
+          {/* Arrow 2 */}
+          <ArrowSection index={1} />
 
           {/* Career Support */}
-          <div className="flex flex-col items-center space-y-4">
-            <AnimationPlayer
-              src={jobAnimation}
-              className="animation-size"
-              fallback={<span className="text-gray-500">Animation unavailable</span>}
-            />
-            <p className="text-xl font-semibold text-gray-700 hover:text-blue-600 transition-colors duration-300">
-              Career Support
-            </p>
-          </div>
+          {CareerSupportSection}
         </div>
 
         <style type='text/css'>
