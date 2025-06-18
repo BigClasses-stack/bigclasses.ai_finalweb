@@ -68,18 +68,26 @@ const Highlights: React.FC = () => {
   // Form validation
   const validateForm = (): boolean => {
     const errors: FormErrors = {};
-
-    if (!formData.name || formData.name.trim().length < 2) {
-      errors.name = "Name must be at least 2 characters";
+    
+    // Name validation (at least 2 characters, only letters and spaces)
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+    } else if (!/^[A-Za-z\s]{2,}$/.test(formData.name.trim())) {
+      errors.name = "Please enter a valid name (only letters and spaces)";
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email || !emailRegex.test(formData.email)) {
+    // Email validation
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       errors.email = "Please enter a valid email address";
     }
 
-    if (!formData.phone || formData.phone.trim().length < 10) {
-      errors.phone = "Please enter a valid phone number";
+    // Phone validation (10 digits)
+    if (!formData.phone.trim()) {
+      errors.phone = "Phone number is required";
+    } else if (!/^[0-9]{10}$/.test(formData.phone.replace(/\D/g, ''))) {
+      errors.phone = "Please enter a valid 10-digit phone number";
     }
 
     setFormErrors(errors);
@@ -183,9 +191,24 @@ const Highlights: React.FC = () => {
 
     setIsSubmitting(true);
     try {
+      // Check if user has already downloaded
+      const hasDownloaded = localStorage.getItem(`curriculum_downloaded_${id}`);
+      if (hasDownloaded) {
+        toast({
+          title: "Already Downloaded",
+          description: "You have already downloaded this curriculum.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       const response = await axiosInstance.post(`/courses/${id}/enroll-download/`, formData);
 
       if (response.data.success) {
+        // Mark as downloaded
+        localStorage.setItem(`curriculum_downloaded_${id}`, 'true');
+        
         setEnrollmentSuccess(true);
         setShowSuccessMessage(true);
 
@@ -194,7 +217,6 @@ const Highlights: React.FC = () => {
           description: "Thank you for enrolling. Your download will begin shortly.",
         });
 
-        // Auto-download after 2 seconds
         setTimeout(() => {
           downloadCurriculum();
         }, 2000);
@@ -711,10 +733,14 @@ const Highlights: React.FC = () => {
                   onChange={e => handleInputChange('name', e.target.value)}
                   disabled={isSubmitting}
                   className={formErrors.name ? "border-red-500" : ""}
+                  placeholder="Enter your full name"
                   required
+                  aria-describedby={formErrors.name ? "name-error" : undefined}
                 />
                 {formErrors.name && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
+                  <p className="text-red-500 text-xs mt-1" id="name-error" role="alert">
+                    {formErrors.name}
+                  </p>
                 )}
               </div>
               <div>
@@ -726,10 +752,14 @@ const Highlights: React.FC = () => {
                   onChange={e => handleInputChange('email', e.target.value)}
                   disabled={isSubmitting}
                   className={formErrors.email ? "border-red-500" : ""}
+                  placeholder="you@example.com"
                   required
+                  aria-describedby={formErrors.email ? "email-error" : undefined}
                 />
                 {formErrors.email && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
+                  <p className="text-red-500 text-xs mt-1" id="email-error" role="alert">
+                    {formErrors.email}
+                  </p>
                 )}
               </div>
               <div>
@@ -741,10 +771,14 @@ const Highlights: React.FC = () => {
                   onChange={e => handleInputChange('phone', e.target.value)}
                   disabled={isSubmitting}
                   className={formErrors.phone ? "border-red-500" : ""}
+                  placeholder="10-digit phone number"
                   required
+                  aria-describedby={formErrors.phone ? "phone-error" : undefined}
                 />
                 {formErrors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>
+                  <p className="text-red-500 text-xs mt-1" id="phone-error" role="alert">
+                    {formErrors.phone}
+                  </p>
                 )}
               </div>
               <div>
