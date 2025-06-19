@@ -214,12 +214,13 @@ const Highlights: React.FC = () => {
 
         toast({
           title: "Enrollment Successful!",
-          description: "Thank you for enrolling. Your download will begin shortly.",
+          description: "The curriculum has been sent to your email.",
         });
 
-        setTimeout(() => {
-          downloadCurriculum();
-        }, 2000);
+        // Do NOT call downloadCurriculum() anymore
+        // setTimeout(() => {
+        //   downloadCurriculum();
+        // }, 2000);
       }
     } catch (error: any) {
       toast({

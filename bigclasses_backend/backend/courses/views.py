@@ -8,15 +8,21 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError as DjangoValidationError
+import dns.resolver
+
 from .models import Course, BatchSchedule
 from .serializers import CourseSerializer, CourseDetailSerializer, BatchScheduleSerializer
+from enrollments.models import Enrollment
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -161,11 +167,54 @@ class EnrollDownloadView(View):
                     'error': 'Name, email, and phone are required fields'
                 }, status=400)
 
+            # --- Email existence check ---
+            # Syntax check
+            try:
+                validate_email(email)
+            except DjangoValidationError:
+                return JsonResponse({'success': False, 'error': 'Invalid email format'}, status=400)
+            # MX record check
+            domain = email.split('@')[-1]
+            try:
+                dns.resolver.resolve(domain, 'MX')
+            except Exception:
+                return JsonResponse({'success': False, 'error': 'Email domain does not exist'}, status=400)
+            # (Optional) Already enrolled check
             try:
                 course = get_object_or_404(Course, slug=slug)
                 course_title = course.title if hasattr(course, 'title') else f"Course {slug}"
             except:
-                course_title = f"Course {slug}"
+                return JsonResponse({'success': False, 'error': 'Course not found'}, status=404)
+            if Enrollment.objects.filter(email=email, course=course).exists():
+                return JsonResponse({'success': False, 'error': 'Email already enrolled'}, status=400)
+            # --- End email check ---
+
+            # Save enrollment as unverified (or verified, since no verification step)
+            enrollment, created = Enrollment.objects.get_or_create(
+                email=email, course=course,
+                defaults={'is_verified': True}
+            )
+
+            # Send curriculum file as attachment if available
+            curriculum_sent = False
+            if hasattr(course, 'curriculum_file') and course.curriculum_file and course.curriculum_file.storage.exists(course.curriculum_file.name):
+                file_path = course.curriculum_file.path
+                file_name = course.get_curriculum_filename()
+                subject = f"{course_title} - Curriculum Download"
+                message = f"Dear {name},\n\nThank you for enrolling in {course_title}.\nPlease find the curriculum attached.\n\nBest regards,\nBigclasses.ai"
+                email_msg = EmailMessage(
+                    subject=subject,
+                    body=message,
+                    from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@example.com'),
+                    to=[email]
+                )
+                email_msg.attach_file(file_path)
+                try:
+                    email_msg.send(fail_silently=False)
+                    curriculum_sent = True
+                except Exception as e:
+                    logger.error(f"Failed to send curriculum to {email}: {e}")
+                    curriculum_sent = False
 
             sheet_data = {
                 'name': name,
@@ -176,7 +225,6 @@ class EnrollDownloadView(View):
                 'course_title': course_title,
                 'timestamp': '',
             }
-
             try:
                 response = requests.post(
                     GOOGLE_SHEET_WEBHOOK_URL,
@@ -200,7 +248,7 @@ class EnrollDownloadView(View):
 
             return JsonResponse({
                 'success': True,
-                'message': 'Enrollment successful! Check your email for confirmation.'
+                'message': 'Enrollment successful! The curriculum has been sent to your email.' if curriculum_sent else 'Enrollment successful! But failed to send curriculum to your email.'
             })
 
         except json.JSONDecodeError:
@@ -267,6 +315,13 @@ class CurriculumDownloadView(APIView):
     API endpoint for downloading curriculum files
     """
     def get(self, request, slug):
+        email = request.GET.get('email')
+        if not email:
+            return Response({"error": "Email required"}, status=400)
+        from enrollments.models import Enrollment
+        if not Enrollment.objects.filter(email=email, course__slug=slug, is_verified=True).exists():
+            return Response({"error": "Email not verified"}, status=403)
+
         try:
             course = get_object_or_404(Course, slug=slug)
             if not course.curriculum_file:
@@ -342,7 +397,6 @@ class CurriculumInfoView(APIView):
                 p = math.pow(1024, i)
                 s = round(size_bytes / p, 2)
                 return f"{s} {size_names[i]}"
-                
 
             return Response({
                 "has_file": True,
@@ -364,3 +418,23 @@ class CurriculumInfoView(APIView):
                 {"error": "Internal server error"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class VerifyEmailView(APIView):
+    def post(self, request):
+        email = request.data.get('email', '').strip()
+        # 1. Syntax check
+        try:
+            validate_email(email)
+        except DjangoValidationError:
+            return Response({'isValid': False, 'reason': 'Invalid format'}, status=200)
+        # 2. MX record check
+        domain = email.split('@')[-1]
+        try:
+            dns.resolver.resolve(domain, 'MX')
+        except Exception:
+            return Response({'isValid': False, 'reason': 'No MX records'}, status=200)
+        # 3. (Optional) Check if already enrolled
+        from enrollments.models import Enrollment
+        if Enrollment.objects.filter(email=email).exists():
+            return Response({'isValid': False, 'reason': 'Already enrolled'}, status=200)
+        return Response({'isValid': True}, status=200)

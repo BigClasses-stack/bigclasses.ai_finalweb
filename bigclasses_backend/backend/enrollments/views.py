@@ -7,7 +7,13 @@ from datetime import datetime
 import os
 from django.conf import settings
 import logging
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from .models import Enrollment
+from django.utils import timezone
+
 logger = logging.getLogger(__name__)
+
 class EnrollmentView(APIView):
     EXCEL_HEADERS = ['Timestamp', 'Student Name', 'Email', 'Course', 'Phone']
     def post(self, request):
@@ -68,3 +74,13 @@ class EnrollmentView(APIView):
             return Response({
                 'error': f'Enrollment failed: {str(e)}'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+def verify_enrollment(request, token):
+    enrollment = get_object_or_404(Enrollment, verification_token=token)
+    if not enrollment.is_verified:
+        enrollment.is_verified = True
+        enrollment.verified_at = timezone.now()
+        enrollment.save()
+        return HttpResponse("Your email has been verified. You can now download the curriculum.")
+    else:
+        return HttpResponse("Your email is already verified.")

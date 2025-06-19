@@ -5,8 +5,9 @@ from .views import (
     CurriculumDownloadView, 
     CurriculumInfoView,
     EnrollDownloadView,
-    CourseBatchSchedulesView,  # NEW IMPORT
-    AllBatchSchedulesView      # NEW IMPORT
+    CourseBatchSchedulesView,
+    AllBatchSchedulesView,
+    VerifyEmailView,  # This must exist in views.py!
 )
 
 urlpatterns = [
@@ -24,4 +25,7 @@ urlpatterns = [
     # Batch schedule endpoints - NEW ADDITIONS
     path('<slug:slug>/batch-schedules/', CourseBatchSchedulesView.as_view(), name='course-batch-schedules'),
     path('batch-schedules/all/', AllBatchSchedulesView.as_view(), name='all-batch-schedules'),
+
+    # Email verification endpoint
+    path('verify-email/', VerifyEmailView.as_view(), name='verify-email'),
 ]
