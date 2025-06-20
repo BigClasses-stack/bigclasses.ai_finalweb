@@ -218,7 +218,83 @@ const StudentChatbot: React.FC = () => {
     return null;
   };
 
+  const CONTACT_ADVISOR_MESSAGE = 
+  "For detailed information about course fees, discounts, payment plans, or any personalized queries, please contact our course advisor directly:\n\n" +
+  "📞 **Call/WhatsApp:** +91 9666523199\n" +
+  "💬 **Live Chat:** Available on our website\n\n" +
+  "Our advisors will provide you with the most accurate and up-to-date information!";
+
+  const GREETING_RESPONSES = [
+    "Hello! 👋 I'm your BigClasses.AI course assistant. Ask me about any course, topics, duration, projects, or curriculum details.",
+    "Hi there! 😊 How can I help you explore our courses today?",
+    "Welcome! 🚀 You can ask about course topics, duration, projects, or ratings. How can I assist you?"
+  ];
+
+  const isFeeQuery = (input: string) => {
+    const lower = input.toLowerCase();
+    return (
+      lower.includes("fee") ||
+      lower.includes("fees") ||
+      lower.includes("amount") ||
+      lower.includes("price") ||
+      lower.includes("cost") ||
+      lower.includes("payment") ||
+      lower.includes("charge") ||
+      lower.includes("pay") ||
+      lower.includes("discount")
+    );
+  };
+
+  const isGreeting = (input: string) => {
+    const lower = input.toLowerCase();
+    return (
+      /\b(hi|hello|hey|greetings|good morning|good afternoon|good evening|namaste|hola|howdy)\b/.test(lower)
+    );
+  };
+
+  const isHelpQuery = (input: string) => {
+    const lower = input.toLowerCase();
+    return (
+      lower.includes("help") ||
+      lower.includes("assist") ||
+      lower.includes("support") ||
+      lower.includes("how to") ||
+      lower.includes("what can you do")
+    );
+  };
+
   const getContextualResponse = (input: string): { answer: string; quickReplies?: string[] } => {
+    // Handle fee/amount queries
+    if (isFeeQuery(input)) {
+      return {
+        answer: CONTACT_ADVISOR_MESSAGE,
+        quickReplies: ['Contact advisor', 'Call now', 'WhatsApp advisor']
+      };
+    }
+
+    // Handle greetings
+    if (isGreeting(input)) {
+      return {
+        answer: GREETING_RESPONSES[Math.floor(Math.random() * GREETING_RESPONSES.length)],
+        quickReplies: ['Course catalog', 'Popular courses', 'Course durations', 'Course ratings']
+      };
+    }
+
+    // Handle help queries
+    if (isHelpQuery(input)) {
+      return {
+        answer: "I'm here to help you with course information! You can ask about:\n\n" +
+          "• Course topics and curriculum\n" +
+          "• Duration and time commitment\n" +
+          "• Projects and assignments\n" +
+          "• Ratings and reviews\n\n" +
+          "Try asking: \"Topics in MLOps\" or \"Duration of Python Programming\".",
+        quickReplies: ['Course catalog', 'Course durations', 'Course ratings']
+      };
+    }
+
+    // --- BEGIN: Inserted logic for fallback to advisor for unknown questions ---
+    // Try to answer with pre-defined logic
     const lowerInput = input.toLowerCase();
     const courseName = getCourseName(input);
     
@@ -399,12 +475,12 @@ const StudentChatbot: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-24 right-6 z-50 md:bottom-24 sm:bottom-28">
+    <div className="w-full flex flex-col items-end">
       {/* Chat Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110 animate-pulse"
+          className="relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-110"
           aria-label="Open chat"
         >
           <MessageCircle className="w-6 h-6" />
@@ -416,7 +492,7 @@ const StudentChatbot: React.FC = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 h-[500px] flex flex-col overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 h-[500px] flex flex-col overflow-hidden mt-2">
           {/* Header */}
           <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 flex items-center justify-between">
             <div className="flex items-center space-x-2">

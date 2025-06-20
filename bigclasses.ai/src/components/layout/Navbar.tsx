@@ -4,6 +4,8 @@ import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import startNowAnimation from "../../assets/animations/start_now_animation.json";
+import StudentChatbot from "@/components/StudentChatbot";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -657,57 +659,49 @@ const Navbar = () => {
   )}
 </nav>
 
-{/* Floating Contact Buttons - Updated positioning to move leftward */}
+{/* Floating Contact Buttons - All on right, equally spaced */}
       {!isLoggedIn && showFloatingButton && (
-        <div className="fixed bottom-16 right-6 z-50 flex flex-col space-y-3 items-end">
-          {/* Phone Contact Button - Moved leftward from right-2 to right-6 */}
-          <div className="relative">
+        <>
+          <div className="fixed bottom-16 right-6 z-50 flex flex-col items-end space-y-4">
+            {/* Chatbot button and window */}
+            <StudentChatbot />
+            {/* Enroll Now Button */}
             <Button
-              onClick={togglePhoneDropdown}
-              className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
+              className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
+              onClick={() => navigate("/signup")}
             >
-              <Phone size={20} />
+              🚀 Enroll Now
             </Button>
-
-            {/* Phone Dropdown - Adjusted positioning */}
-            {isPhoneDropdownOpen && (
-              <div className="phone-dropdown absolute bottom-16 right-0 w-64 mb-2">
-                <div className="phone-dropdown-header">
-                  <span className="font-medium">Call Us (Or) WhatsApp Us</span>
-                  <button 
-                    onClick={togglePhoneDropdown}
-                    className="close-button"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-                
-                {/* <div className="phone-number-item" onClick={() => handlePhoneCall('+919666717099')}>
-                  <div className="phone-icon">
-                    <Phone size={16} />
+            {/* Phone Contact Button - now after Enroll Now */}
+            <div className="relative">
+              <Button
+                onClick={togglePhoneDropdown}
+                className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
+              >
+                <Phone size={20} />
+              </Button>
+              {isPhoneDropdownOpen && (
+                <div className="phone-dropdown absolute bottom-16 right-0 w-64 mb-2">
+                  <div className="phone-dropdown-header">
+                    <span className="font-medium">Call Us (Or) WhatsApp Us</span>
+                    <button 
+                      onClick={togglePhoneDropdown}
+                      className="close-button"
+                    >
+                      <X size={18} />
+                    </button>
                   </div>
-                  <span className="font-medium text-gray-800">+91 9666717099</span>
-                </div> */}
-                
-                <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
-                  <div className="phone-icon">
-                    <Phone size={16} />
+                  <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
+                    <div className="phone-icon">
+                      <Phone size={16} />
+                    </div>
+                    <span className="font-medium text-gray-800">+91 9666523199</span>
                   </div>
-                  <span className="font-medium text-gray-800">+91 9666523199</span>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
-
-
-          {/* Enroll Now Button - Also moved leftward */}
-          <Button
-            className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
-            onClick={() => navigate("/signup")}
-          >
-            🚀 Enroll Now
-          </Button>
-        </div>
+        </>
       )}
     </>
   );
