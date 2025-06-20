@@ -662,17 +662,10 @@ const Navbar = () => {
 {/* Floating Contact Buttons - All on right, equally spaced */}
       {!isLoggedIn && showFloatingButton && (
         <>
-          <div className="fixed bottom-16 right-6 z-50 flex flex-col items-end space-y-4">
-            {/* Chatbot button and window */}
+          <div className="fixed bottom-8 right-6 z-50 flex flex-col items-end space-y-4">
+            {/* Chatbot button and window - now first */}
             <StudentChatbot />
-            {/* Enroll Now Button */}
-            <Button
-              className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
-              onClick={() => navigate("/signup")}
-            >
-              🚀 Enroll Now
-            </Button>
-            {/* Phone Contact Button - now after Enroll Now */}
+            {/* Phone Contact Button - now second */}
             <div className="relative">
               <Button
                 onClick={togglePhoneDropdown}
@@ -700,6 +693,13 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            {/* Enroll Now Button - now last */}
+            <Button
+              className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
+              onClick={() => navigate("/signup")}
+            >
+              🚀 Enroll Now
+            </Button>
           </div>
         </>
       )}
