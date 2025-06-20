@@ -10,6 +10,8 @@ import EnrollPage from "./pages/EnrollPage";
 import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
+import StudentChatbot from "@/components/StudentChatbot";
+
 const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -21,14 +23,15 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/enrollnow" element={<EnrollPage />} />
-          <Route path="/course-details/:id" element={<CourseDetails />} /> 
+          <Route path="/course-details/:id" element={<CourseDetails />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
+          <Route path="/feature-details/:id" element={<FeatureDetail />} />
           <Route path="/features" element={<FeatureOverview />} />
           <Route path="/features/:featureId" element={<FeatureOverview />} />
-         </Routes>
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
+    <StudentChatbot />
   </QueryClientProvider>
 );
 export default App;
