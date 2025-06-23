@@ -85,7 +85,7 @@ const AppContent: React.FC = () => {
         <Route path="/" element={<Index />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/enrollnow" element={<EnrollPage />} />
-        <Route path="/course-details/:id" element={<CourseDetails />} /> 
+        <Route path="/:id" element={<CourseDetails />} /> 
         <Route path="*" element={<NotFound />} />
         <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
         <Route path="/features" element={<FeatureOverview />} />

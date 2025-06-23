@@ -287,74 +287,74 @@ const Navbar = () => {
         </a>
         <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
           <a
-            href="/course-details/data-analytics"
+            href="/data-analytics/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Data Analytics
           </a>
           <a
-            href="/course-details/python-programming"
+            href="/python-programming/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Python Programming 
           </a>
           <a
-            href="/course-details/machine-learning"
+            href="/machine-learning/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Machine Learning
           </a>
           <a
-            href="/course-details/deep-learning"
+            href="/deep-learning/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Deep Learning
           </a>
           <a
-            href="/course-details/natural-language-processing"
+            href="/natural-language-processing"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Natural Language Processing (NLP)
           </a>
           <a
-            href="/course-details/generative-ai"
+            href="/generative-ai/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
            Generative AI
           </a>
           <a
-            href="/course-details/langchain"
+            href="/langchain/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Langchain
           </a>
           <a
-            href="/course-details/langgraph"
+            href="/langgraph/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LangGraph
           </a>
           <a
-            href="/course-details/mlops"
+            href="/mlops/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             MLOps
           </a>
           <a
-            href="/course-details/llmops"
+            href="/llmops/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LLMOps
           </a>
          
           <a
-            href="/course-details/ai-agents"
+            href="/ai-agents/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Agents
           </a>
             <a
-            href="/course-details/ai-ethics"
+            href="/ai-ethics/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Ethics AI and Scaling AI system
