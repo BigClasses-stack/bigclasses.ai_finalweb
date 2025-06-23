@@ -293,19 +293,19 @@ const Navbar = () => {
             Data Analytics
           </a>
           <a
-            href="/python-programming/"
+            href="/python-programming"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Python Programming 
           </a>
           <a
-            href="/machine-learning/"
+            href="/machine-learning"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Machine Learning
           </a>
           <a
-            href="/deep-learning/"
+            href="/deep-learning"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Deep Learning
@@ -317,44 +317,44 @@ const Navbar = () => {
             Natural Language Processing (NLP)
           </a>
           <a
-            href="/generative-ai/"
+            href="/generative-ai"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
            Generative AI
           </a>
           <a
-            href="/langchain/"
+            href="/langchain"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Langchain
           </a>
           <a
-            href="/langgraph/"
+            href="/langgraph"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LangGraph
           </a>
           <a
-            href="/mlops/"
+            href="/mlops"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             MLOps
           </a>
           <a
-            href="/llmops/"
+            href="/llmops"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LLMOps
           </a>
          
           <a
-            href="/ai-agents/"
+            href="/ai-agents"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Agents
           </a>
             <a
-            href="/ai-ethics/"
+            href="/ai-ethics"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Ethics AI and Scaling AI system
@@ -487,7 +487,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/data-analytics");
+                  navigate("/data-analytics");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -497,7 +497,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/python-programming");
+                  navigate("/python-programming");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -507,7 +507,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/machine-learning");
+                  navigate("/machine-learning");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -517,7 +517,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/deep-learning");
+                  navigate("/deep-learning");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -527,7 +527,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/natural-language-processing");
+                  navigate("/natural-language-processing");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
