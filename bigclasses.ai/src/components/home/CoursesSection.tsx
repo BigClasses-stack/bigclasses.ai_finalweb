@@ -150,7 +150,7 @@ const CoursesSection = () => {
   const [showAllCourses, setShowAllCourses] = useState(false);
 
   const handleViewCourse = (courseId: string) => {
-    navigate(`/course-details/${courseId}`);
+    navigate(`/${courseId}`);
   };
 
   const visibleCourses = showAllCourses ? courses : courses.slice(0, 8);
