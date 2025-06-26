@@ -14,6 +14,7 @@ const Navbar = () => {
   const [mobileCourseDropdownOpen, setMobileCourseDropdownOpen] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
+  const [mobileResourcesDropdownOpen, setMobileResourcesDropdownOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -40,6 +41,9 @@ const Navbar = () => {
   };
   const togglePhoneDropdown = () => {
     setIsPhoneDropdownOpen(!isPhoneDropdownOpen);
+  };
+  const toggleMobileResourcesDropdown = () => {
+    setMobileResourcesDropdownOpen(!mobileResourcesDropdownOpen);
   };
   const handleScrollTo = (id: string) => {
     const section = document.getElementById(id);
@@ -85,6 +89,12 @@ const Navbar = () => {
         setIsMenuOpen(false);
       }
     }, 100);
+  };
+
+  // Helper for navigation and scroll to top
+  const navigateAndScrollTop = (path: string) => {
+    navigate(path);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   };
 
   return (
@@ -246,7 +256,7 @@ const Navbar = () => {
     <div className="flex items-center gap-2">
       <button
         onClick={() => {
-          navigate("/#");
+          navigateAndScrollTop("/#");
           setTimeout(() => handleScrollTo("hero"), 0);
         }}
         className="flex items-center gap-2"
@@ -263,7 +273,7 @@ const Navbar = () => {
     <div className="hidden md:flex justify-center items-center space-x-12 flex-1 max-w-3xl mx-auto px-4">
       <button
         onClick={() => {
-          navigate("/#");
+          navigateAndScrollTop("/#");
           setTimeout(() => handleScrollTo("hero"), 0);
         }}
         className="text-black hover:text-blue-500 transition-colors whitespace-nowrap"
@@ -420,6 +430,34 @@ const Navbar = () => {
       >
         Testimonials
       </button>
+      {/* Resources Dropdown - Desktop */}
+      <div className="relative group">
+        <button
+          className="text-black hover:text-primary transition-colors flex items-center space-x-2 whitespace-nowrap"
+        >
+          <span>Resources</span>
+          <svg
+            className="w-4 h-4 transform group-hover:rotate-180 transition-transform"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div className="absolute top-full left-0 mt-2 w-44 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <button
+            onClick={() => {
+              navigateAndScrollTop("/blog");
+            }}
+            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Blog
+          </button>
+          {/* Add more resource links here if needed */}
+        </div>
+      </div>
     </div>
 
     {/* Right Auth Buttons - adjusted margin */}
@@ -460,7 +498,10 @@ const Navbar = () => {
     <div className="md:hidden bg-white py-6 px-4 shadow-lg">
       <div className="flex flex-col space-y-4">
         <button
-          onClick={() => handleScrollTo("home")}
+          onClick={() => {
+            navigateAndScrollTop("/#");
+            setTimeout(() => handleScrollTo("home"), 0);
+          }}
           className="text-left text-black hover:text-blue-500 transition-colors py-2"
         >
           Home
@@ -603,6 +644,40 @@ const Navbar = () => {
               >
                 View All Features
               </button>
+            </div>
+          )}
+        </div>
+
+        {/* Resources dropdown for mobile */}
+        <div className="py-2">
+          <button
+            onClick={toggleMobileResourcesDropdown}
+            className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
+          >
+            <span>Resources</span>
+            <svg
+              className={`w-4 h-4 transform transition-transform ${mobileResourcesDropdownOpen ? 'rotate-180' : ''}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {mobileResourcesDropdownOpen && (
+            <div className="pl-4 flex flex-col space-y-2 mt-2">
+              <button
+                onClick={() => {
+                  navigateAndScrollTop("/blog");
+                  setIsMenuOpen(false);
+                  setMobileResourcesDropdownOpen(false);
+                }}
+                className="text-left text-gray-700 hover:text-blue-500"
+              >
+                Blog
+              </button>
+              {/* Add more resource links here if needed */}
             </div>
           )}
         </div>
