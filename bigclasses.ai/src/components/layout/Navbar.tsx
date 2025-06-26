@@ -4,7 +4,8 @@ import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import startNowAnimation from "../../assets/animations/start_now_animation.json";
-import StudentChatbot from "@/components/StudentChatbot";
+// 1. THIS IS THE FIRST CHANGE: Import the wrapper instead of the direct component.
+import GeminiChatWrapper from "@/components/GeminiChatWrapper";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -661,12 +662,15 @@ const Navbar = () => {
 
 {/* Floating Contact Buttons - All on right, equally spaced */}
       {!isLoggedIn && showFloatingButton && (
-        <>
-          <div className="fixed bottom-8 right-6 z-50 flex flex-col items-end space-y-4">
-            {/* Chatbot button and window - now first */}
-            <StudentChatbot />
-            {/* Phone Contact Button - now second */}
-            <div className="relative">
+        <>          
+          {/* Adjusting positioning to prevent overlapping */}
+          <div className="fixed z-50 flex flex-col space-y-6">
+            {/* 1. Top: AI Chat (GeminiChatWrapper) */}
+            <div className="fixed bottom-44 right-6">
+              <GeminiChatWrapper />
+            </div>
+            {/* 2. Middle: Phone Contact Button */}
+            <div className="fixed bottom-24 right-6">
               <Button
                 onClick={togglePhoneDropdown}
                 className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
@@ -693,13 +697,15 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            {/* Enroll Now Button - now last */}
-            <Button
-              className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
-              onClick={() => navigate("/signup")}
-            >
-              🚀 Enroll Now
-            </Button>
+            {/* 3. Bottom: Enroll Now Button */}
+            <div className="fixed bottom-6 right-6">
+              <Button
+                className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
+                onClick={() => navigate("/signup")}
+              >
+                🚀 Enroll Now
+              </Button>
+            </div>
           </div>
         </>
       )}

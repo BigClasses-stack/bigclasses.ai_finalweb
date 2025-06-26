@@ -8,4 +8,4 @@ openpyxl
 djangorestframework-simplejwt
 python-dotenv
 requests
-dnspython django
+dnspython

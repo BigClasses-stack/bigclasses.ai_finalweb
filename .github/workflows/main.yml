@@ -1,4 +1,3 @@
-
 name: Deploy to stage
 
 on:
@@ -19,6 +18,11 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          cd /home/ubuntu/stage
+          sudo rm -rf bigclasses.ai_finalweb
+          git clone https://github.com/BigClasses-stack/bigclasses.ai_finalweb.git
           cd /home/ubuntu/stage/bigclasses.ai_finalweb
+          git checkout stage
           git pull origin stage
+          chmod +x deploy.sh
           ./deploy.sh
