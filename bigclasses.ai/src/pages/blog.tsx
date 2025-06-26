@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Search, Filter, Clock, User, ArrowRight, Star, BookOpen, Code, Briefcase, Users, TrendingUp } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
+// import CoursesSection from "@/components/home/CoursesSection";
+// import FeaturesSection from "@/components/home/FeaturesSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import PlacementAssistance from "@/components/home/PlacementAssistance";
+import CTASection from "@/components/home/CTASection";
+import Footer from "@/components/layout/Footer";
 
 interface BlogPost {
   id: string;
@@ -180,10 +186,13 @@ const BlogPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Navbar */}
       <Navbar />
 
+      {/* Home sections */}
+
+      {/* Blog Catalog Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar Filters */}
@@ -413,6 +422,12 @@ const BlogPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Homepage sections below */}
+      <TestimonialsSection />
+      <PlacementAssistance />
+      <CTASection />
+      <Footer />
     </div>
   );
 };
