@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    container_name: backend_prod
+    container_name: backend_stage
     build: ./bigclasses_backend/backend
     ports:
       - "8000:8000"
@@ -11,7 +11,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
 
   frontend:
-    container_name: frontend_prod 
+    container_name: frontend_stage 
     build: ./bigclasses.ai
     ports:
       - "3000:80"

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from '@/hooks/use-toast';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://www.bigclasses.ai/api',
+  baseURL: 'https://www.stage.bigclasses.ai',
   // baseURL: 'http://localhost:8000/api',
   headers: {
     'Content-Type': 'application/json',
