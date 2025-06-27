@@ -5,7 +5,7 @@ services:
     container_name: backend_stage
     build: ./bigclasses_backend/backend
     ports:
-      - "8000:8000"
+      - "8001:8000"
     volumes:
       - ./bigclasses_backend/backend:/app
     command: python manage.py runserver 0.0.0.0:8000
@@ -14,6 +14,6 @@ services:
     container_name: frontend_stage 
     build: ./bigclasses.ai
     ports:
-      - "3000:80"
+      - "3001:80"
     depends_on:
       - backend
