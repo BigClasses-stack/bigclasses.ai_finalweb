@@ -11,7 +11,6 @@ import EnrollPage from "./pages/EnrollPage";
 import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
-import BlogPage from "./pages/blog";
 
 const queryClient = new QueryClient();
 
@@ -90,7 +89,6 @@ const AppContent: React.FC = () => {
         <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
         <Route path="/features" element={<FeatureOverview />} />
         <Route path="/features/:featureId" element={<FeatureOverview />} />
-        <Route path="/blog" element={<BlogPage />} />
       </Routes>
     </>
   );
