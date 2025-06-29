@@ -677,33 +677,36 @@ const Navbar = () => {
       {!isLoggedIn && showFloatingButton && (
         <>          
           {/* Adjusting positioning to prevent overlapping */}
-          <div className="fixed z-50 flex flex-col space-y-6">
+          <div className="fixed z-50 flex flex-col space-y-3"> {/* Reduced space-y-6 to space-y-3 */}
             {/* 1. Top: AI Chat (GeminiChatWrapper) */}
-            <div className="fixed bottom-44 right-6">
-              <GeminiChatWrapper />
+            <div className="fixed bottom-36 right-4"> {/* Adjusted bottom and right for smaller icons */}
+              <div style={{ width: 44, height: 44 }}> {/* Set a fixed smaller size */}
+                <GeminiChatWrapper iconSize={22} /> {/* Pass iconSize if supported */}
+              </div>
             </div>
             {/* 2. Middle: Phone Contact Button */}
-            <div className="fixed bottom-24 right-6">
+            <div className="fixed bottom-20 right-4"> {/* Adjusted bottom and right */}
               <Button
                 onClick={togglePhoneDropdown}
-                className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
+                className="phone-floating-button w-11 h-11 p-0 flex items-center justify-center shadow-2xl" // w-12 h-12 -> w-11 h-11
+                style={{ minWidth: 44, minHeight: 44 }} // Ensure minimum clickable area
               >
-                <Phone size={20} />
+                <Phone size={18} /> {/* Decreased icon size */}
               </Button>
               {isPhoneDropdownOpen && (
-                <div className="phone-dropdown absolute bottom-16 right-0 w-64 mb-2">
+                <div className="phone-dropdown absolute bottom-14 right-0 w-60 mb-2"> {/* Adjusted bottom and width */}
                   <div className="phone-dropdown-header">
                     <span className="font-medium">Call Us (Or) WhatsApp Us</span>
                     <button 
                       onClick={togglePhoneDropdown}
                       className="close-button"
                     >
-                      <X size={18} />
+                      <X size={16} /> {/* Smaller close icon */}
                     </button>
                   </div>
                   <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
-                    <div className="phone-icon">
-                      <Phone size={16} />
+                    <div className="phone-icon" style={{ width: 28, height: 28 }}> {/* Smaller phone icon */}
+                      <Phone size={14} />
                     </div>
                     <span className="font-medium text-gray-800">+91 9666523199</span>
                   </div>
@@ -711,9 +714,10 @@ const Navbar = () => {
               )}
             </div>
             {/* 3. Bottom: Enroll Now Button */}
-            <div className="fixed bottom-6 right-6">
+            <div className="fixed bottom-4 right-4"> {/* Adjusted bottom and right */}
               <Button
-                className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
+                className="vibrate-button gradient-button-floating rounded-full px-3 py-1.5 text-xs font-medium hover:shadow-xl" // px-4 py-2 text-sm -> px-3 py-1.5 text-xs
+                style={{ minWidth: 110, minHeight: 36 }} // Slightly smaller button
                 onClick={() => navigate("/signup")}
               >
                 🚀 Enroll Now
