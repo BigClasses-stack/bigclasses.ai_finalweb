@@ -1,8 +1,5 @@
-// vectorDatabase.ts
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
-// CHANGE 1: We now import the course data from a separate JSON file for clean code.
-import courseDataJson from './courses.json';
+import courseDataJson from './Courses.json'; // line 5
 
 // --- Interface Definitions (Unchanged) ---
 export interface CourseData {
@@ -185,9 +182,9 @@ class VectorDatabase {
   public getCourseById(courseId: number): CourseData | null {
     return this.getCourseData().find(course => course.id === courseId) || null;
   }
-  
-  public getAllCourses(): Array<{id: number, title: string}> {
-    return this.getCourseData().map(course => ({ id: course.id, title: course.title }));
+
+  public getAllCourses(): CourseData[] {
+    return this.getCourseData();
   }
 
   private getCourseData(): CourseData[] {
@@ -195,6 +192,6 @@ class VectorDatabase {
   }
 }
 
-// CHANGE 4: Create and export a SINGLETON instance of the database.
-// This is the key to sharing one instance across your entire application.
-export const vectorDB = new VectorDatabase();
+// Export a singleton instance
+const vectorDatabase = new VectorDatabase();
+export default vectorDatabase;

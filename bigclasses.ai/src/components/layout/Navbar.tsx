@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +15,6 @@ const Navbar = () => {
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
   const [mobileResourcesDropdownOpen, setMobileResourcesDropdownOpen] = useState(false);
-  const [learningPathDropdownOpen, setLearningPathDropdownOpen] = useState(false);
-  const learningPathTimeout = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -46,9 +44,6 @@ const Navbar = () => {
   };
   const toggleMobileResourcesDropdown = () => {
     setMobileResourcesDropdownOpen(!mobileResourcesDropdownOpen);
-  };
-  const toggleLearningPathDropdown = () => {
-    setLearningPathDropdownOpen(!learningPathDropdownOpen);
   };
   const handleScrollTo = (id: string) => {
     const section = document.getElementById(id);
@@ -429,60 +424,6 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-      {/* Learning Path dropdown with improved hover/click behavior */}
-      <div
-        className="relative"
-        onMouseEnter={() => {
-          if (learningPathTimeout.current) clearTimeout(learningPathTimeout.current);
-          setLearningPathDropdownOpen(true);
-        }}
-        onMouseLeave={() => {
-          if (learningPathTimeout.current) clearTimeout(learningPathTimeout.current);
-          learningPathTimeout.current = setTimeout(() => setLearningPathDropdownOpen(false), 400); // 400ms delay
-        }}
-      >
-        <button
-          type="button"
-          aria-haspopup="true"
-          aria-expanded={learningPathDropdownOpen}
-          onClick={toggleLearningPathDropdown}
-          className={`text-black hover:text-primary transition-colors flex items-center space-x-2 whitespace-nowrap ${learningPathDropdownOpen ? "text-blue-600" : ""}`}
-        >
-          <span>Learning Path</span>
-          <svg
-            className={`w-4 h-4 transform transition-transform ${learningPathDropdownOpen ? 'rotate-180' : ''}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        <div
-          className={`absolute top-full left-0 mt-2 w-44 bg-white shadow-lg rounded-md border border-gray-100 z-20 transition-all duration-150
-            ${learningPathDropdownOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
-          onMouseEnter={() => {
-            if (learningPathTimeout.current) clearTimeout(learningPathTimeout.current);
-            setLearningPathDropdownOpen(true);
-          }}
-          onMouseLeave={() => {
-            if (learningPathTimeout.current) clearTimeout(learningPathTimeout.current);
-            learningPathTimeout.current = setTimeout(() => setLearningPathDropdownOpen(false), 400); // 400ms delay
-          }}
-        >
-          <button
-            onClick={() => {
-              navigate("/blog");
-              setLearningPathDropdownOpen(false);
-            }}
-            className="block w-full text-left px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
-            tabIndex={learningPathDropdownOpen ? 0 : -1}
-          >
-            Blog
-          </button>
-        </div>
-      </div>
       <button
         onClick={() => handleScrollToSection('testimonials')}
         className="text-black hover:text-primary transition-colors whitespace-nowrap"
@@ -674,39 +615,6 @@ const Navbar = () => {
                 className="text-left font-medium text-blue-600"
               >
                 View All Features
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Learning Path dropdown for mobile */}
-        <div className="py-2">
-          <button
-            onClick={toggleLearningPathDropdown}
-            className="w-full text-left flex items-center justify-between text-black hover:text-blue-500 transition-colors"
-          >
-            <span>Learning Path</span>
-            <svg
-              className={`w-4 h-4 transform transition-transform ${learningPathDropdownOpen ? 'rotate-180' : ''}`}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              <path d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          {learningPathDropdownOpen && (
-            <div className="pl-4 flex flex-col space-y-2 mt-2">
-              <button
-                className="text-left text-gray-700 hover:text-blue-500"
-                onClick={() => {
-                  navigate("/blog");
-                  setIsMenuOpen(false);
-                  setLearningPathDropdownOpen(false);
-                }}
-              >
-                Blog
               </button>
             </div>
           )}
