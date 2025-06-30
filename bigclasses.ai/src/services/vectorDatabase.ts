@@ -183,4 +183,14 @@ class VectorDatabase {
 
   // --- Helper Methods (Unchanged logic, now use getCourseData) ---
   public getCourseById(courseId: number): CourseData | null {
-    return this.getCourseData().find(course => course.id === courseId) |
+    return this.getCourseData().find(course => course.id === courseId) || null;
+  }
+
+  public getCourseData(): CourseData[] {
+    return courseDataJson as CourseData[];
+  }
+}
+
+// Export a singleton instance
+const vectorDatabase = new VectorDatabase();
+export default vectorDatabase;
