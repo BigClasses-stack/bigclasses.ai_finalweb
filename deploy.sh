@@ -14,6 +14,9 @@ cd ..
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 
+# Remove all Python __pycache__ directories to avoid Docker context errors
+find . -type d -name "__pycache__" -exec rm -rf {} +
+
 # Bring down only the STAGING containers
 docker-compose -f docker-compose.stage.yml -p stage down
 
