@@ -10,6 +10,10 @@ cd /home/ubuntu/stage/bigclasses.ai_finalweb/bigclasses.ai
 rm -rf node_modules package-lock.json
 cd ..
 
+# Fix file permissions to avoid Docker build errors
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+
 # Bring down only the STAGING containers
 docker-compose -f docker-compose.stage.yml -p stage down
 

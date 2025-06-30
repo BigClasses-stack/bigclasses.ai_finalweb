@@ -1,8 +1,5 @@
-// vectorDatabase.ts
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
-// CHANGE 1: We now import the course data from a separate JSON file for clean code.
-import courseDataJson from './Courses.json';
+import courseDataJson from './Courses.json'; // line 5
 
 // --- Interface Definitions (Unchanged) ---
 export interface CourseData {
@@ -186,11 +183,14 @@ class VectorDatabase {
     return this.getCourseData().find(course => course.id === courseId) || null;
   }
 
-  public getCourseData(): CourseData[] {
+  public getAllCourses(): CourseData[] {
+    return this.getCourseData();
+  }
+
+  private getCourseData(): CourseData[] {
     return courseDataJson as CourseData[];
   }
 }
 
-// Export a singleton instance
-const vectorDatabase = new VectorDatabase();
-export default vectorDatabase;
+// Export a singleton instance as a named export
+export const vectorDB = new VectorDatabase();
