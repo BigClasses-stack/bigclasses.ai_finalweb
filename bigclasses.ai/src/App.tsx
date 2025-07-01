@@ -16,6 +16,8 @@ import FeatureOverview from "./components/home/FeatureOverview";
 import Blog from "./pages/blogs/blog";
 import Datascienceblog from "./pages/blogs/pythonclass";
 import Pythonclass from "./pages/blogs/pythonclass";
+import PythonClassBlogPage from './pages/blogs/pythonclass';
+import BlogPage from './pages/blogs/blog';
 
 
 const queryClient = new QueryClient();
@@ -100,7 +102,8 @@ const AppContent: React.FC = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/datascience" element={<Datascienceblog />} />
         <Route path="/blog/pythonclass" element={<Pythonclass />} />
-
+        <Route path="/blogs/pythonclass" element={<PythonClassBlogPage />} />
+        <Route path="/blogs" element={<BlogPage />} />
       </Routes>
     </>
   );

@@ -352,7 +352,7 @@ Remember to start simple and gradually incorporate more advanced concepts as you
     `,
     excerpt: "Master Python classes and object-oriented programming with practical examples, best practices, and advanced concepts.",
     category: "Python Programming",
-    author: {
+    author: { 
       name: "Alex Rodriguez",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
       bio: "Senior Python Developer with 10+ years of experience. Passionate about clean code, OOP design patterns, and teaching programming concepts."
@@ -408,7 +408,6 @@ Remember to start simple and gradually incorporate more advanced concepts as you
   const handleShare = (platform: string) => {
     const url = window.location.href;
     const title = article.title;
-    
     switch (platform) {
       case 'twitter':
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`);
