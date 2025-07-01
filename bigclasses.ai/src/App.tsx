@@ -12,6 +12,12 @@ import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
 
+
+import Blog from "./pages/blogs/blog";
+import Datascienceblog from "./pages/blogs/pythonclass";
+import Pythonclass from "./pages/blogs/pythonclass";
+
+
 const queryClient = new QueryClient();
 
 // Analytics utility functions
@@ -89,6 +95,12 @@ const AppContent: React.FC = () => {
         <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
         <Route path="/features" element={<FeatureOverview />} />
         <Route path="/features/:featureId" element={<FeatureOverview />} />
+
+         {/* Add more blog routes as needed */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/datascience" element={<Datascienceblog />} />
+        <Route path="/blog/pythonclass" element={<Pythonclass />} />
+
       </Routes>
     </>
   );
