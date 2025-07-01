@@ -193,5 +193,4 @@ class VectorDatabase {
 }
 
 // Export a singleton instance
-const vectorDatabase = new VectorDatabase();
-export default vectorDatabase;
+export const vectorDB = new VectorDatabase();
