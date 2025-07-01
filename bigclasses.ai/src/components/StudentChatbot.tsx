@@ -151,7 +151,10 @@ const StudentChatbot: React.FC<StudentChatbotProps> = ({ messages, isTyping, isL
               ) : (
                 <>
                   {messages.map((message) => (
-                    <div key={message.id} className={flex items-end gap-2 ${message.type === 'user' ? 'justify-end' : 'justify-start'}}>
+                    <div
+                      key={message.id}
+                      className={`flex items-end gap-2 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
                       {message.type === 'bot' && (
                         <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-purple-100 text-purple-600">
                           <Bot className="w-5 h-5" />
