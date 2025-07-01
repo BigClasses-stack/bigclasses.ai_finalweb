@@ -5,7 +5,9 @@ import { vectorDB, type CourseData } from './vectorDatabase';
 
 // --- API Key Initialization ---
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
-console.log("Gemini API key status:", apiKey ? Key found (${apiKey.slice(0, 4)}...) : "No key found");
+console.log(
+  `Gemini API key status: ${apiKey ? `Key found (${apiKey.slice(0, 4)}...)` : "No key found"}`
+);
 
 if (!apiKey) {
   console.error("ERROR: No Gemini API key found in environment variables. Please add VITE_GEMINI_API_KEY to your .env file.");
@@ -161,8 +163,8 @@ When a user asks about a course, and you are provided with context, follow this 
 
   public async sendMessage(message: string): Promise<string> {
     try {
-      console.log([${this.sessionId}] User message: "${message}");
-      console.log([${this.sessionId}] Current conversation state - Last course: ${this.lastDiscussedCourse || 'None'});
+      console.log(`[${this.sessionId}] User message: "${message}"`);
+      console.log(`[${this.sessionId}] Current conversation state - Last course: ${this.lastDiscussedCourse || 'None'}`);
 
       // Check if this is a simple greeting that doesn't need course context
       const isSimpleGreeting = this.isSimpleGreeting(message.trim().toLowerCase());
@@ -170,7 +172,7 @@ When a user asks about a course, and you are provided with context, follow this 
       // Check if this is a follow-up question referring to the previously discussed course
       const isFollowUpQuestion = this.isFollowUpQuestion(message.trim().toLowerCase());
       
-      console.log([${this.sessionId}] Message analysis - IsGreeting: ${isSimpleGreeting}, IsFollowUp: ${isFollowUpQuestion});
+      console.log(`[${this.sessionId}] Message analysis - IsGreeting: ${isSimpleGreeting}, IsFollowUp: ${isFollowUpQuestion}`);
       
       let relevantCourseInfo: any[] = [];
       
@@ -179,23 +181,23 @@ When a user asks about a course, and you are provided with context, follow this 
         relevantCourseInfo = [];
       } else if (isFollowUpQuestion && this.lastDiscussedCourse) {
         // For follow-up questions, search specifically for the last discussed course
-        console.log([${this.sessionId}] Follow-up question detected, searching for: ${this.lastDiscussedCourse});
-        relevantCourseInfo = await vectorDB.search(${this.lastDiscussedCourse} ${message}, 3);
+        console.log(`[${this.sessionId}] Follow-up question detected, searching for: ${this.lastDiscussedCourse}`);
+        relevantCourseInfo = await vectorDB.search(`${this.lastDiscussedCourse} ${message}`, 3);
         
         // If no results found with combined search, try searching for just the course name
         if (relevantCourseInfo.length === 0) {
-          console.log([${this.sessionId}] No results with combined search, trying course name only: ${this.lastDiscussedCourse});
+          console.log(`[${this.sessionId}] No results with combined search, trying course name only: ${this.lastDiscussedCourse}`);
           relevantCourseInfo = await vectorDB.search(this.lastDiscussedCourse, 3);
         }
         
         // If still no results, get course details directly from the database
         if (relevantCourseInfo.length === 0) {
-          console.log([${this.sessionId}] No vector search results, getting course details directly);
+          console.log(`[${this.sessionId}] No vector search results, getting course details directly`);
           const courseDetails = await this.getCourseDetails(this.lastDiscussedCourse);
           if (courseDetails) {
             relevantCourseInfo = [{
               metadata: { courseTitle: courseDetails.title },
-              content: Title: ${courseDetails.title}\nDuration: ${courseDetails.duration}\nPackage: ${courseDetails.package}\nHighlights: ${courseDetails.highlights.join(', ')}\nFeatures: ${courseDetails.features.join(', ')}
+              content: `Title: ${courseDetails.title}\nDuration: ${courseDetails.duration}\nPackage: ${courseDetails.package}\nHighlights: ${courseDetails.highlights.join(', ')}\nFeatures: ${courseDetails.features.join(', ')}`
             }];
           }
         }
@@ -221,7 +223,7 @@ When a user asks about a course, and you are provided with context, follow this 
 
         // Build context information
         const contextInfo = relevantCourseInfo.map(
-          (result) => Course: ${result.metadata.courseTitle}\nDetails: ${result.content}
+          (result) => `Course: ${result.metadata.courseTitle}\nDetails: ${result.content}`
         ).join('\n\n');
 
         // Create an enhanced message that includes context while preserving the original message
@@ -229,15 +231,15 @@ When a user asks about a course, and you are provided with context, follow this 
 ${contextInfo}
 
 [Conversation Context]:
-${this.lastDiscussedCourse ? Currently discussing course: ${this.lastDiscussedCourse} : 'No previous course discussed'}
-${isFollowUpQuestion ? [IMPORTANT: This is a follow-up question about ${this.lastDiscussedCourse}] : ''}
+${this.lastDiscussedCourse ? `Currently discussing course: ${this.lastDiscussedCourse}` : 'No previous course discussed'}
+${isFollowUpQuestion ? `[IMPORTANT: This is a follow-up question about ${this.lastDiscussedCourse}]` : ''}
 
 [User's Current Message]:
 ${message}
 
-[Instructions]: Use the provided context to answer the user's question. Remember our conversation history. ${isFollowUpQuestion ? The user is asking a follow-up question about ${this.lastDiscussedCourse}. When they ask about "duration", "how long", "time", or similar questions, they are referring to ${this.lastDiscussedCourse}. Always answer about ${this.lastDiscussedCourse}, NOT about any other course that might appear in the search results. When they say "it", "this course", "that program", they are referring to ${this.lastDiscussedCourse}. : If the user refers to "it", "this course", "that program", etc., they are likely referring to the last discussed course: ${this.lastDiscussedCourse || 'none'}.} Maintain the conversational flow and remember what we've discussed.`;
+[Instructions]: Use the provided context to answer the user's question. Remember our conversation history. ${isFollowUpQuestion ? `The user is asking a follow-up question about ${this.lastDiscussedCourse}. When they ask about "duration", "how long", "time", or similar questions, they are referring to ${this.lastDiscussedCourse}. Always answer about ${this.lastDiscussedCourse}, NOT about any other course that might appear in the search results. When they say "it", "this course", "that program", they are referring to ${this.lastDiscussedCourse}.` : `If the user refers to "it", "this course", "that program", etc., they are likely referring to the last discussed course: ${this.lastDiscussedCourse || 'none'}.`} Maintain the conversational flow and remember what we've discussed.`;
 
-        console.log([${this.sessionId}] Context found and conversation tracking updated.);
+        console.log(`[${this.sessionId}] Context found and conversation tracking updated.`);
       } else if (this.lastDiscussedCourse && !isSimpleGreeting) {
         // Even without new context, remind the AI of the conversation state (but not for greetings)
         enhancedMessage = `[Conversation Context]: We were discussing: ${this.lastDiscussedCourse}
@@ -245,23 +247,23 @@ ${message}
 [User's Current Message]:
 ${message}
 
-[Instructions]: The user's message relates to our ongoing conversation about ${this.lastDiscussedCourse}. ${isFollowUpQuestion ? This appears to be a follow-up question about ${this.lastDiscussedCourse}. When they ask about "duration", "how long", "time", or similar questions, they are asking about ${this.lastDiscussedCourse} specifically. : ''} Remember what we've discussed and maintain conversational continuity. If you need specific details about ${this.lastDiscussedCourse}, refer to your knowledge about this course.`;
-        console.log([${this.sessionId}] No new context found, using conversation memory.);
+[Instructions]: The user's message relates to our ongoing conversation about ${this.lastDiscussedCourse}. ${isFollowUpQuestion ? `This appears to be a follow-up question about ${this.lastDiscussedCourse}. When they ask about "duration", "how long", "time", or similar questions, they are asking about ${this.lastDiscussedCourse} specifically.` : ''} Remember what we've discussed and maintain conversational continuity. If you need specific details about ${this.lastDiscussedCourse}, refer to your knowledge about this course.`;
+        console.log(`[${this.sessionId}] No new context found, using conversation memory.`);
       } else if (isSimpleGreeting) {
         // For simple greetings, add instruction to ask about interests
         enhancedMessage = `[User's Current Message]:
 ${message}
 
 [Instructions]: The user is greeting you. Respond warmly and ask about their learning goals or what field/skills they're interested in. Help them discover the right course for their needs.`;
-        console.log([${this.sessionId}] Simple greeting detected, will ask about interests.);
+        console.log(`[${this.sessionId}] Simple greeting detected, will ask about interests.`);
       } else {
-        console.log([${this.sessionId}] No context found and no previous course discussed.);
+        console.log(`[${this.sessionId}] No context found and no previous course discussed.`);
       }
 
       const result = await this.chatSession.sendMessage(enhancedMessage);
       const responseText = result.response.text();
 
-      console.log([${this.sessionId}] Gemini response received.);
+      console.log(`[${this.sessionId}] Gemini response received.`);
       return responseText;
 
     } catch (error: any) {
@@ -276,7 +278,7 @@ ${message}
         errorMessage = "Our AI service is currently experiencing very high demand. Please try again in a few moments.";
       }
       
-      return ⚠ **Technical Glitch**\n\n${errorMessage};
+      return `⚠ **Technical Glitch**\n\n${errorMessage}`;
     }
   }
 
@@ -354,9 +356,9 @@ ${message}
 
   // Debug method to check conversation state
   public debugConversationState(): void {
-    console.log([${this.sessionId}] DEBUG - Conversation State:);
-    console.log(- Last discussed course: ${this.lastDiscussedCourse || 'None'});
-    console.log(- Conversation topics: ${this.conversationContext.join(', ') || 'None'});
+    console.log(`[${this.sessionId}] DEBUG - Conversation State:`);
+    console.log(`- Last discussed course: ${this.lastDiscussedCourse || 'None'}`);
+    console.log(`- Conversation topics: ${this.conversationContext.join(', ') || 'None'}`);
   }
 
   // Check if a message is asking about duration
