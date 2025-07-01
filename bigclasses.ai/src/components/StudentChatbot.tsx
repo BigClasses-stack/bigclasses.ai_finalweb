@@ -14,7 +14,7 @@ interface Message {
 interface StudentChatbotProps {
   messages: Message[];
   isTyping: boolean;
-  isLoading: boolean; // <-- ADD THIS NEW PROP
+   isLoading: boolean; // <-- ADD THIS NEW PROP
   sendMessage: (content: string) => void;
   iconSize?: number; // <-- add this line
 }
@@ -81,32 +81,36 @@ const StudentChatbot: React.FC<StudentChatbotProps> = ({ messages, isTyping, isL
       {/* Chat Window */}
       {isOpen && (
         <div
-          className="bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col"
+          className="bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col fixed z-[9999] student-chatbot-window"
           style={{
-            position: 'fixed',
             bottom: 72,
-            right: 64, // <-- move chat window further left to avoid overlap with mobile icon
-            width: '280px',
+            right: 64,
+            width: 280,
             maxWidth: '96vw',
-            height: '410px',
-            zIndex: 9999,
+            height: 410,
             overflow: 'hidden',
           }}
         >
           <style>{`
-            @media (max-width: 480px) {
+            @media (max-width: 600px) {
               .student-chatbot-window {
-                width: 92vw !important;
+                width: 95vw !important;
                 min-width: 0 !important;
-                right: 56px !important; /* move left on mobile to avoid floating icon */
-                left: auto !important;
-                height: 65vh !important;
-                max-height: 80vh !important;
-                bottom: 80px !important;
+                max-width: 95vw !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                right: unset !important;
+                bottom: 90px !important; /* Move window further up */
+                top: unset !important;
+                height: 70vh !important;
+                max-height: 70vh !important;
+                border-radius: 18px !important;
+                margin-bottom: calc(env(safe-area-inset-bottom, 8px) + 90px) !important; /* Add extra space for floating icon */
+                z-index: 99999 !important;
               }
             }
           `}</style>
-          <div className="student-chatbot-window flex flex-col h-full">
+          <div className="flex flex-col h-full">
             {/* Header */}
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-3 flex items-center justify-between flex-shrink-0">
               <div className="flex items-center space-x-2">
@@ -132,6 +136,8 @@ const StudentChatbot: React.FC<StudentChatbotProps> = ({ messages, isTyping, isL
                 minHeight: 0,
                 overflowX: 'hidden',
                 wordBreak: 'break-word',
+                // On mobile, ensure the messages area doesn't get cut off
+                maxHeight: '100%',
               }}
             >
               {/* 3. USE THE isLoading PROP to show a loading spinner */}
@@ -145,7 +151,7 @@ const StudentChatbot: React.FC<StudentChatbotProps> = ({ messages, isTyping, isL
               ) : (
                 <>
                   {messages.map((message) => (
-                    <div key={message.id} className={`flex items-end gap-2 ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div key={message.id} className={flex items-end gap-2 ${message.type === 'user' ? 'justify-end' : 'justify-start'}}>
                       {message.type === 'bot' && (
                         <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-purple-100 text-purple-600">
                           <Bot className="w-5 h-5" />
