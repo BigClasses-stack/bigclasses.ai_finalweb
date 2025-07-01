@@ -1,11 +1,13 @@
+bigclases.ai/src/services
+courses.json
 [
   {
     "id": 1,
     "title": "Python Programming",
+    "duration": "6 weeks",
     "package": "12.5",
     "hike": "150",
     "transitions": "500",
-    "image": "https://grras.com/files/hiclvxrtdz6derhkzc6a/python%20(1).png",
     "highlights": [
       "Basics of Python Programming",
       "Data Structures and Algorithms",
@@ -77,10 +79,10 @@
   {
     "id": 2,
     "title": "Machine Learning",
+    "duration": "6 weeks",
     "package": "15.5",
     "hike": "180",
     "transitions": "600",
-    "image": "https://www.digitaledify.ai/images/aibnr.jpg",
     "highlights": [
       "Introduction to Machine Learning",
       "Supervised Learning",
@@ -152,10 +154,10 @@
   {
     "id": 3,
     "title": "Deep Learning",
+    "duration": "4 weeks",
     "package": "18.5",
     "hike": "200",
     "transitions": "400",
-    "image": "https://public.softmaxdata.com/imgs/home/data_discussion.png",
     "highlights": [
       "Basics of Neural Networks",
       "Convolutional Neural Networks (CNNs)",
@@ -227,10 +229,10 @@
   {
     "id": 4,
     "title": "Natural Language Processing",
+    "duration": "8-12 weeks",
     "package": "17",
     "hike": "190",
     "transitions": "350",
-    "image": "https://cdn.prod.website-files.com/634054bf0f60201ce9b30604/6489540e67c5fbe5900c09cf_home%20large%20down.svg",
     "highlights": [
       "Text Preprocessing",
       "Classical NLP Approaches",
@@ -302,10 +304,10 @@
   {
     "id": 5,
     "title": "Generative AI",
+    "duration": "4-8 weeks",
     "package": "20",
     "hike": "210",
     "transitions": "300",
-    "image": "https://img.freepik.com/premium-photo/abstract-ai-illustration-with-futuristic-design-elements-vibrant-colors-showcasing-artificial-intelligence-digital-connectivity_124865-93745.jpg",
     "highlights": [
       "Fundamentals of Generative AI",
       "Text Generation",
@@ -377,10 +379,10 @@
   {
     "id": 6,
     "title": "LangChain",
+    "duration": "4 weeks",
     "package": "16",
     "hike": "170",
     "transitions": "320",
-    "image": "https://cdn.prod.website-files.com/62a8969da1ab56329dc8c41e/664eeed26a136d6160434321_Amazon_Lamd-03%201.png",
     "highlights": [
       "Introduction to LangChain",
       "Working with Language Models",
@@ -452,10 +454,10 @@
   {
     "id": 7,
     "title": "LangGraph",
+    "duration": "4 weeks",
     "package": "15",
     "hike": "160",
     "transitions": "290",
-    "image": "https://miro.medium.com/v2/resize:fit:1100/format:webp/0*GuAKET2lI82IcBrW.png",
     "highlights": [
       "Fundamentals of LangGraph",
       "Advanced Graph-Based Workflows",
@@ -527,10 +529,10 @@
   {
     "id": 8,
     "title": "MLOps",
+    "duration": "8-12 weeks",
     "package": "19",
     "hike": "210",
     "transitions": "380",
-    "image": "https://miro.medium.com/v2/resize:fit:800/1*0DmXy4etGIxtI9nbYqMBAw.png",
     "highlights": [
       "Introduction to MLOps",
       "Introduction to MLflow",
@@ -747,10 +749,10 @@
   {
     "id": 9,
     "title": "LLMOps",
+    "duration": "4-8 weeks",
     "package": "22",
     "hike": "220",
     "transitions": "410",
-    "image": "https://littlebigcode.fr/wp-content/uploads/2022/02/image-20211203-161343.png",
     "highlights": [
       "Basics of LLMOps",
       "Data Management for LLMs",
@@ -822,10 +824,10 @@
   {
     "id": 10,
     "title": "AI Agents",
+    "duration": "4 weeks",
     "package": "24",
     "hike": "230",
     "transitions": "350",
-    "image": "https://miro.medium.com/v2/resize:fit:1400/0*P8FHyPOLd8mpNHY8",
     "highlights": [
       "Basics of Agents",
       "Reinforcement Learning for Agents",
@@ -897,10 +899,10 @@
   {
     "id": 11,
     "title": "AI Ethics",
+    "duration": "4 weeks",
     "package": "13",
     "hike": "140",
     "transitions": "450",
-    "image": "https://aicontentfy.com/hubfs/Blog/Robot%20with%20a%20toolbox%20in%20flat%20illustration%20style%20with%20gradients%20and%20white%20background_a1a8948e-7a01-4f70-86f6-791a47ffe3e5.png",
     "highlights": [
       "Introduction to AI Ethics",
       "Responsible AI Development",
@@ -972,10 +974,10 @@
   {
     "id": 12,
     "title": "Data Analytics",
+    "duration": "8-12 weeks",
     "package": "13",
     "hike": "140",
     "transitions": "450",
-    "image": "https://www.oxfordinstitute.in/img/all-software-development/data-analayes.jpg",
     "highlights": [
       "Excel with Project",
       "SQL Server with Project",

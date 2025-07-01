@@ -1,3 +1,5 @@
+bigclasses.ai/src/hooks
+useGeminiChat.ts
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { GeminiChatService, ChatMessage, mapRoleToType } from '@/services/geminiService';
@@ -43,7 +45,7 @@ export function useGeminiChat(): UseGeminiChatReturn {
       setMessages([{
         id: uuidv4(),
         type: 'bot',
-        content: 'Hi there! 👋 I\'m your BigClasses.AI enrollment advisor. I\'m here to help you discover the perfect course to accelerate your career and transform your skills. Our industry-leading courses feature hands-on projects, real-time support, and expert instruction. What specific course are you interested in today? Perhaps Python, Data Analytics, Machine Learning, or one of our other specialized programs?',
+        content: 'Hi there! 👋 I\'m your BigClasses.AI enrollment advisor. I\'m here to help you discover the perfect course to accelerate your career and transform your skills. Our industry-leading courses feature hands-on projects, real-time support, and expert instruction. What field or skill are you most interested in learning about today? I can help you explore our offerings in technology, programming, data science, and more!',
         timestamp: new Date()
       }]);
       
