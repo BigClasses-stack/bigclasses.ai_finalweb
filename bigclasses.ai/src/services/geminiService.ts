@@ -1,5 +1,3 @@
-bigclases.ai/src/services
-geminiService.ts
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
 import { vectorDB, type CourseData } from './vectorDatabase';
 
