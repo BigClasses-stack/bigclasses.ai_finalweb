@@ -64,13 +64,13 @@ class VectorDatabase {
     try {
       const courseData = this.getCourseData();
       
-      // Process all courses. This loop populates the `this.records` array.
+      // Process all courses. This loop populates the this.records array.
       for (const course of courseData) {
         await this.indexCourse(course);
       }
       
       this.isInitialized = true;
-      console.log(`✅ Vector database initialized successfully with ${this.records.length} records.`);
+      console.log(✅ Vector database initialized successfully with ${this.records.length} records.);
 
     } catch (error) {
       console.error("FATAL: Failed to initialize VectorDatabase:", error);
@@ -87,7 +87,7 @@ class VectorDatabase {
       const result = await model.embedContent(text);
       return result.embedding.values;
     } catch (error) {
-      console.error(`Error creating embedding for text snippet: "${text.substring(0, 50)}..."`, error);
+      console.error(Error creating embedding for text snippet: "${text.substring(0, 50)}...", error);
       return []; // Return an empty array on failure to prevent adding bad data.
     }
   }
@@ -100,7 +100,7 @@ class VectorDatabase {
     const chunks: { type: VectorRecord['type'], content: string, metadata: VectorRecord['metadata'] }[] = [];
 
     // Create a comprehensive "overview" chunk for general queries.
-    const overviewText = `Course Title: ${course.title}. Key Highlights: ${course.highlights.join('. ')}. Course Features: ${course.features.join('. ')}`;
+    const overviewText = Course Title: ${course.title}. Key Highlights: ${course.highlights.join('. ')}. Course Features: ${course.features.join('. ')};
     chunks.push({
       type: 'overview',
       content: overviewText,
@@ -109,7 +109,7 @@ class VectorDatabase {
 
     // Create a separate chunk for each module, as they are detailed.
     course.modules.forEach((module, i) => {
-      const moduleText = `In the ${course.title} course, the module named "${module.name}" covers: ${module.description}. Specific topics include: ${module.topics.join(', ')}. The project for this module is: ${module.project || 'Not specified'}.`;
+      const moduleText = In the ${course.title} course, the module named "${module.name}" covers: ${module.description}. Specific topics include: ${module.topics.join(', ')}. The project for this module is: ${module.project || 'Not specified'}.;
       chunks.push({
         type: 'module',
         content: moduleText,
@@ -125,7 +125,7 @@ class VectorDatabase {
       const embedding = embeddings[i];
       if (embedding && embedding.length > 0) { // Only add if embedding was successful
         this.records.push({
-          id: `course_${course.id}_${chunk.type}_${i}`,
+          id: course_${course.id}_${chunk.type}_${i},
           courseId: course.id,
           content: chunk.content,
           embedding: embedding,
@@ -174,7 +174,7 @@ class VectorDatabase {
       .sort((a, b) => b.similarity - a.similarity)
       .slice(0, limit);
       
-    console.log(`Search for "${query}" found ${results.length} relevant records.`);
+    console.log(Search for "${query}" found ${results.length} relevant records.);
     return results;
   }
 
@@ -192,5 +192,5 @@ class VectorDatabase {
   }
 }
 
-// Export a singleton instance as a named export
+// Export a singleton instance
 export const vectorDB = new VectorDatabase();
