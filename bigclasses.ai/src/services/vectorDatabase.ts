@@ -3,6 +3,7 @@ import courseDataJson from './Courses.json';
 
 // --- Interface Definitions ---
 export interface CourseData {
+  duration: any;
   id: number;
   title: string;
   package: string;

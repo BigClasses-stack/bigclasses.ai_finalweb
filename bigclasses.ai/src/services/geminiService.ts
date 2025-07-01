@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from "@google/generative-ai";
-import { vectorDB, type CourseData } from './vectorDatabase';
+import vectorDB, {type CourseData } from './vectorDatabase';
 
 // --- API Key Initialization ---
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
