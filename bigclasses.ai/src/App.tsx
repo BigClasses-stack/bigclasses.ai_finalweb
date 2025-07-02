@@ -11,9 +11,8 @@ import EnrollPage from "./pages/EnrollPage";
 import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
+import Webinar from "./pages/Webinar";
 
-
-import Webinar from "./pages/webinar"
 
 const queryClient = new QueryClient();
 
