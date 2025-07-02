@@ -12,6 +12,9 @@ import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
 
+
+import Webinar from "./pages/webinar"
+
 const queryClient = new QueryClient();
 
 // Analytics utility functions
@@ -89,6 +92,7 @@ const AppContent: React.FC = () => {
         <Route path="/feature-details/:id" element={<FeatureDetail />} /> 
         <Route path="/features" element={<FeatureOverview />} />
         <Route path="/features/:featureId" element={<FeatureOverview />} />
+        <Route path="/free-online-data-engineer-webinar-with-certificate" element={<Webinar />} />
       </Routes>
     </>
   );
