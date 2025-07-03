@@ -6,7 +6,7 @@ const SuccessModal = ({ open, onClose }) => {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white rounded-2xl shadow-2xl max-w-xs w-full p-4 relative text-center">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-xs w-full p-4 sm:max-w-sm sm:p-6 relative text-center">
         {/* Reduced max-w-md to max-w-xs and p-8 to p-4 */}
         <button
           className="absolute top-2 right-3 text-xl text-gray-400 hover:text-gray-700"
@@ -64,7 +64,7 @@ const DataEngineerWebinar = () => {
       {/* Registration Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-0 relative">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg p-0 mx-2 sm:mx-0 relative">
             <button
               className="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-700"
               onClick={() => setShowModal(false)}
@@ -85,14 +85,14 @@ const DataEngineerWebinar = () => {
 
       {/* Header */}
       <header className="bg-white shadow-lg sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-2xl font-bold text-purple-700 tracking-wide flex items-center gap-2">
             <Award className="text-pink-500" size={28} />
             BigClasses
           </div>
           <button
             onClick={() => setShowModal(true)}
-            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300 text-lg"
+            className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-full font-bold shadow-lg hover:scale-105 transition-all duration-300 text-lg"
           >
             Register Now
           </button>
@@ -100,18 +100,18 @@ const DataEngineerWebinar = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-16 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 opacity-20"></div>
-        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center relative z-10">
-          <div className="space-y-8">
-            <div className="inline-flex items-center bg-gradient-to-r from-purple-100 to-pink-100 rounded-full px-5 py-2 text-purple-700 font-semibold shadow">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center relative z-10">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="inline-flex items-center bg-gradient-to-r from-purple-100 to-pink-100 rounded-full px-4 py-2 text-purple-700 font-semibold shadow text-base sm:text-lg">
               🎓 Free 2-Day Live Webinar
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight drop-shadow-lg">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight drop-shadow-lg">
               Data Engineering
               <span className="block bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Career Masterclass</span>
             </h1>
-            <div className="flex flex-wrap gap-4 text-lg text-gray-700 font-medium">
+            <div className="flex flex-wrap gap-3 sm:gap-4 text-base sm:text-lg text-gray-700 font-medium">
               <div className="flex items-center gap-2">
                 <Calendar className="text-purple-600" size={22} />
                 <span>12th & 13th July 2025</span>
@@ -128,17 +128,18 @@ const DataEngineerWebinar = () => {
             <a
               href="#register"
               onClick={e => { e.preventDefault(); setShowModal(true); }}
-              className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full text-2xl font-bold shadow-2xl hover:scale-105 transition-all duration-300 border-4 border-white"
+              className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-lg sm:text-2xl font-bold shadow-2xl hover:scale-105 transition-all duration-300 border-4 border-white"
             >
               Register Now
-              <Users size={28} />
+              <Users size={24} className="sm:hidden" />
+              <Users size={28} className="hidden sm:inline" />
             </a>
-            <div className="text-lg text-gray-600 mt-2">
+            <div className="text-base sm:text-lg text-gray-600 mt-2">
               <span className="font-bold text-pink-600">Limited to 300 seats</span> – Secure your spot today!
             </div>
           </div>
-          <div className="relative">
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform rotate-3 hover:rotate-0 transition-all duration-500 border-4 border-purple-100">
+          <div className="relative mt-8 md:mt-0">
+            <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-10 transform rotate-3 hover:rotate-0 transition-all duration-500 border-4 border-purple-100">
               <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 mb-6 flex flex-col items-center">
                 <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-full p-5 mb-4">
                   <Play className="text-white" size={48} />
@@ -166,30 +167,30 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Why Attend Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Why Attend This Data Engineering Webinar?</h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Why Attend This Data Engineering Webinar?</h2>
+            <p className="text-base sm:text-xl text-gray-700 max-w-3xl mx-auto">
               Discover the roadmap to becoming a Data Engineer. Learn to build scalable data pipelines, master ETL, and get career guidance from BigClasses experts.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-purple-100">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-purple-100">
               <div className="bg-purple-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <BookOpen className="text-white" size={28} />
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">For Beginners</h3>
               <p className="text-gray-600">Kickstart your journey in data engineering with foundational concepts and tools.</p>
             </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-blue-100">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-blue-100">
               <div className="bg-blue-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <TrendingUp className="text-white" size={28} />
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">For Professionals</h3>
               <p className="text-gray-600">Upgrade your skills with the latest in cloud data engineering and real-world projects.</p>
             </div>
-            <div className="bg-gradient-to-br from-pink-50 to-pink-100 p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-pink-100">
+            <div className="bg-gradient-to-br from-pink-50 to-pink-100 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-pink-100">
               <div className="bg-pink-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <MessageCircle className="text-white" size={28} />
               </div>
@@ -201,12 +202,12 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* What You'll Learn */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">What You'll Learn</h2>
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">What You'll Learn</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             <div className="space-y-6">
               {[
                 'Introduction to Data Engineering & Modern Data Stack',
@@ -237,13 +238,13 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Webinar Details */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Webinar Details</h2>
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Webinar Details</h2>
           </div>
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-10 text-white shadow-xl">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-6 sm:p-10 text-white shadow-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
               <div className="text-center">
                 <Calendar size={48} className="mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-2">Dates</h3>
@@ -280,13 +281,13 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Meet Your Trainer */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-blue-50 to-purple-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Meet Your Trainer</h2>
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Meet Your Trainer</h2>
           </div>
-          <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-10">
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-6 sm:p-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
               <div className="text-center">
                 <div className="w-48 h-48 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
                   <div className="w-44 h-44 bg-white rounded-full flex items-center justify-center">
@@ -326,16 +327,16 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Registration Form Section (replaced with button to open modal) */}
-      <section id="register" className="py-24 bg-gradient-to-br from-purple-600 to-pink-600">
+      <section id="register" className="py-16 sm:py-24 bg-gradient-to-br from-purple-600 to-pink-600">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl font-extrabold text-white mb-4 drop-shadow-lg">Reserve Your Free Seat</h2>
-            <p className="text-xl text-white font-semibold">🚨 Only 300 seats available – fill the form to reserve your spot!</p>
+          <div className="text-center mb-6 sm:mb-10">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4 drop-shadow-lg">Reserve Your Free Seat</h2>
+            <p className="text-base sm:text-xl text-white font-semibold">🚨 Only 300 seats available – fill the form to reserve your spot!</p>
           </div>
           <div className="flex justify-center">
             <button
               onClick={() => setShowModal(true)}
-              className="bg-white text-purple-700 font-bold px-8 py-4 rounded-xl shadow-xl text-2xl hover:bg-purple-100 transition-all duration-300"
+              className="w-full sm:w-auto bg-white text-purple-700 font-bold px-6 sm:px-8 py-3 sm:py-4 rounded-xl shadow-xl text-lg sm:text-2xl hover:bg-purple-100 transition-all duration-300"
             >
               Open Registration Form
             </button>
@@ -344,12 +345,12 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Why Choose BigClasses */}
-      <section className="py-20 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-extrabold mb-4">Why Choose BigClasses?</h2>
+          <div className="text-center mb-10 sm:mb-16">
+            <h2 className="text-2xl sm:text-4xl font-extrabold mb-4">Why Choose BigClasses?</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="text-center">
               <div className="bg-white bg-opacity-20 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
                 <Star size={40} />
@@ -379,15 +380,15 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-4">Data Engineering Webinar – FAQs</h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Data Engineering Webinar – FAQs</h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
               Got questions about the Data Engineering webinar? Check our FAQs below or email us at <a href="mailto:info@bigclasses.com" className="text-purple-600 underline">info@bigclasses.com</a>
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
             <div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">About the Webinar</h3>
               <FaqAccordion faqs={[
@@ -427,11 +428,11 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-gray-900 text-white py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-2xl font-bold mb-4">BigClasses</div>
+          <div className="text-xl sm:text-2xl font-bold mb-4">BigClasses</div>
           <p className="text-gray-400 mb-4">Empowering careers through expert-led technology training</p>
-          <p className="text-sm text-gray-500">© 2025 BigClasses. All rights reserved.</p>
+          <p className="text-xs sm:text-sm text-gray-500">© 2025 BigClasses. All rights reserved.</p>
         </div>
       </footer>
     </div>

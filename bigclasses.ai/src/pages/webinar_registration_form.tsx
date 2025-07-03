@@ -69,10 +69,10 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-8 space-y-8">
-      <h2 className="text-3xl font-extrabold text-purple-700 mb-4 text-center">Webinar Registration</h2>
+    <form onSubmit={handleSubmit} className="p-4 sm:p-8 space-y-6 sm:space-y-8">
+      <h2 className="text-2xl sm:text-3xl font-extrabold text-purple-700 mb-4 text-center">Webinar Registration</h2>
       {submitMessage && (
-        <div className={`p-4 rounded-xl text-center font-semibold ${
+        <div className={`p-3 sm:p-4 rounded-xl text-center font-semibold ${
           submitMessage.includes('successful') 
             ? 'bg-green-100 text-green-800' 
             : 'bg-red-100 text-red-800'
@@ -80,7 +80,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
           {submitMessage}
         </div>
       )}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Full Name *</label>
           <input
@@ -108,7 +108,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
           />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
           <input
@@ -161,17 +161,19 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-xl text-xl font-bold shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+        className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 sm:py-4 rounded-xl text-lg sm:text-xl font-bold shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
         {isSubmitting ? (
           <>
-            <Loader2 size={24} className="animate-spin" />
+            <Loader2 size={20} className="sm:hidden animate-spin" />
+            <Loader2 size={24} className="hidden sm:inline animate-spin" />
             Registering...
           </>
         ) : (
           <>
             🔒 Register for Free Webinar
-            <Shield size={24} />
+            <Shield size={20} className="sm:hidden" />
+            <Shield size={24} className="hidden sm:inline" />
           </>
         )}
       </button>
