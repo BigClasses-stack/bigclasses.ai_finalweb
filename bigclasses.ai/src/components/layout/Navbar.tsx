@@ -364,12 +364,19 @@ const Navbar = () => {
           >
             Agents
           </a>
-            <a
+          <a
             href="/ai-ethics"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Ethics AI and Scaling AI system
           </a>
+          <a
+            href="/azure-data-engineering"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Azure Data Engineering
+          </a>
+
         </div>
       </div>
 
