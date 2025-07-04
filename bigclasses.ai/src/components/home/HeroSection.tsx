@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import LearningJourneySteps from "../LearningJourneySteps";
 import ScrollingTicker from "./ScrollingTicker";
@@ -42,3 +40,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+

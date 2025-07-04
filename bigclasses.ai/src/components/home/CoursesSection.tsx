@@ -80,7 +80,7 @@ export const courses = [
     id: "langchain",
     title: "LangChain",
     description: "Master building LLM applications with LangChain and real-world integrations.",
-    image: "/lovable-uploads/langchain.png",
+    image: "/lovable-uploads/langchain.webp",
     students: "2167+",
     duration: "4 weeks",
     level: "Intermediate",
