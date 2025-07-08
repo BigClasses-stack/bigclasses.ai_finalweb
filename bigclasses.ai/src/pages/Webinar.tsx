@@ -16,12 +16,12 @@ const SuccessModal = ({ open, onClose }) => {
         <div className="flex flex-col items-center gap-2">
           <div className="text-green-500 text-3xl mb-1">✔️</div>
           <h2 className="text-xl font-bold mb-1">Enrollment Successful!</h2>
-          <div className="text-green-600 text-base font-semibold mb-1">Thank you for enrolling!</div>
+          <div className="text-green-600 text-base font-medium mb-1">Thank you for enrolling!</div>
           <div className="text-gray-700 mb-2 text-sm">
             Kindly check your registered email .
           </div>
           <button
-            className="bg-blue-600 text-white px-4 py-1.5 rounded-lg font-bold text-sm"
+            className="bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium text-sm"
             onClick={onClose}
           >Close</button>
         </div>
@@ -176,7 +176,7 @@ const DataEngineerWebinar = () => {
       <section className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Why Attend This Data Engineering Webinar?</h2>
+            <h2 className="text-xl sm:text-4xl font-bold text-gray-900 mb-4">Why Attend This Data Engineering Webinar?</h2>
             <p className="text-base sm:text-xl text-gray-700 max-w-3xl mx-auto">
               Discover the roadmap to becoming a Data Engineer. Learn to build scalable data pipelines, master ETL, and get career guidance from BigClasses experts.
             </p>
@@ -186,21 +186,21 @@ const DataEngineerWebinar = () => {
               <div className="bg-blue-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <BookOpen className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">For Beginners</h3>
+              <h3 className="text-2xl font-bold text-center text-gray-800 mb-4">For Beginners</h3>
               <p className="text-gray-600">Kickstart your journey in data engineering with foundational concepts and tools.</p>
             </div>
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-blue-100">
               <div className="bg-blue-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <TrendingUp className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">For Professionals</h3>
+              <h3 className="text-2xl font-bold text-center text-gray-800 mb-4">For Professionals</h3>
               <p className="text-gray-600">Upgrade your skills with the latest in cloud data engineering and real-world projects.</p>
             </div>
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-blue-100">
               <div className="bg-blue-600 rounded-full p-4 w-16 h-16 flex items-center justify-center mb-6">
                 <MessageCircle className="text-white" size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">Career Switchers</h3>
+              <h3 className="text-2xl font-bold text-center text-gray-800 mb-4">Career Switchers</h3>
               <p className="text-gray-600">Get a step-by-step roadmap to transition into high-paying data engineering roles.</p>
             </div>
           </div>
@@ -211,7 +211,7 @@ const DataEngineerWebinar = () => {
       <section className="py-12 sm:py-20 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">What You'll Learn</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">What You'll Learn</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
             <div className="space-y-6">
@@ -223,7 +223,7 @@ const DataEngineerWebinar = () => {
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-500">
                   <CheckCircle className="text-blue-600" size={22} />
-                  <span className="text-lg font-semibold text-gray-700">{item}</span>
+                  <span className="text-lg font-medium text-gray-700">{item}</span>
                 </div>
               ))}
             </div>
@@ -235,7 +235,7 @@ const DataEngineerWebinar = () => {
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-4 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-blue-400">
                   <CheckCircle className="text-blue-400" size={22} />
-                  <span className="text-lg font-semibold text-gray-700">{item}</span>
+                  <span className="text-lg font-medium text-gray-700">{item}</span>
                 </div>
               ))}
             </div>
@@ -247,7 +247,7 @@ const DataEngineerWebinar = () => {
       <section className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Webinar Details</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">Webinar Details</h2>
           </div>
           <div className="bg-gradient-to-r from-blue-600 to-blue-400 rounded-3xl p-6 sm:p-10 text-white shadow-xl">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
@@ -290,7 +290,7 @@ const DataEngineerWebinar = () => {
       <section className="py-12 sm:py-20 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Meet Your Trainer</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">Meet Your Trainer</h2>
           </div>
           <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl p-6 sm:p-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-center">
@@ -301,7 +301,7 @@ const DataEngineerWebinar = () => {
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-center text-gray-800 mb-2"></h3>
-                <p className="text-blue-600 font-semibold mb-4">12+ years of industry experience in AI</p>
+                <p className="text-blue-600 font-medium mb-4">12+ years of industry experience in AI</p>
                 <div className="flex justify-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="text-yellow-400 fill-current" size={20} />
@@ -336,8 +336,8 @@ const DataEngineerWebinar = () => {
       <section id="register" className="py-16 sm:py-24 bg-gradient-to-br from-blue-600 to-blue-400">
         <div className="max-w-3xl mx-auto px-4">
           <div className="text-center mb-6 sm:mb-10">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white mb-4 drop-shadow-lg">Reserve Your Free Seat</h2>
-            <p className="text-base sm:text-xl text-white font-semibold">🚨 Only 300 seats available – fill the form to reserve your spot!</p>
+            <h2 className="text-2xl sm:text-4xl font-bold text-white mb-4 drop-shadow-lg">Reserve Your Free Seat</h2>
+            <p className="text-base sm:text-xl text-white font-medium">🚨 Only 300 seats available – fill the form to reserve your spot!</p>
           </div>
           <div className="flex justify-center">
             <button
@@ -351,33 +351,33 @@ const DataEngineerWebinar = () => {
       </section>
 
       {/* Why Choose BigClasses */}
-      <section className="py-12 sm:py-20 bg-gradient-to-br from-blue-600 to-blue-400 text-white">
+      <section className="py-12 sm:py-20 bg-white text-black">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10 sm:mb-16">
-            <h2 className="text-2xl sm:text-4xl font-extrabold mb-4">Why Choose BigClasses?</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold mb-4">Why Choose BigClasses?</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="text-center">
-              <div className="bg-white bg-opacity-20 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                <Star size={40} />
+              <div className="bg-black bg-opacity-10 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                <Star size={40} className="text-black" />
               </div>
               <h3 className="text-xl font-bold mb-2">Learn from Industry Experts</h3>
             </div>
             <div className="text-center">
-              <div className="bg-white bg-opacity-20 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                <BookOpen size={40} />
+              <div className="bg-black bg-opacity-10 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                <BookOpen size={40} className="text-black" />
               </div>
               <h3 className="text-xl font-bold mb-2">Hands-on Learning</h3>
             </div>
             <div className="text-center">
-              <div className="bg-white bg-opacity-20 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                <TrendingUp size={40} />
+              <div className="bg-black bg-opacity-10 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                <TrendingUp size={40} className="text-black" />
               </div>
               <h3 className="text-xl font-bold mb-2">Career-Oriented Sessions</h3>
             </div>
             <div className="text-center">
-              <div className="bg-white bg-opacity-20 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
-                <Award size={40} />
+              <div className="bg-black bg-opacity-10 rounded-full p-6 w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                <Award size={40} className="text-black" />
               </div>
               <h3 className="text-xl font-bold mb-2">Free Certificate & Job Roadmap</h3>
             </div>
@@ -389,7 +389,7 @@ const DataEngineerWebinar = () => {
       <section className="py-12 sm:py-20 bg-gradient-to-br from-blue-50 to-blue-100">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 mb-4">Data Engineering Webinar – FAQs</h2>
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-4">Data Engineering Webinar – FAQs</h2>
             <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto">
               Got questions about the Data Engineering webinar? Check our FAQs below or email us at <a href="mailto:info@bigclasses.com" className="text-purple-600 underline">info@bigclasses.com</a>
             </p>

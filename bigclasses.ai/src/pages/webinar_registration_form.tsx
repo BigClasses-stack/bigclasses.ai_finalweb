@@ -71,9 +71,9 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
   return (
     <div className="font-sans">
       <form onSubmit={handleSubmit} className="p-4 sm:p-8 space-y-6 sm:space-y-8">
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-blue-700 mb-4 text-center">Webinar Registration</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-700 mb-4 text-center">Webinar Registration</h2>
         {submitMessage && (
-          <div className={`p-3 sm:p-4 rounded-xl text-center font-semibold ${
+          <div className={`p-3 sm:p-4 rounded-xl text-center font-medium ${
             submitMessage.includes('successful') 
               ? 'bg-green-100 text-green-800' 
               : 'bg-red-100 text-red-800'
@@ -83,7 +83,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Full Name *</label>
+            <label className="block text-gray-700 font-medium mb-2">Full Name *</label>
             <input
               type="text"
               name="fullName"
@@ -96,7 +96,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Email ID *</label>
+            <label className="block text-gray-700 font-medium mb-2">Email ID *</label>
             <input
               type="email"
               name="email"
@@ -111,7 +111,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Phone Number *</label>
+            <label className="block text-gray-700 font-medium mb-2">Phone Number *</label>
             <input
               type="tel"
               name="phone"
@@ -124,7 +124,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
             />
           </div>
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Educational Background</label>
+            <label className="block text-gray-700 font-medium mb-2">Educational Background</label>
             <select
               name="education"
               value={formData.education}
@@ -142,7 +142,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
           </div>
         </div>
         <div>
-          <label className="block text-gray-700 font-semibold mb-2">Current Role/Experience</label>
+          <label className="block text-gray-700 font-medium mb-2">Current Role/Experience</label>
           <select
             name="experience"
             value={formData.experience}
@@ -162,7 +162,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3 sm:py-4 rounded-xl text-lg sm:text-xl font-bold shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-400 text-white py-3 sm:py-4 rounded-xl text-lg sm:text-xl font-semibold shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           {isSubmitting ? (
             <>
