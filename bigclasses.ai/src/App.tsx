@@ -12,6 +12,7 @@ import CourseDetails from "@/pages/CourseDetails";
 import FeatureDetail from "./components/home/FeatureDetail";
 import FeatureOverview from "./components/home/FeatureOverview";
 import Webinar from "./pages/Webinar";
+import GenerativeAIWebinar from "./pages/Webinar_GenerativeAI"; // Add this import
 
 
 const queryClient = new QueryClient();
@@ -92,6 +93,7 @@ const AppContent: React.FC = () => {
         <Route path="/features" element={<FeatureOverview />} />
         <Route path="/features/:featureId" element={<FeatureOverview />} />
         <Route path="/free-online-data-engineer-webinar-with-certificate" element={<Webinar />} />
+        <Route path="/free-generative-ai-webinar" element={<GenerativeAIWebinar />} /> {/* Add this route */}
       </Routes>
     </>
   );

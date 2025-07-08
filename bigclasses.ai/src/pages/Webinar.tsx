@@ -301,7 +301,7 @@ const DataEngineerWebinar = () => {
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-center text-gray-800 mb-2"></h3>
-                <p className="text-blue-600 font-medium mb-4">12+ years of industry experience in AI</p>
+                <p className="text-blue-600 font-medium mb-4">12+ years of industry experience in AI</p>
                 <div className="flex justify-center gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="text-yellow-400 fill-current" size={20} />
