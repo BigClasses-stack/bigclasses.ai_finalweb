@@ -162,14 +162,30 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 load_dotenv()
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-COMPANY_EMAIL = os.getenv('COMPANY_EMAIL')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL') or EMAIL_HOST_USER or 'noreply@bigclasses.ai'
+COMPANY_EMAIL = os.getenv('COMPANY_EMAIL') or 'admin@bigclasses.ai'
+
+import logging
+logger = logging.getLogger(__name__)
+
+# Log email settings at startup for debugging
+logger.debug(f"EMAIL_BACKEND: {EMAIL_BACKEND}")
+logger.debug(f"EMAIL_HOST: {EMAIL_HOST}")
+logger.debug(f"EMAIL_PORT: {EMAIL_PORT}")
+logger.debug(f"EMAIL_USE_TLS: {EMAIL_USE_TLS}")
+logger.debug(f"EMAIL_HOST_USER: {EMAIL_HOST_USER}")
+logger.debug(f"EMAIL_HOST_PASSWORD: {'SET' if EMAIL_HOST_PASSWORD else 'NOT SET'}")
+logger.debug(f"DEFAULT_FROM_EMAIL: {DEFAULT_FROM_EMAIL}")
+logger.debug(f"COMPANY_EMAIL: {COMPANY_EMAIL}")
+
+if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
+    logger.warning("EMAIL_HOST_USER or EMAIL_HOST_PASSWORD is not set. Emails will not be sent.")
 
 
 # Logging Configuration

@@ -20,7 +20,7 @@ from .serializers import CourseSerializer, CourseDetailSerializer, BatchSchedule
 
 logger = logging.getLogger(__name__)
 
-GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxxu2LFxZeyfLSzCHTzrycwIAyEumcd0LjxdR7H2ilPDmr1-pHxVQEES0NT5tci_pWz/exec"
+GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx7yXdJG66MaT-KmSnY8txhYnmK4_QQktY-6FZ_UbtvFbTS8jj49I9XNf1pLm4BYehV/exec"
 
 class CourseListView(ListAPIView):
     queryset = Course.objects.all()
@@ -229,14 +229,21 @@ If you have any questions, please don't hesitate to reach out to us.
 Best regards,
 Bigclasses.ai
         """
-
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@example.com'),
-            recipient_list=[email],
-            fail_silently=True,
-        )
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
+        logger.debug(f"Attempting to send user email: subject={subject}, from_email={from_email}, to={email}")
+        if not from_email:
+            logger.warning("DEFAULT_FROM_EMAIL is not set in settings.")
+        try:
+            result = send_mail(
+                subject=subject,
+                message=message,
+                from_email=from_email,
+                recipient_list=[email],
+                fail_silently=False,  # Set to False for debugging
+            )
+            logger.info(f"User email send_mail result: {result} (to {email})")
+        except Exception as e:
+            logger.error(f"Exception sending user email to {email}: {e}", exc_info=True)
 
     def send_company_email(self, name, email, phone, course_title, extra_info):
         subject = f"New Course Enrollment - {course_title}"
@@ -252,15 +259,24 @@ Additional Info: {extra_info or 'None provided'}
 Please follow up with the student.
         """
 
-        company_email = getattr(settings, 'COMPANY_EMAIL', 'admin@yourcompany.com')
-
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@example.com'),
-            recipient_list=[company_email],
-            fail_silently=True,
-        )
+        company_email = getattr(settings, 'COMPANY_EMAIL', None)
+        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
+        logger.debug(f"Attempting to send company email: subject={subject}, from_email={from_email}, to={company_email}")
+        if not company_email:
+            logger.warning("COMPANY_EMAIL is not set in settings.")
+        if not from_email:
+            logger.warning("DEFAULT_FROM_EMAIL is not set in settings.")
+        try:
+            result = send_mail(
+                subject=subject,
+                message=message,
+                from_email=from_email,
+                recipient_list=[company_email] if company_email else [],
+                fail_silently=False,  # Set to False for debugging
+            )
+            logger.info(f"Company email send_mail result: {result} (to {company_email})")
+        except Exception as e:
+            logger.error(f"Exception sending company email to {company_email}: {e}", exc_info=True)
 
 class CurriculumDownloadView(APIView):
     """
