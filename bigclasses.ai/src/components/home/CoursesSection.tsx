@@ -80,7 +80,7 @@ export const courses = [
     id: "langchain",
     title: "LangChain",
     description: "Master building LLM applications with LangChain and real-world integrations.",
-    image: "/lovable-uploads/langchain.png",
+    image: "/lovable-uploads/langchain.webp",
     students: "2167+",
     duration: "4 weeks",
     level: "Intermediate",
@@ -141,7 +141,19 @@ export const courses = [
     level: "Beginner",
     rating: 4.7,
     modules: 5,
+  },
+  {
+    id: "azure-data-engineering",
+    title: " Azure Data Engineering",
+    description: "Learn how to build reliable data pipelines and manage scalable data infrastructure for analytics and AI.",
+    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbwcFDc6NsL438QuCOg10p071k5GYDms1dPQ&s",
+    students: "2647+",
+    duration: "8-12 weeks",
+    level: "Beginner",
+    rating: 4.6,
+    modules: 8,
   }
+
 ];
 
 const CoursesSection = () => {
@@ -150,7 +162,7 @@ const CoursesSection = () => {
   const [showAllCourses, setShowAllCourses] = useState(false);
 
   const handleViewCourse = (courseId: string) => {
-    navigate(`/course-details/${courseId}`);
+    navigate(`/${courseId}`);
   };
 
   const visibleCourses = showAllCourses ? courses : courses.slice(0, 8);

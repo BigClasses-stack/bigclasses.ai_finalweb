@@ -4,6 +4,9 @@ import { Menu, X, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import startNowAnimation from "../../assets/animations/start_now_animation.json";
+// 1. THIS IS THE FIRST CHANGE: Import the wrapper instead of the direct component.
+import GeminiChatWrapper from "@/components/GeminiChatWrapper";
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,6 +14,7 @@ const Navbar = () => {
   const [mobileCourseDropdownOpen, setMobileCourseDropdownOpen] = useState(false);
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
+  const [mobileResourcesDropdownOpen, setMobileResourcesDropdownOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -37,6 +41,9 @@ const Navbar = () => {
   };
   const togglePhoneDropdown = () => {
     setIsPhoneDropdownOpen(!isPhoneDropdownOpen);
+  };
+  const toggleMobileResourcesDropdown = () => {
+    setMobileResourcesDropdownOpen(!mobileResourcesDropdownOpen);
   };
   const handleScrollTo = (id: string) => {
     const section = document.getElementById(id);
@@ -82,6 +89,12 @@ const Navbar = () => {
         setIsMenuOpen(false);
       }
     }, 100);
+  };
+
+  // Helper for navigation and scroll to top
+  const navigateAndScrollTop = (path: string) => {
+    navigate(path);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   };
 
   return (
@@ -243,7 +256,7 @@ const Navbar = () => {
     <div className="flex items-center gap-2">
       <button
         onClick={() => {
-          navigate("/#");
+          navigateAndScrollTop("/#");
           setTimeout(() => handleScrollTo("hero"), 0);
         }}
         className="flex items-center gap-2"
@@ -260,7 +273,7 @@ const Navbar = () => {
     <div className="hidden md:flex justify-center items-center space-x-12 flex-1 max-w-3xl mx-auto px-4">
       <button
         onClick={() => {
-          navigate("/#");
+          navigateAndScrollTop("/#");
           setTimeout(() => handleScrollTo("hero"), 0);
         }}
         className="text-black hover:text-blue-500 transition-colors whitespace-nowrap"
@@ -285,78 +298,85 @@ const Navbar = () => {
         </a>
         <div className="absolute top-full left-0 mt-2 w-72 bg-white shadow-lg rounded-md border border-gray-100 z-20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
           <a
-            href="/course-details/data-analytics"
+            href="/data-analytics/"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Data Analytics
           </a>
           <a
-            href="/course-details/python-programming"
+            href="/python-programming"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Python Programming 
           </a>
           <a
-            href="/course-details/machine-learning"
+            href="/machine-learning"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Machine Learning
           </a>
           <a
-            href="/course-details/deep-learning"
+            href="/deep-learning"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Deep Learning
           </a>
           <a
-            href="/course-details/natural-language-processing"
+            href="/natural-language-processing"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Natural Language Processing (NLP)
           </a>
           <a
-            href="/course-details/generative-ai"
+            href="/generative-ai"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
            Generative AI
           </a>
           <a
-            href="/course-details/langchain"
+            href="/langchain"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Langchain
           </a>
           <a
-            href="/course-details/langgraph"
+            href="/langgraph"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LangGraph
           </a>
           <a
-            href="/course-details/mlops"
+            href="/mlops"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             MLOps
           </a>
           <a
-            href="/course-details/llmops"
+            href="/llmops"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             LLMOps
           </a>
          
           <a
-            href="/course-details/ai-agents"
+            href="/ai-agents"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Agents
           </a>
-            <a
-            href="/course-details/ai-ethics"
+          <a
+            href="/ai-ethics"
             className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
           >
             Ethics AI and Scaling AI system
           </a>
+          <a
+            href="/azure-data-engineering"
+            className="block px-6 py-3 hover:bg-gray-100 text-sm text-gray-800"
+          >
+            Azure Data Engineering
+          </a>
+
         </div>
       </div>
 
@@ -457,7 +477,10 @@ const Navbar = () => {
     <div className="md:hidden bg-white py-6 px-4 shadow-lg">
       <div className="flex flex-col space-y-4">
         <button
-          onClick={() => handleScrollTo("home")}
+          onClick={() => {
+            navigateAndScrollTop("/#");
+            setTimeout(() => handleScrollTo("home"), 0);
+          }}
           className="text-left text-black hover:text-blue-500 transition-colors py-2"
         >
           Home
@@ -485,7 +508,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/data-analytics");
+                  navigate("/data-analytics");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -495,7 +518,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/python-programming");
+                  navigate("/python-programming");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -505,7 +528,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/machine-learning");
+                  navigate("/machine-learning");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -515,7 +538,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/deep-learning");
+                  navigate("/deep-learning");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -525,7 +548,7 @@ const Navbar = () => {
               <button
                 className="text-left text-gray-700 hover:text-blue-500"
                 onClick={() => {
-                  navigate("/course-details/natural-language-processing");
+                  navigate("/natural-language-processing");
                   setIsMenuOpen(false);
                   setMobileCourseDropdownOpen(false);
                 }}
@@ -657,57 +680,58 @@ const Navbar = () => {
   )}
 </nav>
 
-{/* Floating Contact Buttons - Updated positioning to move leftward */}
+{/* Floating Contact Buttons - All on right, equally spaced */}
       {!isLoggedIn && showFloatingButton && (
-        <div className="fixed bottom-16 right-6 z-50 flex flex-col space-y-3 items-end">
-          {/* Phone Contact Button - Moved leftward from right-2 to right-6 */}
-          <div className="relative">
-            <Button
-              onClick={togglePhoneDropdown}
-              className="phone-floating-button w-12 h-12 p-0 flex items-center justify-center shadow-2xl"
-            >
-              <Phone size={20} />
-            </Button>
-
-            {/* Phone Dropdown - Adjusted positioning */}
-            {isPhoneDropdownOpen && (
-              <div className="phone-dropdown absolute bottom-16 right-0 w-64 mb-2">
-                <div className="phone-dropdown-header">
-                  <span className="font-medium">Call Us (Or) WhatsApp Us</span>
-                  <button 
-                    onClick={togglePhoneDropdown}
-                    className="close-button"
-                  >
-                    <X size={18} />
-                  </button>
-                </div>
-                
-                {/* <div className="phone-number-item" onClick={() => handlePhoneCall('+919666717099')}>
-                  <div className="phone-icon">
-                    <Phone size={16} />
-                  </div>
-                  <span className="font-medium text-gray-800">+91 9666717099</span>
-                </div> */}
-                
-                <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
-                  <div className="phone-icon">
-                    <Phone size={16} />
-                  </div>
-                  <span className="font-medium text-gray-800">+91 9666523199</span>
-                </div>
+        <>          
+          {/* Adjusting positioning to prevent overlapping */}
+          <div className="fixed z-50 flex flex-col space-y-3"> {/* Reduced space-y-6 to space-y-3 */}
+            {/* 1. Top: AI Chat (GeminiChatWrapper) */}
+            <div className="fixed bottom-36 right-4"> {/* Adjusted bottom and right for smaller icons */}
+              <div style={{ width: 44, height: 44 }}> {/* Set a fixed smaller size */}
+                <GeminiChatWrapper iconSize={22} /> {/* Pass iconSize if supported */}
               </div>
-            )}
+            </div>
+            {/* 2. Middle: Phone Contact Button */}
+            <div className="fixed bottom-20 right-4"> {/* Adjusted bottom and right */}
+              <Button
+                onClick={togglePhoneDropdown}
+                className="phone-floating-button w-11 h-11 p-0 flex items-center justify-center shadow-2xl" // w-12 h-12 -> w-11 h-11
+                style={{ minWidth: 44, minHeight: 44 }} // Ensure minimum clickable area
+              >
+                <Phone size={18} /> {/* Decreased icon size */}
+              </Button>
+              {isPhoneDropdownOpen && (
+                <div className="phone-dropdown absolute bottom-14 right-0 w-60 mb-2"> {/* Adjusted bottom and width */}
+                  <div className="phone-dropdown-header">
+                    <span className="font-medium">Call Us (Or) WhatsApp Us</span>
+                    <button 
+                      onClick={togglePhoneDropdown}
+                      className="close-button"
+                    >
+                      <X size={16} /> {/* Smaller close icon */}
+                    </button>
+                  </div>
+                  <div className="phone-number-item" onClick={() => handlePhoneCall('+919666523199')}>
+                    <div className="phone-icon" style={{ width: 28, height: 28 }}> {/* Smaller phone icon */}
+                      <Phone size={14} />
+                    </div>
+                    <span className="font-medium text-gray-800">+91 9666523199</span>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* 3. Bottom: Enroll Now Button */}
+            <div className="fixed bottom-4 right-4"> {/* Adjusted bottom and right */}
+              <Button
+                className="vibrate-button gradient-button-floating rounded-full px-3 py-1.5 text-xs font-medium hover:shadow-xl" // px-4 py-2 text-sm -> px-3 py-1.5 text-xs
+                style={{ minWidth: 110, minHeight: 36 }} // Slightly smaller button
+                onClick={() => navigate("/signup")}
+              >
+                🚀 Enroll Now
+              </Button>
+            </div>
           </div>
-
-
-          {/* Enroll Now Button - Also moved leftward */}
-          <Button
-            className="vibrate-button gradient-button-floating rounded-full px-4 py-2 text-sm font-medium hover:shadow-xl"
-            onClick={() => navigate("/signup")}
-          >
-            🚀 Enroll Now
-          </Button>
-        </div>
+        </>
       )}
     </>
   );

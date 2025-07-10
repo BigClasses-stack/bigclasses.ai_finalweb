@@ -971,14 +971,15 @@ class Command(BaseCommand):
                 },
             {
                     'id': 12,
-                    'title': "data-analytics",
+                    'title': "Data-analytics",
                     'package': "13",
                     'hike': "140",
                     'transitions': "450",
-                    'image': "https://www.oxfordinstitute.in/img/all-software-development/data-analayes.jpg",  # <-- Add this line
+                    'image': "https://www.shutterstock.com/image-vector/thin-line-flat-design-business-600nw-300116720.jpg",  # <-- Add this line
 
                     'highlights': [
                         "Excel with Project",
+                        
                         "SQL Server with Project",
                         "PowerBI with Project",
                         "Python with Project",
@@ -1084,8 +1085,159 @@ class Command(BaseCommand):
     )
 ]
 
-                }
+                },
+        {
+                    'id': 13,
+                    'title': "Azure Data Engineering",
+                    'package': "12",
+                    'hike': "150",
+                    'transitions': "500",
+                    'image': "https://www.nextitcareer.com/wp-content/uploads/2023/11/azure-data-engineer-course.jpg",  # <-- Add this line
+
+                    'highlights': [
+                        "Azure SQL",
+                        "Azure DataLake",
+                        "Azure Synapse Analytics",
+                        "Azure Data Factory",
+                        "Azure Data Bricks",
+                        "Azure Cosmos DB",
+                        "Azure Stream Analytics",
+                        "Azure Key Vault"
+
+
+                    ],
+                    'features': [
+                        "Real-Time Applications",
+                        "Capstone Projects",
+                        "Online & Classroom Real-time Training",
+                        "Project & Task-Based Learning",
+                        "24/7 Learning Support",
+                        "Interviews, Jobs and Placement Support"
+
+                    ],
+'modules': [
+    (
+        "Azure SQL",
+        "Master Azure SQL for creating, managing, and querying relational databases in the cloud.",
+        [
+            "Introduction to Azure SQL",
+            "Provisioning SQL Databases",
+            "Database Design and Schemas",
+            "Writing SQL Queries",
+            "Indexes and Performance Tuning",
+            "Security and Role-based Access",
+            "Monitoring and Auditing",
+            "Backup, Restore, and Failover",
+            "Project : Design and deploy a secure Azure SQL database with optimized queries."
+        ]
+    ),
+    (
+        "Azure Data Lake",
+        "Learn how to handle large volumes of structured and unstructured data using Azure Data Lake.",
+        [
+            "Introduction to Azure Data Lake Storage",
+            "Understanding Gen2 Features",
+            "Data Lake Architecture",
+            "Access Control with ACLs and RBAC",
+            "Uploading and Managing Data",
+            "Integration with Azure Services",
+            "Best Practices for Data Organization",
+            "Project : Organize and manage a hierarchical data lake for big data analytics."
+        ]
+    ),
+    (
+        "Azure Synapse Analytics",
+        "Build end-to-end analytics solutions combining big data and data warehousing capabilities.",
+        [
+            "Introduction to Synapse Analytics",
+            "Workspaces and Architecture Overview",
+            "Data Ingestion and Integration",
+            "Dedicated SQL Pools vs Serverless",
+            "Writing and Optimizing T-SQL Queries",
+            "Integrating with Power BI and Data Lake",
+            "Pipeline Creation and Scheduling",
+            "Security and Performance Monitoring",
+            "Project : Develop a unified data warehouse and dashboard using Synapse and Power BI."
+        ]
+    ),
+    (
+        "Azure Data Factory",
+        "Design and deploy powerful data pipelines to automate data movement and transformation.",
+        [
+            "Introduction to Azure Data Factory",
+            "Creating Linked Services and Datasets",
+            "Building Pipelines and Data Flows",
+            "Data Movement and Copy Activities",
+            "Data Transformation with Mapping Data Flows",
+            "Triggers and Pipeline Scheduling",
+            "Monitoring and Logging Pipelines",
+            "CI/CD with Data Factory",
+            "Project : Create and monitor a complete ETL pipeline using ADF with real-time triggers."
+        ]
+    ),
+    (
+        "Azure Databricks",
+        "Perform big data processing and machine learning using Azure Databricks and Apache Spark.",
+        [
+            "Introduction to Azure Databricks and Spark",
+            "Databricks Workspace and Clusters",
+            "Working with Notebooks (Python/SQL)",
+            "Structured Streaming and Delta Lake",
+            "DataFrames and Spark SQL",
+            "ML Pipelines in Databricks",
+            "Integration with Data Lake and ADF",
+            "Job Scheduling and Monitoring",
+            "Project : Analyze and transform a large dataset using Spark and ML in Databricks."
+        ]
+    ),
+    (
+        "Azure Cosmos DB",
+        "Build scalable and globally distributed NoSQL applications using Azure Cosmos DB.",
+        [
+            "Overview of Azure Cosmos DB",
+            "Core SQL API and NoSQL Data Models",
+            "Partitioning and Indexing Strategies",
+            "Throughput Provisioning and Tuning",
+            "Querying Data with SQL API",
+            "Data Replication and Consistency Levels",
+            "Backup, Restore, and SLA Guarantees",
+            "Integrating with Azure Functions and SDKs",
+            "Project : Design and implement a globally available application using Cosmos DB."
+        ]
+    ),
+    (
+        "Azure Stream Analytics",
+        "Process real-time data from various sources and deliver instant insights.",
+        [
+            "Understanding Stream Analytics Concepts",
+            "Setting Up Input and Output Sources",
+            "Real-time SQL Queries on Streaming Data",
+            "Windowing Functions and Joins",
+            "Integrating with Event Hubs and IoT Hub",
+            "Sending Output to Power BI, SQL, and Storage",
+            "Monitoring and Scaling Jobs",
+            "Project : Stream IoT sensor data and visualize it in real-time dashboards."
+        ]
+    ),
+    (
+        "Azure Key Vault",
+        "Secure your cloud-based data engineering solutions using secrets, certificates, and keys.",
+        [
+            "Introduction to Azure Key Vault",
+            "Creating and Managing Vaults",
+            "Storing Secrets, Keys, and Certificates",
+            "Access Control and RBAC",
+            "Key Vault Integration with ADF and Databricks",
+            "Using Managed Identities for Secure Access",
+            "Audit Logs and Best Practices",
+            "Project : Secure an end-to-end data pipeline using Azure Key Vault for secret management."
+        ]
+    )
+]
+        }
             ]
+
+            
 
             def get_level(course_id):
                 if course_id == 1:

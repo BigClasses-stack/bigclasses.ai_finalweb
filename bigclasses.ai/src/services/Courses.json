@@ -1,0 +1,1084 @@
+[
+  {
+    "id": 1,
+    "title": "Python Programming",
+    "duration": "6 weeks",
+    "package": "12.5",
+    "hike": "150",
+    "transitions": "500",
+    "highlights": [
+      "Basics of Python Programming",
+      "Data Structures and Algorithms",
+      "Object-Oriented Programming (OOP)",
+      "File Handling and Exceptions",
+      "Advanced Python"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Basics of Python Programming",
+        "description": "Basic Python covers variables, data types, loops, functions, and I/O.",
+        "topics": [
+          "Python Syntax and Variables",
+          "Data Types and Operators",
+          "Conditional Statements and Loops"
+        ],
+        "project": "Create a basic calculator with conditional operations."
+      },
+      {
+        "name": "Data Structures and Algorithms",
+        "description": "DSA focuses on efficient data storage and problem-solving methods.",
+        "topics": [
+          "Lists, Tuples, and Dictionaries",
+          "Stack, Queue, and Tree Implementations",
+          "Sorting and Searching Algorithms"
+        ],
+        "project": "Develop a to-do list application with priority sorting."
+      },
+      {
+        "name": "Object-Oriented Programming (OOP)",
+        "description": "OOP is a programming style based on classes and objects.",
+        "topics": [
+          "Classes and Objects",
+          "Polymorphism and Inheritance",
+          "Encapsulation"
+        ],
+        "project": "Create a library management system using OOP principles."
+      },
+      {
+        "name": "File Handling and Exceptions",
+        "description": "File handling manages data files; exceptions handle runtime errors.",
+        "topics": [
+          "Reading and Writing Files",
+          "Exception Handling",
+          "Logging and Debugging"
+        ],
+        "project": "Build a file organizer that categorizes files into folders based on type."
+      },
+      {
+        "name": "Advanced Python",
+        "description": "Advanced Python includes decorators, generators, and context managers.",
+        "topics": [
+          "Python Modules and Packages",
+          "Decorators and Generators",
+          "Multithreading and Multiprocessing"
+        ],
+        "project": "Design a multithreaded web scraper for extracting headlines."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Machine Learning",
+    "duration": "6 weeks",
+    "package": "15.5",
+    "hike": "180",
+    "transitions": "600",
+    "highlights": [
+      "Introduction to Machine Learning",
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Model Evaluation and Optimization",
+      "Deployment"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Introduction to Machine Learning",
+        "description": "Getting started with algorithms that enable data-driven predictions.",
+        "topics": [
+          "Supervised vs. Unsupervised Learning",
+          "Machine Learning Lifecycle",
+          "Data Preprocessing"
+        ],
+        "project": "Implement a simple house price prediction model."
+      },
+      {
+        "name": "Supervised Learning",
+        "description": "Learning from labeled data to predict outcomes.",
+        "topics": [
+          "Linear and Logistic Regression",
+          "Decision Trees and Random Forests",
+          "Gradient Boosting (XGBoost, LightGBM)"
+        ],
+        "project": "Develop a spam email detection system."
+      },
+      {
+        "name": "Unsupervised Learning",
+        "description": "Identifying patterns in unlabeled data.",
+        "topics": [
+          "K-Means Clustering",
+          "Hierarchical Clustering",
+          "Dimensionality Reduction (PCA)"
+        ],
+        "project": "Create a customer segmentation model for a retail store."
+      },
+      {
+        "name": "Model Evaluation and Optimization",
+        "description": "Enhancing model performance through evaluation and fine-tuning.",
+        "topics": [
+          "Cross-Validation and Hyperparameter Tuning",
+          "Confusion Matrix and AUC-ROC",
+          "Overfitting and Regularization Techniques"
+        ],
+        "project": "Optimize a model to predict employee attrition rates."
+      },
+      {
+        "name": "Deployment",
+        "description": "Delivering models for real-world use.",
+        "topics": [
+          "Flask/FastAPI for ML Model Deployment",
+          "Monitoring and Updating Models",
+          "Deployment on Cloud Platforms (AWS/GCP)"
+        ],
+        "project": "Deploy a loan approval prediction model on a cloud platform."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Deep Learning",
+    "duration": "4 weeks",
+    "package": "18.5",
+    "hike": "200",
+    "transitions": "400",
+    "highlights": [
+      "Basics of Neural Networks",
+      "Convolutional Neural Networks (CNNs)",
+      "Recurrent Neural Networks (RNNs)",
+      "Transformers",
+      "Deployment and Real-World Applications"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Basics of Neural Networks",
+        "description": "Basics of neural networks cover layers, neurons, and learning processes.",
+        "topics": [
+          "Perceptrons and Activation Functions",
+          "Forward and Backward Propagation",
+          "Loss Functions"
+        ],
+        "project": "Build a simple neural network for digit classification (MNIST)."
+      },
+      {
+        "name": "Convolutional Neural Networks (CNNs)",
+        "description": "CNNs are neural networks specialized for image processing tasks.",
+        "topics": [
+          "Convolution and Pooling Operations",
+          "Transfer Learning with Pretrained Models",
+          "Applications in Image Recognition"
+        ],
+        "project": "Create a face detection system using CNNs."
+      },
+      {
+        "name": "Recurrent Neural Networks (RNNs)",
+        "description": "RNNs are neural networks designed for sequential data and time series.",
+        "topics": [
+          "LSTMs and GRUs",
+          "Applications in Text and Time-Series Data",
+          "Attention Mechanism Basics"
+        ],
+        "project": "Build a text sentiment analysis tool using RNNs."
+      },
+      {
+        "name": "Transformers",
+        "description": "Transformers are models that use attention to process sequence data efficiently.",
+        "topics": [
+          "Introduction to Transformers and BERT",
+          "Sequence-to-Sequence Models",
+          "Applications in NLP"
+        ],
+        "project": "Develop a text summarization tool using BERT."
+      },
+      {
+        "name": "Deployment and Real-World Applications",
+        "description": "Deployment and real-world applications involve launching models for practical use.",
+        "topics": [
+          "Model Deployment with TensorFlow Serving",
+          "Real-Time Analytics with Deep Learning",
+          "Industry Case Studies"
+        ],
+        "project": "Deploy an image recognition model on a cloud platform"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Natural Language Processing",
+    "duration": "8-12 weeks",
+    "package": "17",
+    "hike": "190",
+    "transitions": "350",
+    "highlights": [
+      "Text Preprocessing",
+      "Classical NLP Approaches",
+      "Advanced NLP Techniques",
+      "Applications of NLP",
+      "Deployment and Integration"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Text Preprocessing",
+        "description": "Preparing text data for analysis and modeling.",
+        "topics": [
+          "Tokenization and Stopword Removal",
+          "Lemmatization and Stemming",
+          "N-Grams and Bag of Words"
+        ],
+        "project": "Develop a keyword extractor from text documents."
+      },
+      {
+        "name": "Classical NLP Approaches",
+        "description": "Traditional methods for text analysis using statistical and rule-based techniques.",
+        "topics": [
+          "Sentiment Analysis",
+          "Named Entity Recognition (NER)",
+          "Text Classification"
+        ],
+        "project": "Build a sentiment analysis model for product reviews."
+      },
+      {
+        "name": "Advanced NLP Techniques",
+        "description": "Cutting-edge methods like transformers for deep text understanding.",
+        "topics": [
+          "Word Embeddings (Word2Vec, GloVe)",
+          "Transformers (BERT, GPT)",
+          "Sequence-to-Sequence Models"
+        ],
+        "project": "Create a machine translation system."
+      },
+      {
+        "name": "Applications of NLP",
+        "description": "Real-world uses of NLP, including chatbots, sentiment analysis, and translation.",
+        "topics": [
+          "Chatbots and Virtual Assistants",
+          "Text Summarization",
+          "Topic Modeling"
+        ],
+        "project": "Develop a chatbot for customer support."
+      },
+      {
+        "name": "Deployment and Integration",
+        "description": "Implementing models into systems for seamless real-world use.",
+        "topics": [
+          "Deployment of NLP Models",
+          "Integration with Web Applications",
+          "NLP in Real-Time Systems"
+        ],
+        "project": "Deploy a language detection model for a multilingual website"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Generative AI",
+    "duration": "4-8 weeks",
+    "package": "20",
+    "hike": "210",
+    "transitions": "300",
+    "highlights": [
+      "Fundamentals of Generative AI",
+      "Text Generation",
+      "Image and Video Generation",
+      "Multi-Modal Models",
+      "Real-World Applications and Deployment"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Fundamentals of Generative AI",
+        "description": "Exploring models like GANs, VAEs, and Diffusion for generative tasks.",
+        "topics": [
+          "Introduction to GANs",
+          "Variational Autoencoders (VAEs)",
+          "Diffusion Models"
+        ],
+        "project": "Build a basic GAN for image generation."
+      },
+      {
+        "name": "Text Generation",
+        "description": "Text generation is creating written content using AI models.",
+        "topics": [
+          "GPT Models and Their Applications",
+          "Fine-Tuning Pretrained Models",
+          "Text-Based Content Creation"
+        ],
+        "project": "Develop an AI writer for automated blog generation."
+      },
+      {
+        "name": "Image and Video Generation",
+        "description": "Image and video generation use AI to create visual content.",
+        "topics": [
+          "DALL-E and Stable Diffusion",
+          "GANs for Image-to-Image Translation",
+          "Applications in Video Synthesis"
+        ],
+        "project": "Create an AI-powered image-to-art converter."
+      },
+      {
+        "name": "Multi-Modal Models",
+        "description": "Multi-modal models process and combine different data types like text and images.",
+        "topics": [
+          "Combining Text, Image, and Audio Data",
+          "CLIP and Other Multi-Modal Models",
+          "Use Cases in Interactive Media"
+        ],
+        "project": "Develop a multi-modal system that generates captions for images."
+      },
+      {
+        "name": "Real-World Applications and Deployment",
+        "description": "Real-world applications and deployment bring AI models into practical use.",
+        "topics": [
+          "Deployment of Generative AI Models",
+          "Ethical Considerations in Generative AI",
+          "Industry Applications"
+        ],
+        "project": "Deploy a generative AI model for creating virtual environments"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "LangChain",
+    "duration": "4 weeks",
+    "package": "16",
+    "hike": "170",
+    "transitions": "320",
+    "highlights": [
+      "Introduction to LangChain",
+      "Working with Language Models",
+      "Building Knowledge-Based Systems",
+      "Deployment and Scaling",
+      "Advanced Features of LangChain"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Introduction to LangChain",
+        "description": "Overview of LangChain for building language model-powered applications.",
+        "topics": [
+          "Overview of LangChain",
+          "Core Concepts: Chains and Agents",
+          "Setting Up LangChain Environment"
+        ],
+        "project": "Build a simple conversational chain using LangChain."
+      },
+      {
+        "name": "Working with Language Models",
+        "description": "Using language models to generate, understand, and analyze text.",
+        "topics": [
+          "Integrating OpenAI APIs (GPT, BERT)",
+          "Fine-Tuning LLMs",
+          "Prompt Engineering Techniques"
+        ],
+        "project": "Create a question-answering system using GPT."
+      },
+      {
+        "name": "Building Knowledge-Based Systems",
+        "description": "Developing intelligent systems using structured data and rules.",
+        "topics": [
+          "Workflow Automation with Chains",
+          "Memory Management in LangChain",
+          "Developing Custom Agents"
+        ],
+        "project": "Build a workflow automation tool with LangChain agents."
+      },
+      {
+        "name": "Deployment and Scaling",
+        "description": "Launching applications and expanding capacity to handle growth.",
+        "topics": [
+          "Deployment of LangChain Applications",
+          "Monitoring and Optimization of Chains",
+          "Scaling for High-Volume Requests"
+        ],
+        "project": "Deploy a customer support system powered by LangChain."
+      },
+      {
+        "name": "Advanced Features of LangChain",
+        "description": "Creating systems that leverage structured information for intelligent responses.",
+        "topics": [
+          "Utilizing External Data Sources",
+          "Building a Context-Aware Chatbot",
+          "Semantic Search and Retrieval-Augmented Generation (RAG)"
+        ],
+        "project": "Develop a chatbot for FAQ retrieval"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "LangGraph",
+    "duration": "4 weeks",
+    "package": "15",
+    "hike": "160",
+    "transitions": "290",
+    "highlights": [
+      "Fundamentals of LangGraph",
+      "Advanced Graph-Based Workflows",
+      "Integration with External Services",
+      "Complex Graph Applications",
+      "Deployment and Monitoring"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Fundamentals of LangGraph",
+        "description": "LangGraph fundamentals cover building and managing AI workflows with graph-based structures.",
+        "topics": [
+          "Introduction to LangGraph",
+          "Creating Graph-Based Workflows",
+          "Data Modeling in LangGraph"
+        ],
+        "project": "Build a simple graph for task prioritization."
+      },
+      {
+        "name": "Advanced Graph-Based Workflows",
+        "description": "Advanced Graph-Based Workflows.",
+        "topics": [
+          "Creating Custom Nodes and Edges",
+          "Optimizing Workflow Execution",
+          "Handling Errors in LangGraph Workflows"
+        ],
+        "project": "Develop a document approval workflow."
+      },
+      {
+        "name": "Integration with External Services",
+        "description": "Integration with external services connects AI workflows to APIs and third-party tools.",
+        "topics": [
+          "Connecting APIs and Databases",
+          "Dynamic Updates in Graphs",
+          "Real-Time Graph Visualization"
+        ],
+        "project": "Build a real-time data processing pipeline using LangGraph."
+      },
+      {
+        "name": "Complex Graph Applications",
+        "description": "Complex graph applications solve intricate problems using advanced graph structures.",
+        "topics": [
+          "Multi-Step Graph Workflows",
+          "Recursive Workflows and Loops",
+          "Parallel Processing in LangGraph"
+        ],
+        "project": "Create a knowledge graph for content recommendation."
+      },
+      {
+        "name": "Deployment and Monitoring",
+        "description": "Deployment and monitoring ensure AI models run smoothly and perform well in production.",
+        "topics": [
+          "Deploying LangGraph Applications",
+          "Performance Monitoring and Debugging",
+          "Scaling Graph-Based Solutions"
+        ],
+        "project": "Deploy a graph-based project management system"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "MLOps",
+    "duration": "8-12 weeks",
+    "package": "19",
+    "hike": "210",
+    "transitions": "380",
+    "highlights": [
+      "Introduction to MLOps",
+      "Introduction to MLflow",
+      "MLflow Tracking component",
+      "MLflow Logging function",
+      "Launch multiple Experiments and Runs",
+      "Autologging in MLflow",
+      "Tracking Server of MLflow",
+      "MLflow Model component",
+      "Handling Customized models in MLflow",
+      "MLflow Model Evaluation",
+      "Git and Github",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Azure Essentials",
+      "Azure MLops"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Introduction to MLOps",
+        "description": "Introduction to MLOps covers the basics of deploying and managing machine learning models efficiently.",
+        "topics": [
+          "What is MLOps?",
+          "Traditional Machine Learning Lifecycle",
+          "Challenges in traditional ML lifecycle - Part 1",
+          "Challenges in traditional ML lifecycle - Part 2",
+          "How MLOps address the challenges"
+        ]
+      },
+      {
+        "name": "Introduction to MLFlow",
+        "description": "Getting started with MLflow for tracking and managing ML experiments.",
+        "topics": [
+          "What is MLFlow",
+          "Components of MLFlow",
+          "MLflow Setup"
+        ]
+      },
+      {
+        "name": "MLflow Tracking Components",
+        "description": "MLflow Tracking lets you log and manage experiments with APIs, a central server, metadata store, and artifact storage.",
+        "topics": [
+          "Sklearn regression model",
+          "Sklearn regression model with MLflow",
+          "MLruns directory",
+          "MLflow UI tour"
+        ]
+      },
+      {
+        "name": "MLflow Logging Functions",
+        "description": "MLflow logging functions record experiment data like parameters, metrics, tags, and artifacts during model training.",
+        "topics": [
+          "Setting and Getting Tracking Uri - Part 1",
+          "Setting and Getting Tracking Uri - Part 2",
+          "Create MLflow experiment function",
+          "Set MLflow experiment function",
+          "Start and End run functions - Part 1",
+          "Start and End run functions - Part 2",
+          "Active & Last active run functions",
+          "Log multiple parameters & metrics function",
+          "Log multiple artifacts function",
+          "Set tags function"
+        ]
+      },
+      {
+        "name": "Launch Multiple Experiments and Runs",
+        "description": "MLflow allows launching multiple experiments and runs to track and compare different model training workflows.",
+        "topics": [
+          "Launch multiple Runs in a program",
+          "Launch multiple Experiments in a program"
+        ]
+      },
+      {
+        "name": "Autologging in MLflow",
+        "description": "MLflow autologging automatically logs parameters, metrics, and artifacts during training.",
+        "topics": [
+          "Introduction to Autologging",
+          "implement autolog() function",
+          "Implement library specific autolog function"
+        ]
+      },
+      {
+        "name": "Tracking Server of MLflow",
+        "description": "The MLflow Tracking Server stores and manages experiment runs, parameters, metrics, and artifacts centrally.",
+        "topics": [
+          "What is MLflow Tracking server",
+          "Implement Tracking Server in MLflow",
+          "Local Tracking server scenarios",
+          "Remote Tracking server scenarios"
+        ]
+      },
+      {
+        "name": "MLflow Model Component",
+        "description": "The MLflow Model component packages machine learning models for easy deployment and reuse across platforms.",
+        "topics": [
+          "Introduction to Model component",
+          "Model components",
+          "Storage format",
+          "MLmodel file explained",
+          "What are Model Signatures",
+          "What is Signature Enforcement in MLflow",
+          "Log Signatures & input example in MLflow",
+          "Model API (save_model, log_model) explained"
+        ]
+      },
+      {
+        "name": "Handling Customized Models in MLflow",
+        "description": "MLflow handles custom models by packaging and logging them with their code and dependencies.",
+        "topics": [
+          "What is Model customization in MLflow",
+          "Implement Custom Python model - Part 1",
+          "Implement Custom Python model - Part 2",
+          "Implement Custom Python model - Part 3",
+          "Loading the customized Python model",
+          "Custom Flavors in MLflow"
+        ]
+      },
+      {
+        "name": "MLflow Model Evaluation",
+        "description": "MLflow Model Evaluation tracks and compares model performance using logged metrics and visualizations.",
+        "topics": [
+          "Introduction to Model evaluation in MLflow",
+          "Evaluate function parameters",
+          "Implement evaluate() function",
+          "Comparing Runs of an Experiment",
+          "Create Custome metrics and artifacts",
+          "Setting Validation thresholds in evaluate()"
+        ]
+      },
+      {
+        "name": "Git and GitHub",
+        "description": "Git and GitHub enable efficient version control and collaboration for software development projects.",
+        "topics": [
+          "Introduction to Git and GitHub",
+          "Basic Git Commands",
+          "Working with Remote Repositories",
+          "Git Ignore and Managing Sensitive Files",
+          "Collaboration using Pull Requests",
+          "Resolving Merge Conflicts",
+          "Advanced Git Operations",
+          "GitHub Actions and Automation"
+        ]
+      },
+      {
+        "name": "Docker",
+        "description": "Docker simplifies application deployment by containerizing applications and their dependencies for portability and scalability.",
+        "topics": [
+          "Introduction to Docker and Containerization",
+          "Installing and Setting Up Docker",
+          "Docker Images and Containers",
+          "Creating Custom Docker Images with Dockerfile",
+          "Working with Docker Hub",
+          "Docker Compose Basics",
+          "Networking in Docker",
+          "Docker Volumes and Data Persistence",
+          "Managing and Monitoring Docker Containers"
+        ]
+      },
+      {
+        "name": "Kubernetes",
+        "description": "Kubernetes orchestrates containerized applications, providing scalability, availability, and manageability.",
+        "topics": [
+          "Introduction to Kubernetes and Container Orchestration",
+          "Setting Up a Kubernetes Cluster",
+          "Understanding Pods and Deployments",
+          "Kubernetes Services and Networking",
+          "Managing Configuration with ConfigMaps and Secrets",
+          "Persistent Storage in Kubernetes",
+          "Scaling and Autoscaling Applications",
+          "Kubernetes Ingress and Load Balancing",
+          "Monitoring and Logging in Kubernetes"
+        ]
+      },
+      {
+        "name": "Terraform",
+        "description": "Terraform enables Infrastructure as Code (IaC), allowing declarative provisioning and management of cloud infrastructure.",
+        "topics": [
+          "Introduction to Infrastructure as Code and Terraform",
+          "Setting Up Terraform and Providers",
+          "Writing and Organizing Terraform Configuration Files",
+          "Managing Resources with Terraform",
+          "Variables, Outputs, and Sensitive Data",
+          "Terraform State and Remote Backends",
+          "Terraform Modules for Reusable Configurations",
+          "Conditional Logic and Dynamic Blocks",
+          "Provisioners and Resource Dependencies"
+        ]
+      },
+      {
+        "name": "Azure Essentials",
+        "description": "Introduction to Azure cloud platform.",
+        "topics": [
+          "Introduction to Azure and Cloud Computing",
+          "Azure Computing Services",
+          "Azure Networking Services",
+          "Azure Storage Services",
+          "Azure Database Services",
+          "Azure Security Services",
+          "Azure Monitoring and Management Services",
+          "Azure DevOps"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "LLMOps",
+    "duration": "4-8 weeks",
+    "package": "22",
+    "hike": "220",
+    "transitions": "410",
+    "highlights": [
+      "Basics of LLMOps",
+      "Data Management for LLMs",
+      "Model Training and Optimization",
+      "Deployment and Monitoring",
+      "Advanced MLOps Practices"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Basics of LLMOps",
+        "description": "Managing and optimizing workflows for large language models.",
+        "topics": [
+          "Understanding LLM Workflows",
+          "Setting Up LLM Pipelines",
+          "Fine-Tuning vs Prompt Engineering"
+        ],
+        "project": "Build a text summarization pipeline with LLMs."
+      },
+      {
+        "name": "Data Management for LLMs",
+        "description": "Data management for LLMs involves organizing and processing data for effective model training and updates.",
+        "topics": [
+          "Preprocessing Text Data for LLMs",
+          "Dataset Versioning and Tokenization",
+          "Handling Large Text Corpora"
+        ],
+        "project": "Create a preprocessing pipeline for a sentiment dataset."
+      },
+      {
+        "name": "Model Training and Optimization",
+        "description": "Model training and optimization focus on improving AI performance through data and tuning.",
+        "topics": [
+          "Fine-Tuning Large Models",
+          "Parameter Optimization Techniques",
+          "Distributed Training for LLMs"
+        ],
+        "project": "Fine-tune a BERT model for a classification task."
+      },
+      {
+        "name": "Deployment and Monitoring",
+        "description": "Deployment and monitoring ensure AI models run reliably and stay effective over time.",
+        "topics": [
+          "Model Deployment (Docker, Kubernetes)",
+          "Monitoring Models in Production",
+          "Handling Model Drift"
+        ],
+        "project": "Deploy and monitor a churn prediction model in production."
+      },
+      {
+        "name": "Advanced MLOps Practices",
+        "description": "Advanced MLOps practices automate, scale, and secure AI workflows for production.",
+        "topics": [
+          "Continuous Monitoring and Feedback Loops",
+          "Scaling MLOps Pipelines",
+          "Case Studies of MLOps in Industry"
+        ],
+        "project": "Implement an end-to-end MLOps pipeline for a retail use case."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "AI Agents",
+    "duration": "4 weeks",
+    "package": "24",
+    "hike": "230",
+    "transitions": "350",
+    "highlights": [
+      "Basics of Agents",
+      "Reinforcement Learning for Agents",
+      "Multi-Agent Systems",
+      "Autonomous Decision-Making",
+      "Agent Deployment"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Basics of Agents",
+        "description": "Understanding autonomous programs that perform tasks independently.",
+        "topics": [
+          "Introduction to AI Agents",
+          "Rule-Based vs Learning-Based Agents",
+          "Setting Up Simple AI Agents"
+        ],
+        "project": "Build a basic rule-based agent for a game."
+      },
+      {
+        "name": "Reinforcement Learning for Agents",
+        "description": "Training agents to learn optimal actions through rewards and feedback.",
+        "topics": [
+          "Q-Learning and SARSA Algorithms",
+          "Deep Q-Networks (DQN)",
+          "Policy Gradient Methods"
+        ],
+        "project": "Create an agent to play a simple grid-based game."
+      },
+      {
+        "name": "Multi-Agent Systems",
+        "description": "Coordinating multiple agents to solve complex tasks collaboratively.",
+        "topics": [
+          "Communication in Multi-Agent Systems",
+          "Coordination and Conflict Resolution",
+          "Applications of Multi-Agent Systems"
+        ],
+        "project": "Build a multi-agent system for resource allocation."
+      },
+      {
+        "name": "Autonomous Decision-Making",
+        "description": "Enabling systems to make choices without human intervention.",
+        "topics": [
+          "Planning and Scheduling for Agents",
+          "Probabilistic Models in Decision-Making",
+          "Game-Theoretic Approaches"
+        ],
+        "project": "Develop an agent for automated task scheduling."
+      },
+      {
+        "name": "Agent Deployment",
+        "description": "Launching and managing agents in real-world environments.",
+        "topics": [
+          "Deploying Agents in Real-World Applications",
+          "Monitoring Agent Behavior",
+          "Ethical Considerations in Autonomous Agents"
+        ],
+        "project": "Deploy an agent for inventory management in a warehouse."
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "AI Ethics",
+    "duration": "4 weeks",
+    "package": "13",
+    "hike": "140",
+    "transitions": "450",
+    "highlights": [
+      "Introduction to AI Ethics",
+      "Responsible AI Development",
+      "Scaling AI Systems",
+      "AI in High-Stakes Applications",
+      "Future of Ethical AI"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Introduction to AI Ethics",
+        "description": "Exploring moral principles guiding responsible AI development and use.",
+        "topics": [
+          "Key Ethical Principles",
+          "Bias and Fairness in AI Systems",
+          "Privacy and Data Protection"
+        ],
+        "project": "Analyze a biased dataset and propose improvements."
+      },
+      {
+        "name": "Responsible AI Development",
+        "description": "Building AI systems that are fair, transparent, and accountable.",
+        "topics": [
+          "Transparent AI Models",
+          "Ethical AI Governance",
+          "Tools for Ethical AI Development"
+        ],
+        "project": "Build a transparent ML model with explainability features."
+      },
+      {
+        "name": "Scaling AI Systems",
+        "description": "Expanding AI capabilities to handle larger data and users efficiently.",
+        "topics": [
+          "Distributed Training and Model Parallelism",
+          "Load Balancing for AI Workloads",
+          "Optimizing Resource Usage"
+        ],
+        "project": "Scale a deep learning model for real-time inference."
+      },
+      {
+        "name": "AI in High-Stakes Applications",
+        "description": "Applying AI responsibly in critical areas like healthcare and finance.",
+        "topics": [
+          "AI in Healthcare, Finance, and Law",
+          "Ethical Challenges in Critical Domains",
+          "Case Studies of AI Failures"
+        ],
+        "project": "Propose an ethical framework for deploying AI in healthcare."
+      },
+      {
+        "name": "Future of Ethical AI",
+        "description": "Advancing AI with fairness, transparency, and societal benefit in mind.",
+        "topics": [
+          "AI Policy and Regulation Trends",
+          "AI for Social Good",
+          "Long-Term Implications of AI Systems"
+        ],
+        "project": "Create a roadmap for implementing AI ethics in an organization."
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Data Analytics",
+    "duration": "8-12 weeks",
+    "package": "13",
+    "hike": "140",
+    "transitions": "450",
+    "highlights": [
+      "Excel with Project",
+      "SQL Server with Project",
+      "PowerBI with Project",
+      "Python with Project",
+      "Git and Github",
+      "Interview Preparation"
+    ],
+    "features": [
+      "Real-Time Applications",
+      "Capstone Projects",
+      "Online & Classroom Real-time Training",
+      "Project & Task-Based Learning",
+      "24/7 Learning Support",
+      "Interviews, Jobs and Placement Support"
+    ],
+    "modules": [
+      {
+        "name": "Excel with Project",
+        "description": "Learn the fundamentals of Microsoft Excel through hands-on projects, mastering data organization, formulas, charts, and essential tools for real-world tasks.",
+        "topics": [
+          "Introduction to Excel",
+          "Personalizing Excel",
+          "Lookup and Referencing",
+          "Arithmetic Functions",
+          "Text Functions",
+          "Data Cleaning Functions",
+          "Mathematical Functions",
+          "General Formatting",
+          "Conditional Formatting",
+          "Database Functions",
+          "Text and Data Manipulation",
+          "Protecting Excel - Excel Security",
+          "Printing Workbooks",
+          "Advance Paste Special Techniques",
+          "Date, Time, Financial,& Statistical Functions",
+          "Error Handling, Filtering and Sorting",
+          "Advanced Excel Functions",
+          "What if Analysis and Data Validation",
+          "Logical Analysis, Array & Lookup Functions",
+          "Pivot Tables, Slicers & Charts, Addins & Dashboards"
+        ]
+      },
+      {
+        "name": "SQL Server with Project",
+        "description": "Learn the fundamentals of SQL Server through hands-on projects, covering database design, queries, and performance optimization.",
+        "topics": [
+          "Introduction to Data & Database Systems",
+          "Complete Introduction to SQL Server",
+          "SQL Server Software installation",
+          "SSMS Window",
+          "Datatypes & Sub- Languages in SQL",
+          "Renaming & Copying Data",
+          "Arithmetic, Comparision, Logical, Set & Special Operators, Schemas",
+          "Functions, Special Clauses, Ranking Functions",
+          "Constraints, Joins, Views, Synonyms, Indexes & Sub Queries",
+          "TCL Commands, CTE, Duplicates, Normalization",
+          "ER Modelling, Relationships, OLTPS, Temporary Tables",
+          "TSQL, Variables, Control Statements, Cursors, Stored Procedures, Stored Functions",
+          "Triggers"
+        ]
+      },
+      {
+        "name": "PowerBI with Project",
+        "description": "Gain hands-on experience in data analysis and visualization by learning Power BI tools and techniques through a practical, real-world project.",
+        "topics": [
+          "Power BI Complete Introduction",
+          "PowerBI Desktop installation & PowerBI Service",
+          "PowerBI Desktop User Interface",
+          "Building Blocks of PowerBI",
+          "Power Query (Transformation, Merge, Append)",
+          "Power Pivot (Data Modelling, DAX, Quick Measures)",
+          "Power View (Report View, Visual Interaction, Filters, Hierarchy, Visualizations",
+          "Grouping, Binning, Sorting, Tooltip Page & Bookmarks",
+          "PowerBI Service (Datasets, Dashboards, Data Connectivity modes, Gateways)",
+          "Understanding Sub Folder in Workspace",
+          "Dataflows, Dataset actions, Excel Workbooks, Report & Dashboard actions",
+          "Row Level Security, Deployment Pipelines, ADD ONs"
+        ]
+      },
+      {
+        "name": "Python with Project",
+        "description": "Learn Python fundamentals through hands-on coding and build a complete project to apply your skills in a real-world context.",
+        "topics": [
+          "Python Basics",
+          "Core Python (Conditional & Iterative Statements, Data Structures, Functions & Modules)",
+          "Exception Handling, Regular Expressions, Exporting Data to .txt Files",
+          "Object Oriented Programming",
+          "Python for Data Analytics",
+          "Using Pandas Library (Data Structures, Data import & export)",
+          "Using Matplotlib Library (NumPy, Database Connections)"
+        ]
+      },
+      {
+        "name": "Interview Preparation",
+        "description": "This module provides essential strategies and practical skills to help you confidently prepare for and succeed in job interviews.",
+        "topics": [
+          "Basic Self introduction",
+          "Interview Skills (Preparation, Post Interview)",
+          "Personal Branding",
+          "Mock Interviews"
+        ]
+      }
+    ]
+  }
+]

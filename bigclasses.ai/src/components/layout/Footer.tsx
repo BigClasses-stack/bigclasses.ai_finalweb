@@ -94,7 +94,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-[#f3e8ff] via-[#fce7f3] to-[#e0f2fe] text-gray-800">
+<footer className="bg-gradient-to-r from-[#e0f7ff] via-[#e6f9ff] to-[#f0fcff] text-gray-800">
       <div className="container mx-auto">
         <div className="w-full overflow-hidden">
           <svg

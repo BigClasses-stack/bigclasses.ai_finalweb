@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Add this import
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { X } from "lucide-react"; // Add this import
 import {
   Select,
   SelectContent,
@@ -26,6 +28,7 @@ const courses = [
 ];
 
 const Enroll = () => {
+  const navigate = useNavigate(); // Add this
   const [formData, setFormData] = useState({
     student_name: "",
     email: "",
@@ -72,9 +75,22 @@ const Enroll = () => {
     }
   };
 
+  const handleClose = () => {
+    navigate("/");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
-      <div className="bg-white shadow-[0_20px_50px_rgba(0,_0,_0,_0.1)] w-full max-w-6xl overflow-hidden rounded-lg my-8">
+      <div className="bg-white shadow-[0_20px_50px_rgba(0,_0,_0,_0.1)] w-full max-w-6xl overflow-hidden rounded-lg my-8 relative">
+        {/* Add Close Button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+          aria-label="Close"
+        >
+          <X className="h-6 w-6 text-gray-500" />
+        </button>
+
         {/* Mobile Image Section - Shows at top on mobile */}
         <div className="block md:hidden">
           <div className="h-56">
@@ -153,7 +169,11 @@ const Enroll = () => {
                     <SelectTrigger className="w-full h-10 px-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
-                    <SelectContent side="bottom" align="start" className="max-h-60 z-50">
+                    <SelectContent
+                      side="bottom"
+                      align="start"
+                      className="max-h-60 z-50"
+                    >
                       {courses.map((course) => (
                         <SelectItem key={course.id} value={course.title}>
                           {course.title}
@@ -188,7 +208,10 @@ const Enroll = () => {
                     type="checkbox"
                     className="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
                   />
-                  <label htmlFor="remember" className="ml-2 text-sm text-gray-600">
+                  <label
+                    htmlFor="remember"
+                    className="ml-2 text-sm text-gray-600"
+                  >
                     Remember me
                   </label>
                 </div>

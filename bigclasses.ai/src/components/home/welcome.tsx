@@ -19,17 +19,17 @@ const Welcome = () => {
           {/* Left - Image Grid */}
           <div className="grid grid-cols-2 gap-4 lg:w-1/2">
             <img
-              src="https://i.pinimg.com/474x/07/ea/37/07ea372824f53401cd92df9554605ca9.jpg"
+              src="\images\hi-lyt1.webp"
               alt="Student Learning"
               className="rounded-xl object-cover w-full h-56"
             />
             <img
-              src="https://i.pinimg.com/474x/be/f9/bf/bef9bfd87646ccaef465a7132337fb8b.jpg"
+              src="\images\hi-lyt2.webp"
               alt="Online Class"
               className="rounded-xl object-cover w-full h-56"
             />
             <img
-              src="https://i.pinimg.com/736x/66/1e/2a/661e2acf4c682d510033922fa1e873df.jpg"
+              src="\images\hi-lyt5.webp"
               alt="Learning Platform"
               className="rounded-xl object-cover w-full h-80 col-span-2"
             />
