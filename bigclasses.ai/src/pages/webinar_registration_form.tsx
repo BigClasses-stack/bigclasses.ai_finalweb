@@ -26,8 +26,21 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setSubmitMessage('');
+
+    // Check if all fields are filled
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.education.trim() ||
+      !formData.experience.trim()
+    ) {
+      setSubmitMessage('❌ Please fill in all the details before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
     setLoading(true);
 
     try {

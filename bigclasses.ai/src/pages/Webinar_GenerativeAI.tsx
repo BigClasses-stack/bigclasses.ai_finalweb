@@ -117,7 +117,7 @@ const GenerativeAIWebinar = () => {
             <div className="flex flex-wrap gap-3 sm:gap-4 text-base sm:text-lg text-gray-700 font-medium">
               <div className="flex items-center gap-2">
                 <Calendar className="text-blue-600" size={22} />
-                <span>19th & 20th July 2025</span>
+                <span>12th & 13th July 2025</span>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="text-blue-600" size={22} />
@@ -252,7 +252,7 @@ const GenerativeAIWebinar = () => {
               <div className="text-center">
                 <Calendar size={48} className="mx-auto mb-4" />
                 <h3 className="text-xl font-bold mb-2">Dates</h3>
-                <p className="text-lg">19th–20th July 2025</p>
+                <p className="text-lg">12th–13th July 2025</p>
               </div>
               <div className="text-center">
                 <Clock size={48} className="mx-auto mb-4" />

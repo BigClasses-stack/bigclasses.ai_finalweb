@@ -26,12 +26,25 @@ const GenerativeAIRegistrationForm: React.FC<GenerativeAIRegistrationFormProps> 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setSubmitMessage('');
+
+    // Check if all fields are filled
+    if (
+      !formData.fullName.trim() ||
+      !formData.email.trim() ||
+      !formData.phone.trim() ||
+      !formData.education.trim() ||
+      !formData.experience.trim()
+    ) {
+      setSubmitMessage('❌ Please fill in all the details before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
     setLoading(true);
 
     try {
-      const SCRIPT_URL ='https://script.google.com/macros/s/AKfycbyHkYDChh8AleiO8ltIhhZhWUJ7OjuvNcMkaDwOZb73lqsSkn8Y6rOfRnaQSVQhsEwS/exec';
+      const SCRIPT_URL ='https://script.google.com/macros/s/AKfycbxJrAvf8vgnc7AiRuNDzXt4wyeqShtkVmJZxpj7DLcrQJJTvgYfuNyjGwjFACPYKNX8/exec';
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -42,7 +55,7 @@ const GenerativeAIRegistrationForm: React.FC<GenerativeAIRegistrationFormProps> 
           ...formData,
           timestamp: new Date().toISOString(),
           webinar: 'Generative AI Career Masterclass',
-          dates: '19th & 20th July 2025',
+          dates: '12th & 13th July 2025',
           time: '6 PM - 8 PM IST'
         })
       });
