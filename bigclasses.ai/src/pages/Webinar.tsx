@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Calendar, Clock, Users, Award, CheckCircle, Star, Play, Globe, Shield, TrendingUp, BookOpen, MessageCircle } from 'lucide-react';
 import WebinarRegistrationForm from './webinar_registration_form';
 
+
+
 const SuccessModal = ({ open, onClose }) => {
   if (!open) return null;
   return (
