@@ -56,7 +56,7 @@ const GenerativeAIRegistrationForm: React.FC<GenerativeAIRegistrationFormProps> 
           timestamp: new Date().toISOString(),
           webinar: 'Generative AI Career Masterclass',
           dates: '12th & 13th July 2025',
-          time: '6 PM - 8 PM IST'
+          time: '4 PM - 5 PM IST'
         })
       });
 
