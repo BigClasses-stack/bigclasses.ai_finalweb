@@ -8,8 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
-from django.core.mail import send_mail
-from django.conf import settings
+from django.conf import settings # Make sure settings is imported if you move WEBHOOK_URL
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,10 +16,13 @@ from rest_framework import status
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Course, BatchSchedule
 from .serializers import CourseSerializer, CourseDetailSerializer, BatchScheduleSerializer
+from datetime import datetime # Import datetime if you decide to send timestamps from Django
 
 logger = logging.getLogger(__name__)
 
-GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx7yXdJG66MaT-KmSnY8txhYnmK4_QQktY-6FZ_UbtvFbTS8jj49I9XNf1pLm4BYehV/exec"
+# It's recommended to move this to settings.py
+# GOOGLE_SHEET_WEBHOOK_URL = settings.GOOGLE_SHEET_WEBHOOK_URL
+GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbweDIIFBznOb0nn2qznj3r0-3q0LOdkvT4V0mFfVjbOn6j0jBLkliNhJwYUTHUw-asM/exec"
 
 class CourseListView(ListAPIView):
     queryset = Course.objects.all()
@@ -65,10 +67,10 @@ class CourseBatchSchedulesView(APIView):
     def get(self, request, slug):
         try:
             course = get_object_or_404(Course, slug=slug)
-            
+
             # Get active batch schedules ordered by batch number
             batch_schedules = course.batch_schedules.filter(is_active=True).order_by('batch_number')
-            
+
             if not batch_schedules.exists():
                 return Response({
                     "course_title": course.title,
@@ -77,16 +79,16 @@ class CourseBatchSchedulesView(APIView):
                     "total_batches": 0,
                     "message": "No active batch schedules available for this course"
                 })
-            
+
             serializer = BatchScheduleSerializer(batch_schedules, many=True)
-            
+
             return Response({
                 "course_title": course.title,
                 "course_slug": course.slug,
                 "batch_schedules": serializer.data,
                 "total_batches": batch_schedules.count()
             })
-            
+
         except Course.DoesNotExist:
             logger.error(f"Course with slug {slug} not found for batch schedules")
             return Response(
@@ -110,14 +112,14 @@ class AllBatchSchedulesView(ListAPIView):
             batch_schedules = BatchSchedule.objects.filter(
                 is_active=True
             ).select_related('course').order_by('course__title', 'batch_number')
-            
+
             if not batch_schedules.exists():
                 return Response({
                     "batch_schedules": [],
                     "total_count": 0,
                     "message": "No active batch schedules available"
                 })
-            
+
             # Group by course for better organization
             courses_with_batches = {}
             for batch in batch_schedules:
@@ -128,16 +130,16 @@ class AllBatchSchedulesView(ListAPIView):
                         "course_slug": course_slug,
                         "batches": []
                     }
-                
+
                 batch_data = BatchScheduleSerializer(batch).data
                 courses_with_batches[course_slug]["batches"].append(batch_data)
-            
+
             return Response({
                 "courses_with_batches": list(courses_with_batches.values()),
                 "total_courses": len(courses_with_batches),
                 "total_batches": batch_schedules.count()
             })
-            
+
         except Exception as e:
             logger.error(f"Error retrieving all batch schedules: {str(e)}")
             return Response(
@@ -149,6 +151,17 @@ class AllBatchSchedulesView(ListAPIView):
 class EnrollDownloadView(View):
     def post(self, request, slug):
         try:
+            # Get the course details first. If not found, return 404 immediately.
+            try:
+                course = get_object_or_404(Course, slug=slug)
+                course_title = course.title
+            except Http404:
+                logger.error(f"Enrollment attempt for non-existent course slug: {slug}")
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Course not found.'
+                }, status=404)
+
             data = json.loads(request.body)
             name = data.get('name', '').strip()
             email = data.get('email', '').strip()
@@ -161,12 +174,6 @@ class EnrollDownloadView(View):
                     'error': 'Name, email, and phone are required fields'
                 }, status=400)
 
-            try:
-                course = get_object_or_404(Course, slug=slug)
-                course_title = course.title if hasattr(course, 'title') else f"Course {slug}"
-            except:
-                course_title = f"Course {slug}"
-
             sheet_data = {
                 'name': name,
                 'email': email,
@@ -174,7 +181,9 @@ class EnrollDownloadView(View):
                 'extra_info': extra_info,
                 'course_slug': slug,
                 'course_title': course_title,
-                'timestamp': '',
+                'timestamp': datetime.now().isoformat(), # Send current timestamp from Django
+                'send_user_email': True,
+                'send_company_email': True,
             }
 
             try:
@@ -183,20 +192,32 @@ class EnrollDownloadView(View):
                     json=sheet_data,
                     timeout=10
                 )
+                
+                # Log the full response for debugging purposes
+                logger.info(f"Google Sheets webhook response status: {response.status_code}")
+                logger.info(f"Google Sheets webhook response body: {response.text}")
+
                 if response.status_code != 200:
-                    logger.warning(f"Google Sheets API error: {response.text}")
+                    # Attempt to get a more specific error from the response if available
+                    error_message = f"Google Sheets API error: {response.text}"
+                    try:
+                        response_json = response.json()
+                        if 'error' in response_json:
+                            error_message = f"Google Sheets API error: {response_json['error']}"
+                    except json.JSONDecodeError:
+                        pass # Not a JSON response, use full text
+
+                    logger.warning(error_message)
+                    return JsonResponse({
+                        'success': False,
+                        'error': 'Failed to process enrollment. Please try again.'
+                    }, status=500)
             except requests.exceptions.RequestException as e:
-                logger.warning(f"Failed to send data to Google Sheets: {e}")
-
-            try:
-                self.send_user_email(name, email, course_title)
-            except Exception as e:
-                logger.warning(f"Failed to send user email: {e}")
-
-            try:
-                self.send_company_email(name, email, phone, course_title, extra_info)
-            except Exception as e:
-                logger.warning(f"Failed to send company email: {e}")
+                logger.error(f"Failed to send data to Google Sheets: {e}", exc_info=True) # Add exc_info for full traceback
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Failed to process enrollment due to network issues. Please try again.'
+                }, status=500)
 
             return JsonResponse({
                 'success': True,
@@ -204,79 +225,17 @@ class EnrollDownloadView(View):
             })
 
         except json.JSONDecodeError:
+            logger.error("Invalid JSON data received for enrollment request.")
             return JsonResponse({
                 'success': False,
-                'error': 'Invalid JSON data'
+                'error': 'Invalid JSON data provided.'
             }, status=400)
         except Exception as e:
-            logger.error(f"Enrollment error: {e}")
+            logger.error(f"An unexpected error occurred during enrollment processing: {e}", exc_info=True)
             return JsonResponse({
                 'success': False,
-                'error': 'An error occurred during enrollment. Please try again.'
+                'error': 'An internal server error occurred during enrollment. Please try again.'
             }, status=500)
-
-    def send_user_email(self, name, email, course_title):
-        subject = f"Course Enrollment Confirmation - {course_title}"
-        message = f"""
-Dear {name},
-
-Thank you for your interest in "{course_title}"!
-
-We have received your enrollment request and curriculum download. Our team will contact you shortly with more details about the course.
-
-If you have any questions, please don't hesitate to reach out to us.
-
-Best regards,
-Bigclasses.ai
-        """
-        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
-        logger.debug(f"Attempting to send user email: subject={subject}, from_email={from_email}, to={email}")
-        if not from_email:
-            logger.warning("DEFAULT_FROM_EMAIL is not set in settings.")
-        try:
-            result = send_mail(
-                subject=subject,
-                message=message,
-                from_email=from_email,
-                recipient_list=[email],
-                fail_silently=False,  # Set to False for debugging
-            )
-            logger.info(f"User email send_mail result: {result} (to {email})")
-        except Exception as e:
-            logger.error(f"Exception sending user email to {email}: {e}", exc_info=True)
-
-    def send_company_email(self, name, email, phone, course_title, extra_info):
-        subject = f"New Course Enrollment - {course_title}"
-        message = f"""
-New course enrollment received:
-
-Course: {course_title}
-Name: {name}
-Email: {email}
-Phone: {phone}
-Additional Info: {extra_info or 'None provided'}
-
-Please follow up with the student.
-        """
-
-        company_email = getattr(settings, 'COMPANY_EMAIL', None)
-        from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
-        logger.debug(f"Attempting to send company email: subject={subject}, from_email={from_email}, to={company_email}")
-        if not company_email:
-            logger.warning("COMPANY_EMAIL is not set in settings.")
-        if not from_email:
-            logger.warning("DEFAULT_FROM_EMAIL is not set in settings.")
-        try:
-            result = send_mail(
-                subject=subject,
-                message=message,
-                from_email=from_email,
-                recipient_list=[company_email] if company_email else [],
-                fail_silently=False,  # Set to False for debugging
-            )
-            logger.info(f"Company email send_mail result: {result} (to {company_email})")
-        except Exception as e:
-            logger.error(f"Exception sending company email to {company_email}: {e}", exc_info=True)
 
 class CurriculumDownloadView(APIView):
     """
@@ -291,18 +250,22 @@ class CurriculumDownloadView(APIView):
                     {"error": "No curriculum file available for this course"},
                     status=status.HTTP_404_NOT_FOUND
                 )
+            # Check if the file actually exists on storage
             if not course.curriculum_file.storage.exists(course.curriculum_file.name):
-                logger.error(f"Curriculum file not found on disk for course {slug}")
+                logger.error(f"Curriculum file not found on disk for course {slug}: {course.curriculum_file.name}")
                 return Response(
                     {"error": "Curriculum file not found"},
                     status=status.HTTP_404_NOT_FOUND
                 )
+
             file_path = course.curriculum_file.path
             file_name = course.get_curriculum_filename()
             content_type, _ = mimetypes.guess_type(file_path)
             if not content_type:
                 content_type = 'application/octet-stream'
+
             logger.info(f"Downloading curriculum file for course {slug}: {file_name}")
+
             try:
                 response = FileResponse(
                     open(file_path, 'rb'),
@@ -314,7 +277,7 @@ class CurriculumDownloadView(APIView):
                 response['Content-Disposition'] = f'attachment; filename="{file_name}"'
                 return response
             except IOError as e:
-                logger.error(f"Error reading file {file_path}: {str(e)}")
+                logger.error(f"Error reading file {file_path}: {str(e)}", exc_info=True)
                 return Response(
                     {"error": "Error reading curriculum file"},
                     status=status.HTTP_500_INTERNAL_SERVER_ERROR
@@ -358,7 +321,6 @@ class CurriculumInfoView(APIView):
                 p = math.pow(1024, i)
                 s = round(size_bytes / p, 2)
                 return f"{s} {size_names[i]}"
-                
 
             return Response({
                 "has_file": True,
@@ -375,7 +337,7 @@ class CurriculumInfoView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
         except Exception as e:
-            logger.error(f"Error getting curriculum info for course {slug}: {str(e)}")
+            logger.error(f"Error getting curriculum info for course {slug}: {str(e)}", exc_info=True)
             return Response(
                 {"error": "Internal server error"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR

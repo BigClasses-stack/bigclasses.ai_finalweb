@@ -9,8 +9,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 
-const PRIMARY_COLOR = "blue-600";
-const PRIMARY_HOVER_COLOR = "blue-700";
+// Removed PRIMARY_COLOR as direct interpolation with Tailwind classes is problematic.
+// For dynamic colors, use inline styles or Tailwind's safelist/JIT mode.
+// const PRIMARY_COLOR = "blue-600";
+
+// Define your Django API Base URL
+// IMPORTANT: Adjust this if your Django server runs on a different port or domain in production!
+const DJANGO_API_BASE_URL = import.meta.env.VITE_DJANGO_API_BASE_URL || 'http://localhost:8000'; // Example using environment variable for flexibility
 
 interface HighlightsData {
   title?: string;
@@ -22,11 +27,29 @@ interface HighlightsData {
   image_url?: string;
 }
 
+interface BatchSchedule {
+  id: string;
+  date: string;
+  day: string;
+  title: string;
+  subtitle: string;
+  time: string;
+  duration: string;
+}
+
+interface CourseDetailsResponse {
+  highlights: HighlightsData;
+  batch_schedules: BatchSchedule[];
+}
+
 interface EnrollmentFormData {
   name: string;
   email: string;
   phone: string;
   extra_info: string;
+  course_id: string; // Renamed to course_slug to match Django's URL parameter
+  course_title: string;
+  action?: string; // Added action for clarity in backend
 }
 
 interface FormErrors {
@@ -36,19 +59,17 @@ interface FormErrors {
 }
 
 const Highlights: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id: courseSlug } = useParams<{ id: string }>(); // Renamed 'id' to 'courseSlug' for clarity
   const navigate = useNavigate();
   const [data, setData] = useState<HighlightsData | null>(null);
-  const [batchSchedules, setBatchSchedules] = useState<any[]>([]);
+  const [batchSchedules, setBatchSchedules] = useState<BatchSchedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [downloadLoading, setDownloadLoading] = useState(false);
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [enrollmentSuccess, setEnrollmentSuccess] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Indicates if submission was successful
 
   // Contact modal states
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -58,11 +79,13 @@ const Highlights: React.FC = () => {
     name: '',
     email: '',
     phone: '',
-    extra_info: ''
+    extra_info: '',
+    course_id: courseSlug || '', // Initialize with courseSlug from params
+    course_title: '' // Will be set after data loads
   });
   const [formErrors, setFormErrors] = useState<FormErrors>({});
 
-  // Contact phone number - you can make this dynamic or fetch from API
+  // Contact phone number
   const contactPhoneNumber = "+91 9666523199";
 
   // Form validation
@@ -70,16 +93,18 @@ const Highlights: React.FC = () => {
     const errors: FormErrors = {};
 
     if (!formData.name || formData.name.trim().length < 2) {
-      errors.name = "Name must be at least 2 characters";
+      errors.name = "Name must be at least 2 characters.";
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailRegex.test(formData.email)) {
-      errors.email = "Please enter a valid email address";
+      errors.email = "Please enter a valid email address.";
     }
 
-    if (!formData.phone || formData.phone.trim().length < 10) {
-      errors.phone = "Please enter a valid phone number";
+    // Basic 10-digit phone number validation for India
+    const phoneRegex = /^\d{10}$/;
+    if (!formData.phone || !phoneRegex.test(formData.phone.trim())) {
+      errors.phone = "Please enter a valid 10-digit phone number.";
     }
 
     setFormErrors(errors);
@@ -88,7 +113,7 @@ const Highlights: React.FC = () => {
 
   const handleInputChange = (field: keyof EnrollmentFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
+    // Clear error when user starts typing for that specific field
     if (formErrors[field as keyof FormErrors]) {
       setFormErrors(prev => ({ ...prev, [field]: undefined }));
     }
@@ -99,7 +124,9 @@ const Highlights: React.FC = () => {
       name: '',
       email: '',
       phone: '',
-      extra_info: ''
+      extra_info: '',
+      course_id: courseSlug || '', // Use courseSlug here
+      course_title: data?.title || ''
     });
     setFormErrors({});
   };
@@ -115,7 +142,7 @@ const Highlights: React.FC = () => {
   };
 
   const handleWhatsAppClick = () => {
-    const whatsappNumber = contactPhoneNumber.replace(/\D/g, ''); // Remove non-digits
+    const whatsappNumber = contactPhoneNumber.replace(/\D/g, '');
     const message = encodeURIComponent("Hi, I'm interested in the course and would like to speak with a course adviser.");
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
     setIsContactModalOpen(false);
@@ -137,7 +164,7 @@ const Highlights: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!id) {
+    if (!courseSlug) { // Use courseSlug
       setError("Course ID is missing.");
       setLoading(false);
       return;
@@ -145,122 +172,93 @@ const Highlights: React.FC = () => {
     setLoading(true);
     setError(null);
 
-    axiosInstance.get<any>(`/courses/${id}/`)
+    axiosInstance.get<CourseDetailsResponse>(`/courses/${courseSlug}/`) // Use courseSlug
       .then(res => {
-        if (res.data && res.data.highlights) {
-          setData(res.data.highlights as HighlightsData);
-        } else {
-          setData(null);
-        }
-        // Fetch batch schedules from backend
-        if (res.data && res.data.batch_schedules) {
-          setBatchSchedules(res.data.batch_schedules);
-        } else {
-          setBatchSchedules([]);
-        }
+        setData(res.data.highlights || null);
+        setBatchSchedules(res.data.batch_schedules || []);
+        // Set course_title in form data once highlights are loaded
+        setFormData(prev => ({ ...prev, course_title: res.data.highlights?.title || 'Unknown Course' }));
       })
       .catch(err => {
-        setError(err.response?.data?.message || "Failed to load highlights data. Please try again later.");
+        console.error("Error fetching course data:", err);
+        setError(err.response?.data?.message || "Failed to load course details. Please try again later.");
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [courseSlug]); // Dependency on courseSlug
 
-  const scrollToFooter = () => {
-    document.querySelector('footer')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleDownloadClick = () => {
+  const handleDownloadCurriculumClick = () => {
     setIsModalOpen(true);
-    setShowSuccessMessage(false);
-    setEnrollmentSuccess(false);
-    resetForm();
+    setShowSuccessMessage(false); // Reset success message state
+    resetForm(); // Reset form fields
   };
 
   const handleEnrollmentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!validateForm() || !id) return;
+    if (!validateForm() || !courseSlug) return; // Use courseSlug
 
     setIsSubmitting(true);
-    try {
-      const response = await axiosInstance.post(`/courses/${id}/enroll-download/`, formData);
 
-      if (response.data.success) {
-        setEnrollmentSuccess(true);
-        setShowSuccessMessage(true);
+    const submitData = {
+      ...formData,
+      course_slug: courseSlug, // Ensure the key matches what Django expects for the slug parameter
+      course_title: data?.title || 'Unknown Course',
+      action: 'curriculum_download', // Clarified action
+    };
+
+    try {
+      const response = await fetch(`${DJANGO_API_BASE_URL}/api/enroll/${courseSlug}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submitData)
+      });
+
+      let result: any;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        // If response is not JSON, show a generic error
+        throw new Error("Server returned an invalid response. Please try again later.");
+      }
+
+      if (response.ok && result.success) {
+        setShowSuccessMessage(true); // Indicate success for the modal content change
 
         toast({
-          title: "Enrollment Successful!",
-          description: "Thank you for enrolling. Your download will begin shortly.",
+          title: "Request Sent Successfully!",
+          description: "Thank you! Check your email for the curriculum and further details.",
         });
 
-        // Auto-download after 2 seconds
+        // Show success message for 3 seconds then close modal
         setTimeout(() => {
-          downloadCurriculum();
-        }, 2000);
+          setIsModalOpen(false);
+          setShowSuccessMessage(false);
+          resetForm();
+        }, 3000);
+
+      } else {
+        // Handle non-2xx responses and specific error messages from Django
+        const errorMessage = result.error || result.message || 'Submission failed. Please try again.';
+        throw new Error(errorMessage);
       }
     } catch (error: any) {
+      console.error('Submission error:', error);
       toast({
-        title: "Enrollment Failed",
-        description: error.response?.data?.error || "Please try again later.",
+        title: "Submission Failed",
+        description: error.message || "There was an issue processing your request. Please try again later.",
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const downloadCurriculum = async () => {
-    if (!id) return;
-
-    setDownloadLoading(true);
-    try {
-      const response = await axiosInstance.get(`/courses/${id}/download-curriculum/`, {
-        responseType: 'blob',
-      });
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-
-      const contentDisposition = response.headers['content-disposition'];
-      let filename = 'curriculum.pdf';
-      if (contentDisposition) {
-        const filenameMatch = contentDisposition.match(/filename="?([^"]*)"?/);
-        if (filenameMatch) {
-          filename = filenameMatch[1];
-        }
-      }
-
-      link.setAttribute('download', filename);
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.URL.revokeObjectURL(url);
-
-      // Close modal after successful download
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setShowSuccessMessage(false);
-        setEnrollmentSuccess(false);
-      }, 1000);
-
-    } catch (error) {
-      toast({
-        title: "Download Failed",
-        description: "Failed to download curriculum. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setDownloadLoading(false);
-    }
-  };
+  }; // Added missing closing curly brace for handleEnrollmentSubmit
 
   const handleModalClose = () => {
-    if (!isSubmitting) {
+    if (!isSubmitting) { // Prevents closing while submission is in progress
       setIsModalOpen(false);
       setShowSuccessMessage(false);
-      setEnrollmentSuccess(false);
       resetForm();
     }
   };
@@ -269,7 +267,7 @@ const Highlights: React.FC = () => {
     return (
       <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 min-h-[400px] flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className={`h-12 w-12 animate-spin text-${PRIMARY_COLOR} mx-auto mb-4`} />
+          <Loader2 className={`h-12 w-12 animate-spin text-blue-600 mx-auto mb-4`} />
           <p className="text-lg text-gray-600">Loading Course Highlights...</p>
         </div>
       </section>
@@ -288,6 +286,7 @@ const Highlights: React.FC = () => {
     );
   }
 
+  // Ensure data exists and has at least some content to display
   if (!data || (data.key_topics?.length === 0 && data.features?.length === 0 && !data.title)) {
     return (
       <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 min-h-[400px] flex items-center justify-center">
@@ -309,47 +308,51 @@ const Highlights: React.FC = () => {
     image_url = "/placeholder-image.jpg"
   } = data;
 
+  // Move the style string outside the return for clarity
+  const highlightStyles = `
+    @keyframes vibrate {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      10% { transform: translateX(-1px) translateY(-1px); }
+      20% { transform: translateX(1px) translateY(1px); }
+      30% { transform: translateX(-1px) translateY(1px); }
+      40% { transform: translateX(1px) translateY(-1px); }
+      50% { transform: translateX(-1px) translateY(-1px); }
+      60% { transform: translateX(1px) translateY(1px); }
+      70% { transform: translateX(-1px) translateY(1px); }
+      80% { transform: translateX(1px) translateY(-1px); }
+      90% { transform: translateX(-1px) translateY(-1px); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 16px rgba(59, 130, 246, 0.18), 0 0 32px rgba(147, 51, 234, 0.08); }
+      50% { box-shadow: 0 0 24px rgba(59, 130, 246, 0.22), 0 0 48px rgba(147, 51, 234, 0.12); }
+    }
+    .batch-card {
+      animation: float 3s ease-in-out infinite;
+      transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, z-index 0.25s;
+      cursor: pointer;
+    }
+    .batch-card:nth-child(1) { animation-delay: 0s; }
+    .batch-card:nth-child(2) { animation-delay: 0.5s; }
+    .batch-card:nth-child(3) { animation-delay: 1s; }
+    .batch-card:nth-child(4) { animation-delay: 1.5s; }
+    .batch-card:focus,
+    .batch-card:hover {
+      transform: scale(1.08) translateY(-10px);
+      z-index: 30;
+      box-shadow: 0 12px 36px 0 rgba(59,130,246,0.18), 0 0 0 4px rgba(59,130,246,0.10);
+      animation: vibrate 0.7s ease-in-out infinite, pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite;
+      outline: none;
+    }
+  `;
+
   return (
     <>
-      <style>{`
-        @keyframes vibrate {
-          0%, 100% { transform: translateX(0) translateY(0); }
-          10% { transform: translateX(-1px) translateY(-1px); }
-          20% { transform: translateX(1px) translateY(1px); }
-          30% { transform: translateX(-1px) translateY(1px); }
-          40% { transform: translateX(1px) translateY(-1px); }
-          50% { transform: translateX(-1px) translateY(-1px); }
-          60% { transform: translateX(1px) translateY(1px); }
-          70% { transform: translateX(-1px) translateY(1px); }
-          80% { transform: translateX(1px) translateY(-1px); }
-          90% { transform: translateX(-1px) translateY(-1px); }
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-4px); }
-        }
-        @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 16px rgba(59, 130, 246, 0.18), 0 0 32px rgba(147, 51, 234, 0.08); }
-          50% { box-shadow: 0 0 24px rgba(59, 130, 246, 0.22), 0 0 48px rgba(147, 51, 234, 0.12); }
-        }
-        .batch-card {
-          animation: float 3s ease-in-out infinite;
-          transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s, z-index 0.25s;
-          cursor: pointer;
-        }
-        .batch-card:nth-child(1) { animation-delay: 0s; }
-        .batch-card:nth-child(2) { animation-delay: 0.5s; }
-        .batch-card:nth-child(3) { animation-delay: 1s; }
-        .batch-card:nth-child(4) { animation-delay: 1.5s; }
-        .batch-card:focus,
-        .batch-card:hover {
-          transform: scale(1.08) translateY(-10px);
-          z-index: 30;
-          box-shadow: 0 12px 36px 0 rgba(59,130,246,0.18), 0 0 0 4px rgba(59,130,246,0.10);
-          animation: vibrate 0.7s ease-in-out infinite, pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite;
-          outline: none;
-        }
-      `}</style>
+      {/* Fix: Use a string literal for style content */}
+      <style dangerouslySetInnerHTML={{ __html: highlightStyles }} />
 
       <section id="highlights" className="bg-white py-15 md:py-5 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -381,7 +384,7 @@ const Highlights: React.FC = () => {
                   {features.map((feature: string, idx: number) => (
                     <li key={`feature-${idx}`} className="flex items-center space-x-3">
                       <CheckCircle2
-                        className={`h-5 w-5 text-${PRIMARY_COLOR} flex-shrink-0`}
+                        className={`h-5 w-5 text-blue-600 flex-shrink-0`} // Changed to hardcoded blue-600
                       />
                       <span className="text-gray-700 text-base">{feature}</span>
                     </li>
@@ -410,9 +413,9 @@ const Highlights: React.FC = () => {
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Button
                 size="lg"
-                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
-                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
-                transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50
+                transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
                 flex items-center justify-center space-x-1"
                 onClick={() => navigate('/signup')}
               >
@@ -422,8 +425,8 @@ const Highlights: React.FC = () => {
 
               <Button
                 size="lg"
-                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
-                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50
                 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
                 flex items-center justify-center space-x-0"
                 onClick={handleContactClick}
@@ -434,16 +437,16 @@ const Highlights: React.FC = () => {
 
               <Button
                 size="lg"
-                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600 
-                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50 
+                className="bg-white text-gray-800 hover:bg-blue-600 hover:text-white border-2 border-blue-600
+                rounded-lg px-6 py-4 text-base font-semibold shadow-md hover:shadow-blue-300/50
                 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105
                 flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed
                 disabled:hover:transform-none disabled:hover:shadow-none"
-                onClick={handleDownloadClick}
-                disabled={downloadLoading}
+                onClick={handleDownloadCurriculumClick} // Changed function name for clarity
+                disabled={isSubmitting} // Use isSubmitting for the button disabled state during modal submission
               >
                 <Download className="w-5 h-5" />
-                <span>{downloadLoading ? 'Downloading...' : 'Download Curriculum'}</span>
+                <span>{isSubmitting ? 'Processing...' : 'Download Curriculum'}</span>
               </Button>
             </div>
           </div>
@@ -487,7 +490,9 @@ const Highlights: React.FC = () => {
                   'bg-gradient-to-br from-yellow-100/80 to-red-100/80 border-yellow-200/60'
                 }`}
                 tabIndex={0}
-                aria-pressed={false}
+                // Consider adding an onClick here if the whole card is interactive, otherwise remove tabIndex/aria-pressed
+                // onClick={() => navigate('/signup')}
+                // aria-pressed={false} // Removed as it's not a toggle button
               >
                 {/* Card Header */}
                 <div className={`backdrop-blur-sm border-b p-6 ${
@@ -692,103 +697,93 @@ const Highlights: React.FC = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Enrollment Modal */}
+      {/* Enrollment/Download Modal */}
       <Dialog open={isModalOpen} onOpenChange={handleModalClose}>
         <DialogContent className="sm:max-w-md mx-auto">
           <DialogHeader>
             <DialogTitle className="text-xl font-semibold text-center">
-              {showSuccessMessage ? "Enrollment Successful!" : "Download Curriculum"}
+              {showSuccessMessage ? "Thank You!" : "Download Curriculum"}
             </DialogTitle>
           </DialogHeader>
-          {!showSuccessMessage ? (
-            <form onSubmit={handleEnrollmentSubmit} className="space-y-5 py-4">
+          {showSuccessMessage ? (
+            <div className="text-center py-6">
+              <CheckCircle2 className="h-16 w-16 text-green-500 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Your request has been submitted!</h3>
+              <p className="text-gray-600 mb-4">
+                We've sent the curriculum and further details to your email address.
+                Please check your inbox (and spam folder).
+              </p>
+              <Button
+                size="lg"
+                className={`bg-blue-600 text-white hover:bg-blue-700 rounded-md px-6 py-3`} // Changed to hardcoded blue-600
+                onClick={handleModalClose}
+              >
+                Got it!
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleEnrollmentSubmit} className="space-y-6 py-4">
               <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name">Full Name</Label>
                 <Input
                   id="name"
                   type="text"
+                  placeholder="John Doe"
                   value={formData.name}
-                  onChange={e => handleInputChange('name', e.target.value)}
-                  disabled={isSubmitting}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
                   className={formErrors.name ? "border-red-500" : ""}
-                  required
                 />
-                {formErrors.name && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
-                )}
+                {formErrors.name && <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>}
               </div>
               <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <Input
                   id="email"
                   type="email"
+                  placeholder="john.doe@example.com"
                   value={formData.email}
-                  onChange={e => handleInputChange('email', e.target.value)}
-                  disabled={isSubmitting}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
                   className={formErrors.email ? "border-red-500" : ""}
-                  required
                 />
-                {formErrors.email && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
-                )}
+                {formErrors.email && <p className="text-red-500 text-sm mt-1">{formErrors.email}</p>}
               </div>
               <div>
-                <Label htmlFor="phone">Phone</Label>
+                <Label htmlFor="phone">Phone Number</Label>
                 <Input
                   id="phone"
                   type="tel"
+                  placeholder="9876543210"
                   value={formData.phone}
-                  onChange={e => handleInputChange('phone', e.target.value)}
-                  disabled={isSubmitting}
+                  onChange={(e) => handleInputChange('phone', e.target.value)}
                   className={formErrors.phone ? "border-red-500" : ""}
-                  required
                 />
-                {formErrors.phone && (
-                  <p className="text-red-500 text-xs mt-1">{formErrors.phone}</p>
-                )}
+                {formErrors.phone && <p className="text-red-500 text-sm mt-1">{formErrors.phone}</p>}
               </div>
               <div>
-                <Label htmlFor="extra_info">Additional Info (Optional)</Label>
+                <Label htmlFor="extra_info">Additional Information (Optional)</Label>
                 <Textarea
                   id="extra_info"
+                  placeholder="I'm interested in..."
                   value={formData.extra_info}
-                  onChange={e => handleInputChange('extra_info', e.target.value)}
-                  disabled={isSubmitting}
-                  rows={2}
+                  onChange={(e) => handleInputChange('extra_info', e.target.value)}
                 />
               </div>
               <Button
                 type="submit"
                 size="lg"
-                className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold py-3"
+                className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-md py-3"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <Loader2 className="h-5 w-5 animate-spin mr-2" />
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     Submitting...
-                  </span>
+                  </>
                 ) : (
-                  "Submit & Download"
+                  'Submit and Download'
                 )}
               </Button>
             </form>
-          ) : (
-            <div className="py-8 text-center">
-              <CheckCircle2 className="h-12 w-12 text-green-500 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-green-700 mb-2">
-                Thank you for enrolling!
-              </h3>
-              <p className="text-gray-700 mb-4">
-                Your download will begin shortly. If it doesn't, please check your email for the curriculum link.
-              </p>
-              <Button
-                className="mt-2"
-                onClick={handleModalClose}
-              >
-                Close
-              </Button>
-            </div>
           )}
         </DialogContent>
       </Dialog>
