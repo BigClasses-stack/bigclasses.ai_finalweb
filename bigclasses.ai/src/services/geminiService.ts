@@ -132,6 +132,13 @@ interface QueryAnalysis {
   compoundQuery: CompoundQuery;
   detectedCourses: string[];
   faissResults: FAISSRecord[];
+  specificInfoRequest?: SpecificInfoRequest; // New field to detect specific info requests
+}
+
+// --- Specific Information Request Interface ---
+interface SpecificInfoRequest {
+  type: 'duration' | 'topics' | 'price' | null;
+  courseName: string | null;
 }
 
 export class GeminiChatService {
@@ -300,13 +307,19 @@ export class GeminiChatService {
     const faissResults = await this.searchFAISSDatabase(message, compoundQuery);
     const detectedCourses = this.extractCourseNamesFromResults(faissResults);
     
+    // Detect if this is a specific information request
+    const specificInfoRequest = this.detectSpecificInfoRequest(message, detectedCourses);
+    
+    console.log(`[${this.sessionId}] Query analysis: greeting=${isGreeting}, allCourses=${isAllCourses}, followUp=${isFollowUp}, specificInfo=${specificInfoRequest ? specificInfoRequest.type : 'none'}`);
+    
     return {
       isGreeting,
       isAllCourses,
       isFollowUp,
       compoundQuery,
       detectedCourses,
-      faissResults
+      faissResults,
+      specificInfoRequest
     };
   }
 
@@ -325,8 +338,14 @@ export class GeminiChatService {
         // Add specific searches based on what user wants
         if (compoundQuery.wantsTopics) {
           try {
-            const topicResults = await faissVectorDB.search(`${compoundQuery.interest} topics modules curriculum syllabus`, 15);
-            searchResults = [...searchResults, ...topicResults];
+            // Enhanced topics search - increased limit and more topic-related terms
+            const topicResults = await faissVectorDB.search(`${compoundQuery.interest} topics modules curriculum syllabus lessons content`, 25);
+            
+            // Add another search with different keywords to increase coverage
+            const additionalTopicResults = await faissVectorDB.search(`${compoundQuery.interest} course content lessons chapters what you will learn`, 20);
+            
+            // Combine all results
+            searchResults = [...searchResults, ...topicResults, ...additionalTopicResults];
           } catch (error) {
             console.warn(`[${this.sessionId}] Topic search failed:`, error);
           }
@@ -738,12 +757,164 @@ export class GeminiChatService {
     return followUpPatterns.some(pattern => message.includes(pattern));
   }
 
+  // --- Method to detect specific info requests ---
+  private detectSpecificInfoRequest(query: string, detectedCourses: string[]): SpecificInfoRequest | null {
+    const normalizedQuery = query.toLowerCase();
+    
+    // Enhanced pattern detection for specific queries
+    const durationPatterns = [
+      // Direct questions
+      /what is the duration (for|of) (the )?(.+?)( course)?[\?]?/i,
+      /how long (is|does) (the )?(.+?)( course|take)?[\?]?/i,
+      // Time-related questions
+      /(duration|time|length|how long|hours|weeks|months) .{0,20}(for|of|in) .{0,10}([a-z\s]+?)( course)?[\?\.]?$/i,
+      // Simple forms with course name
+      /(.+?) (course )?(duration|how long|time frame|length)[\?]?/i,
+    ];
+    
+    const topicsPatterns = [
+      // Direct questions
+      /what (are the|is the|are|is) (topics|curriculum|syllabus|subject|modules) (for|of|in) (the )?(.+?)( course)?[\?]?/i,
+      /what (will|do) (i|you) (learn|teach|cover) in (the )?(.+?)( course)?[\?]?/i,
+      // Topics-related questions
+      /(topics|modules|curriculum|syllabus) .{0,20}(for|of|in) .{0,10}([a-z\s]+?)( course)?[\?\.]?$/i,
+      // Simple forms with course name
+      /(.+?) (course )?(topics|curriculum|syllabus|content)[\?]?/i,
+      /what.{0,20}(learn|topics|teach).{0,20}(.+?)[\?]?/i
+    ];
+    
+    const pricePatterns = [
+      // Direct questions
+      /what is the (price|cost|fee) (for|of) (the )?(.+?)( course)?[\?]?/i,
+      /how much (does|is) (the )?(.+?)( course)? cost[\?]?/i,
+      // Price-related questions
+      /(price|cost|fee|how much|payment) .{0,20}(for|of) .{0,10}([a-z\s]+?)( course)?[\?\.]?$/i,
+      // Simple forms with course name
+      /(.+?) (course )?(price|cost|fee|pricing)[\?]?/i,
+    ];
+    
+    // Initialize result variables
+    let infoType: 'duration' | 'topics' | 'price' | null = null;
+    let courseName: string | null = null;
+    
+    // Try to match each pattern and extract course name
+    for (const pattern of durationPatterns) {
+      const match = normalizedQuery.match(pattern);
+      if (match) {
+        infoType = 'duration';
+        // Extract course name from the appropriate capture group based on pattern
+        for (const group of match.slice(1)) {
+          if (group && group.length > 3 && !/^(course|duration|the|for|of|in|is|does|take|how long|time)$/i.test(group)) {
+            courseName = group.trim();
+            break;
+          }
+        }
+        break;
+      }
+    }
+    
+    if (!infoType) {
+      for (const pattern of topicsPatterns) {
+        const match = normalizedQuery.match(pattern);
+        if (match) {
+          infoType = 'topics';
+          // Extract course name from the appropriate capture group
+          for (const group of match.slice(1)) {
+            if (group && group.length > 3 && !/^(course|topics|curriculum|the|for|of|in|is|are|syllabus|subject|modules|will|do|i|you|learn|teach|cover|what)$/i.test(group)) {
+              courseName = group.trim();
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+    
+    if (!infoType) {
+      for (const pattern of pricePatterns) {
+        const match = normalizedQuery.match(pattern);
+        if (match) {
+          infoType = 'price';
+          // Extract course name from the appropriate capture group
+          for (const group of match.slice(1)) {
+            if (group && group.length > 3 && !/^(course|price|cost|fee|the|for|of|in|is|does|how much|payment)$/i.test(group)) {
+              courseName = group.trim();
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+    
+    // Fallback to simple keyword detection if regex didn't match
+    if (!infoType) {
+      // Check for duration-related keywords
+      if (normalizedQuery.includes('duration') || 
+          normalizedQuery.includes('how long') || 
+          normalizedQuery.includes('time') || 
+          normalizedQuery.includes('hours') || 
+          normalizedQuery.includes('weeks')) {
+        infoType = 'duration';
+      }
+      // Check for topics-related keywords
+      else if (normalizedQuery.includes('topics') || 
+               normalizedQuery.includes('subject') || 
+               normalizedQuery.includes('curriculum') || 
+               normalizedQuery.includes('syllabus') || 
+               normalizedQuery.includes('what will i learn') ||
+               normalizedQuery.includes('what do you teach')) {
+        infoType = 'topics';
+      }
+      // Check for price-related keywords
+      else if (normalizedQuery.includes('price') || 
+               normalizedQuery.includes('cost') || 
+               normalizedQuery.includes('fee') || 
+               normalizedQuery.includes('how much') || 
+               normalizedQuery.includes('payment')) {
+        infoType = 'price';
+      }
+    }
+    
+    // If we have an info type but no course name, use the detected courses
+    if (infoType && !courseName && detectedCourses.length > 0) {
+      courseName = detectedCourses[0];
+    }
+    
+    // If we have an info type and course name, try to verify/correct the course name
+    if (infoType && courseName) {
+      // Try fuzzy matching to find the actual course
+      const fuzzyMatch = findBestCourseMatch(courseName, this.availableCourses);
+      if (fuzzyMatch) {
+        courseName = fuzzyMatch.course;  // Use the properly formatted course name
+      }
+      
+      console.log(`[${this.sessionId}] Detected specific info request: ${infoType} for "${courseName}"`);
+      
+      return {
+        type: infoType,
+        courseName: courseName
+      };
+    }
+    
+    // If we have an info type but no course name, and we have a last discussed course
+    if (infoType && !courseName && this.lastDiscussedCourse) {
+      console.log(`[${this.sessionId}] Using last discussed course for specific info request: ${infoType} for "${this.lastDiscussedCourse}"`);
+      return {
+        type: infoType,
+        courseName: this.lastDiscussedCourse
+      };
+    }
+    
+    return null;
+  }
+
   // --- Enhanced Message Building ---
   private async buildEnhancedMessage(message: string, queryAnalysis: QueryAnalysis): Promise<string> {
-    const { isGreeting, isAllCourses, isFollowUp, compoundQuery, detectedCourses, faissResults } = queryAnalysis;
+    const { isGreeting, isAllCourses, isFollowUp, compoundQuery, detectedCourses, faissResults, specificInfoRequest } = queryAnalysis;
     
     // Build context information
-    let contextInfo = this.buildEnhancedCourseContext(faissResults, compoundQuery, isFollowUp);
+    let contextInfo = this.buildEnhancedCourseContext(faissResults, compoundQuery, isFollowUp, specificInfoRequest);
     
     // For follow-up questions, search for the previously discussed course
     if (isFollowUp && this.lastDiscussedCourse && faissResults.length < 3) {
@@ -788,6 +959,7 @@ export class GeminiChatService {
       compoundQuery.isCompound ? `[DETAILED COURSE QUERY]: User wants ${compoundQuery.wantsTopics ? 'comprehensive topics/modules breakdown ' : ''}${compoundQuery.wantsDuration ? 'detailed duration and time commitment info ' : ''}${compoundQuery.wantsPricing ? 'pricing guidance ' : ''}for ${compoundQuery.interest}. Provide complete course details with enthusiasm.` : '',
       detectedCourses.length > 0 ? `[DETECTED INTEREST]: User mentioned: ${detectedCourses.join(', ')}. Focus on these courses with detailed information.` : '',
       faissResults.length === 0 ? `[COURSE NOT AVAILABLE]: Requested course not in catalog. Use fuzzy matching to find similar courses or apologize professionally.` : '',
+      specificInfoRequest ? `[SPECIFIC INFO REQUEST]: User is asking specifically about the ${specificInfoRequest.type} for ${specificInfoRequest.courseName}. Provide a concise answer focusing only on this information.` : '',
       `[CONVERSATION GOAL]: Maintain enthusiastic, professional tone. Help user understand course value and make informed decisions. Keep conversation flowing naturally.`
     ].filter(Boolean).join('\n');
     
@@ -809,10 +981,180 @@ ${this.getResponseInstructions(queryAnalysis)}`;
     return enhancedMessage;
   }
 
+  // --- Extract Specific Course Information ---
+  private extractSpecificCourseInfo(faissResults: FAISSRecord[], specificInfoRequest: SpecificInfoRequest): string {
+    if (!specificInfoRequest || !specificInfoRequest.type || !specificInfoRequest.courseName) {
+      return "";
+    }
+    
+    const courseName = specificInfoRequest.courseName;
+    const infoType = specificInfoRequest.type;
+    
+    console.log(`[${this.sessionId}] Extracting ${infoType} information for ${courseName}`);
+    
+    // Filter results for the requested course
+    const courseResults = faissResults.filter(result => 
+      result.metadata.title.toLowerCase() === courseName.toLowerCase());
+    
+    if (courseResults.length === 0) {
+      // Fallback for when no results are found for the course
+      return this.getGenericCourseInfo(courseName, infoType);
+    }
+    
+    // Extract specific information based on request type
+    switch (infoType) {
+      case 'duration':
+        // Find duration-specific records first
+        const durationRecords = courseResults.filter(result => result.type === 'duration');
+        if (durationRecords.length > 0) {
+          return this.filterSalaryHikeData(durationRecords[0].text);
+        }
+        // If no duration records, look for duration in metadata
+        for (const result of courseResults) {
+          if (result.metadata.duration) {
+            return result.metadata.duration;
+          }
+        }
+        return this.getGenericCourseInfo(courseName, 'duration');
+      
+      case 'topics':
+        // Enhanced topic extraction - collects all available module topics
+        
+        // First, find all module-specific records
+        const moduleRecords = courseResults.filter(result => result.type === 'module');
+        
+        // If we have module records, format them as a comprehensive list
+        if (moduleRecords.length > 0) {
+          console.log(`[${this.sessionId}] Found ${moduleRecords.length} modules for ${courseName}`);
+          
+          // Process all modules into a comprehensive, numbered list
+          const formattedModules = moduleRecords.map((module, index) => {
+            // Clean the module text
+            const cleanText = this.filterSalaryHikeData(module.text);
+            
+            // Extract module title and description if it has a format like "Title: Description"
+            const parts = cleanText.split(':');
+            const moduleTitle = parts[0].trim();
+            const moduleDescription = parts.length > 1 ? parts.slice(1).join(':').trim() : '';
+            
+            // Return a nicely formatted module entry
+            return `${index + 1}. **${moduleTitle}**${moduleDescription ? ': ' + moduleDescription : ''}`;
+          }).join('\n');
+          
+          // Add an introduction to the module list
+          return `The ${courseName} course includes the following ${moduleRecords.length} topics/modules:\n\n${formattedModules}`;
+        }
+        
+        // If no specific module records but we have overview records that might contain topic info
+        const overviewRecords = courseResults.filter(result => result.type === 'overview');
+        if (overviewRecords.length > 0) {
+          // Try to extract topic information from the overview
+          const overviewText = this.filterSalaryHikeData(overviewRecords[0].text);
+          
+          // Check if the overview mentions topics or curriculum
+          if (overviewText.toLowerCase().includes('topics') || 
+              overviewText.toLowerCase().includes('curriculum') || 
+              overviewText.toLowerCase().includes('module') || 
+              overviewText.toLowerCase().includes('syllabus')) {
+            return `Topics for ${courseName}:\n\n${overviewText}`;
+          }
+          
+          return `The ${courseName} course curriculum includes: ${overviewText}`;
+        }
+        
+        // If no specific information found, use generic info
+        return this.getGenericCourseInfo(courseName, 'topics');
+      
+      case 'price':
+        // Find pricing-specific records
+        const pricingRecords = courseResults.filter(result => result.type === 'pricing');
+        if (pricingRecords.length > 0) {
+          return this.filterSalaryHikeData(pricingRecords[0].text);
+        }
+        // If no pricing records, look for package in metadata
+        for (const result of courseResults) {
+          if (result.metadata.package) {
+            return result.metadata.package;
+          }
+        }
+        return "For detailed pricing information and flexible payment options, our advisors at +91 9666523199 will help you find the perfect plan that fits your budget.";
+    }
+    
+    return "";
+  }
+
+  // --- Generic Course Information ---
+  private getGenericCourseInfo(courseName: string, infoType: 'duration' | 'topics' | 'price'): string {
+    switch (infoType) {
+      case 'duration':
+        return "The course is designed with a flexible schedule to accommodate your learning pace. Typically, it can be completed in 8-12 weeks with dedicated study time of 5-10 hours per week. For your specific situation, our advisors can create a personalized learning timeline.";
+      
+      case 'topics':
+        // Enhanced topic information with more structured and detailed fallback content
+        const genericTopics = this.getGenericTopicsForCourse(courseName);
+        return `The ${courseName} curriculum covers fundamental to advanced concepts with hands-on projects, real-world applications, and industry-relevant skills. The curriculum is regularly updated to include the latest industry practices and technologies.\n\n${genericTopics}`;
+      
+      case 'price':
+        return "For detailed pricing information and flexible payment options, our advisors at +91 9666523199 will help you find the perfect plan that fits your budget.";
+    }
+  }
+  
+  // --- Generate Generic Topics Based on Course Name ---
+  private getGenericTopicsForCourse(courseName: string): string {
+    const lowerCourseName = courseName.toLowerCase();
+    
+    // Predefined generic topics for common courses
+    if (lowerCourseName.includes('python')) {
+      return "Common topics include:\n\n1. **Python Fundamentals**: Variables, data types, operators, and basic syntax\n2. **Control Flow**: Conditional statements, loops, and exception handling\n3. **Data Structures**: Lists, tuples, dictionaries, and sets\n4. **Functions**: Defining functions, parameters, and return values\n5. **Object-Oriented Programming**: Classes, objects, inheritance, and polymorphism\n6. **File Handling**: Reading and writing files, working with directories\n7. **Modules and Packages**: Creating and importing modules, using standard libraries\n8. **Advanced Python Concepts**: Decorators, generators, and context managers\n9. **Working with External Libraries**: NumPy, Pandas, Matplotlib\n10. **Python for Data Analysis**: Data manipulation, visualization, and basic analysis\n11. **Web Development with Python**: Introduction to Flask or Django\n12. **Practical Projects**: Hands-on applications of Python in real-world scenarios";
+    }
+    
+    if (lowerCourseName.includes('machine learning')) {
+      return "Common topics include:\n\n1. **Fundamentals of Machine Learning**: Core concepts, terminology, and workflow\n2. **Data Preprocessing**: Cleaning, transformation, normalization, and feature engineering\n3. **Regression Algorithms**: Linear regression, polynomial regression, regularization techniques\n4. **Classification Algorithms**: Logistic regression, decision trees, random forests, SVM\n5. **Clustering**: K-means, hierarchical clustering, DBSCAN\n6. **Dimensionality Reduction**: PCA, t-SNE, feature selection methods\n7. **Ensemble Methods**: Bagging, boosting, stacking, and voting classifiers\n8. **Model Evaluation**: Cross-validation, metrics, and performance evaluation\n9. **Hyperparameter Tuning**: Grid search, random search, and Bayesian optimization\n10. **Feature Engineering**: Creating and selecting features for optimal model performance\n11. **Working with Scikit-learn**: Implementation of ML algorithms using Python\n12. **Real-world Applications**: Practical projects and case studies";
+    }
+    
+    if (lowerCourseName.includes('deep learning')) {
+      return "Common topics include:\n\n1. **Neural Network Fundamentals**: Neurons, activation functions, and backpropagation\n2. **Deep Neural Networks**: Multi-layer perceptrons and deep architectures\n3. **Optimization Techniques**: Gradient descent variants, learning rate strategies\n4. **Convolutional Neural Networks (CNNs)**: Architecture, filters, pooling layers\n5. **Image Classification and Object Detection**: Working with visual data\n6. **Recurrent Neural Networks (RNNs)**: Sequence modeling, LSTM, and GRU\n7. **Natural Language Processing with Deep Learning**: Word embeddings, text classification\n8. **Transformers**: Attention mechanisms, BERT, GPT models\n9. **Generative Models**: Autoencoders, VAEs, and GANs\n10. **Transfer Learning**: Using pre-trained models and fine-tuning\n11. **Deep Learning Frameworks**: TensorFlow and PyTorch implementation\n12. **Deployment of Deep Learning Models**: Serving models in production environments";
+    }
+    
+    if (lowerCourseName.includes('data analytics')) {
+      return "Common topics include:\n\n1. **Introduction to Data Analytics**: Core concepts and analytics workflow\n2. **Statistical Analysis**: Descriptive and inferential statistics\n3. **Data Collection and Preparation**: Sources, cleaning, and transformation\n4. **Data Visualization**: Principles, tools, and best practices\n5. **Exploratory Data Analysis**: Techniques for understanding data patterns\n6. **SQL for Data Analysis**: Database queries and data extraction\n7. **Excel for Data Analysis**: Advanced functions, pivot tables, and dashboards\n8. **Python/R for Analytics**: Using programming languages for data manipulation\n9. **Business Intelligence Tools**: Power BI, Tableau implementation\n10. **Dashboard Creation**: Designing effective analytics dashboards\n11. **Storytelling with Data**: Communicating insights effectively\n12. **Practical Analytics Projects**: Real-world business applications";
+    }
+    
+    if (lowerCourseName.includes('natural language processing') || lowerCourseName.includes('nlp')) {
+      return "Common topics include:\n\n1. **NLP Fundamentals**: Text processing, tokenization, and normalization\n2. **Text Representation**: Bag of words, TF-IDF, word embeddings\n3. **Language Modeling**: N-grams and statistical language models\n4. **Part-of-Speech Tagging**: Grammatical tagging and chunking\n5. **Named Entity Recognition**: Identifying entities in text\n6. **Sentiment Analysis**: Determining sentiment in text data\n7. **Topic Modeling**: LDA, NMF for discovering topics in documents\n8. **Word Embeddings**: Word2Vec, GloVe, and contextual embeddings\n9. **Sequence Models for NLP**: RNNs, LSTMs for text processing\n10. **Transformers**: BERT, GPT, and modern NLP architectures\n11. **Machine Translation**: Neural machine translation approaches\n12. **Question Answering Systems**: Building systems that answer questions from text";
+    }
+    
+    if (lowerCourseName.includes('generative ai')) {
+      return "Common topics include:\n\n1. **Fundamentals of Generative AI**: Core concepts and applications\n2. **Generative Models Overview**: Types and architectures\n3. **Language Models**: GPT, LLaMA, and other foundation models\n4. **Diffusion Models**: Image generation with DALL-E, Stable Diffusion\n5. **Prompt Engineering**: Crafting effective prompts for generative AI\n6. **Fine-tuning Large Language Models**: Methods and best practices\n7. **Multimodal AI**: Systems that work with text, images, and audio\n8. **Generative AI Ethics**: Addressing bias, safety, and responsible use\n9. **Retrieval-Augmented Generation**: Enhancing outputs with external knowledge\n10. **Building AI Agents**: Creating autonomous systems with generative AI\n11. **Evaluation of Generative AI**: Metrics and assessment techniques\n12. **Practical Applications**: Implementation in various business contexts";
+    }
+    
+    if (lowerCourseName.includes('langchain')) {
+      return "Common topics include:\n\n1. **Introduction to LangChain**: Framework fundamentals and components\n2. **LLM Integration**: Connecting to various language models\n3. **Prompt Templates**: Creating and managing prompts\n4. **Chains**: Building sequential processing workflows\n5. **Memory Systems**: Adding context and history to conversations\n6. **Document Loading**: Working with different file formats\n7. **Text Splitting and Chunking**: Preprocessing for vector stores\n8. **Vector Stores and Embeddings**: Setting up semantic search\n9. **Retrieval Systems**: Building RAG (Retrieval Augmented Generation)\n10. **Tools and Agents**: Creating systems that can use tools\n11. **LangChain Expression Language**: Advanced workflow construction\n12. **Building Applications**: End-to-end applications with LangChain";
+    }
+    
+    if (lowerCourseName.includes('langgraph')) {
+      return "Common topics include:\n\n1. **LangGraph Fundamentals**: Core concepts and architecture\n2. **Graph-based Workflows**: Creating nodes and edges for AI processes\n3. **State Management**: Handling complex state in AI applications\n4. **Agent Networks**: Building multi-agent systems\n5. **Cyclic Processing**: Creating feedback loops in AI workflows\n6. **Conversation Management**: Advanced dialogue systems\n7. **Integration with LangChain**: Using LangGraph with LangChain components\n8. **Decision-making Frameworks**: Creating agents that can reason\n9. **Event-based Systems**: Trigger-based workflow execution\n10. **Custom Node Development**: Building specialized components\n11. **Debugging and Visualizing Graphs**: Monitoring and optimizing workflows\n12. **Advanced Applications**: Multi-step reasoning and planning systems";
+    }
+    
+    // Default generic topics for other courses
+    return "The curriculum typically includes comprehensive coverage of fundamental concepts, practical applications, and advanced techniques relevant to this field. Contact our advisors for the detailed module breakdown tailored to your learning goals.";
+  }
+
   // --- Enhanced Course Context Formatting ---
-  private buildEnhancedCourseContext(faissResults: FAISSRecord[], compoundQuery: CompoundQuery, isFollowUp: boolean = false): string {
+  private buildEnhancedCourseContext(faissResults: FAISSRecord[], compoundQuery: CompoundQuery, isFollowUp: boolean = false, specificInfoRequest?: SpecificInfoRequest): string {
     if (faissResults.length === 0) {
       return "No specific course data found. Our expert advisors at +91 9666523199 have comprehensive information about all our courses and can provide personalized guidance for your learning journey.";
+    }
+    
+    // Handle specific information request if present
+    if (specificInfoRequest) {
+      const specificInfo = this.extractSpecificCourseInfo(faissResults, specificInfoRequest);
+      if (specificInfo) {
+        return `SPECIFIC INFORMATION REQUEST RESULT:
+Information Type: ${specificInfoRequest.type}
+Course: ${specificInfoRequest.courseName}
+Data: ${specificInfo}`;
+      }
     }
     
     // Group results by course for better organization
@@ -871,13 +1213,39 @@ ${this.getResponseInstructions(queryAnalysis)}`;
       if (compoundQuery.wantsTopics || groups.modules.length > 0 || isFollowUp) {
         if (groups.modules.length > 0) {
           coursePart += `🔥 **Complete Module Breakdown**:\n`;
-          groups.modules.forEach((module, index) => {
-            let moduleText = this.filterSalaryHikeData(module.text);
-            coursePart += `${index + 1}. **${moduleText.split(':')[0] || `Module ${index + 1}`}**: ${moduleText.split(':').slice(1).join(':') || moduleText}\n`;
+          
+          // Sort modules to ensure consistent ordering if possible
+          const sortedModules = [...groups.modules].sort((a, b) => {
+            // Try to extract module numbers if they exist (like "Module 1", "Chapter 2", etc.)
+            const aMatch = a.text.match(/^(module|chapter|section|unit|part|lesson)\s*(\d+)/i);
+            const bMatch = b.text.match(/^(module|chapter|section|unit|part|lesson)\s*(\d+)/i);
+            
+            if (aMatch && bMatch) {
+              return parseInt(aMatch[2]) - parseInt(bMatch[2]);
+            }
+            
+            return 0; // Keep original order if no pattern found
           });
+          
+          // Process all modules
+          sortedModules.forEach((module, index) => {
+            let moduleText = this.filterSalaryHikeData(module.text);
+            
+            // Improve formatting - detect if it has a "Title: Description" pattern
+            const titleMatch = moduleText.match(/^(.+?):\s*(.+)$/);
+            if (titleMatch) {
+              // Format with proper title and description
+              coursePart += `${index + 1}. **${titleMatch[1].trim()}**: ${titleMatch[2].trim()}\n`;
+            } else {
+              // If no clear title-description pattern, just use as-is
+              coursePart += `${index + 1}. **${moduleText.trim()}**\n`;
+            }
+          });
+          
           coursePart += `\n`;
         } else {
-          coursePart += `📚 **Comprehensive curriculum** covers all essential topics with hands-on projects and real-world applications.\n\n`;
+          // If no specific modules, use our generic topics function to provide meaningful content
+          coursePart += `📚 **Complete Curriculum Breakdown**:\n${this.getGenericTopicsForCourse(courseTitle)}\n\n`;
         }
       }
       
@@ -922,7 +1290,39 @@ ${this.getResponseInstructions(queryAnalysis)}`;
 
   // --- Enhanced Response Instructions ---
   private getResponseInstructions(queryAnalysis: QueryAnalysis): string {
-    const { isGreeting, isAllCourses, isFollowUp, compoundQuery, faissResults } = queryAnalysis;
+    const { isGreeting, isAllCourses, isFollowUp, compoundQuery, faissResults, specificInfoRequest } = queryAnalysis;
+    
+    // Handle specific information requests
+    if (specificInfoRequest) {
+      const infoTypeMap = {
+        'duration': 'duration and time commitment',
+        'topics': 'curriculum topics and modules',
+        'price': 'pricing and payment options'
+      };
+      
+      // Special instructions for topics to ensure we show ALL topics
+      if (specificInfoRequest.type === 'topics') {
+        return `CURRICULUM TOPICS RESPONSE:
+1. **COMPREHENSIVE LISTING**: Respond with ALL the topics/modules for ${specificInfoRequest.courseName}
+2. **COMPLETE FORMAT**: Show the FULL list of topics, not just a sample or summary
+3. **NUMBERED LIST**: Present topics in a clear, numbered format (1., 2., 3., etc.)
+4. **INCLUDE DESCRIPTIONS**: Include brief descriptions of topics when available
+5. **FORMATTING**: Use bold formatting for topic names to improve readability
+6. **INTRODUCTION**: Start with "The ${specificInfoRequest.courseName} curriculum includes the following topics/modules:"
+
+CRITICAL: This is a topics request - show ALL modules/topics in the curriculum. Don't abbreviate or truncate the list.`;
+      }
+      
+      // Default handling for other types of specific information requests
+      return `SPECIFIC INFORMATION RESPONSE:
+1. **DIRECT ANSWER**: Respond ONLY with the requested ${infoTypeMap[specificInfoRequest.type]} for ${specificInfoRequest.courseName}
+2. **CONCISE FORMAT**: Keep the response short and focused only on the specific information requested
+3. **NO ADDITIONAL INFO**: Do not include other course details unless directly relevant to the question
+4. **INFORMATION GAPS**: If exact information is not available, provide a generic but helpful response about ${specificInfoRequest.type}
+5. **STRUCTURE**: Start directly with "The ${infoTypeMap[specificInfoRequest.type]} for ${specificInfoRequest.courseName} is..."
+
+CRITICAL: This is a targeted information request. Keep the response brief and focused only on the ${specificInfoRequest.type}.`;
+    }
     
     if (isGreeting) {
       return "Respond with a warm, professional greeting and ask how you can help with course selection.";
@@ -1022,14 +1422,34 @@ You are an enthusiastic, knowledgeable course advisor helping users find the per
    - Show ALL available modules/topics with descriptions
    - For pricing: Always respond "For detailed pricing information, please contact our advisors at +91 9666523199"
 
-6. **CONVERSATIONAL FLOW**: Remember previously discussed courses and maintain context
+6. **SPECIFIC INFO REQUESTS**: When users ask only for specific information (duration, topics, or price):
+   - Provide ONLY the requested information in a targeted response
+   - For topics/curriculum requests, list ALL topics in the course, not just a summary
+   - For duration or price, provide a brief, direct answer
+   - Do not include other course details or promotional content
+   - Start with a direct answer to their specific question
 
-7. **MISSPELLING HANDLING**: When users misspell course names (like "dta analytrics" for "Data Analytics"):
+7. **CONVERSATIONAL FLOW**: Remember previously discussed courses and maintain context
+
+8. **MISSPELLING HANDLING**: When users misspell course names (like "dta analytrics" for "Data Analytics"):
    - Use fuzzy matching to identify the intended course
    - Provide information about the matched course
    - Ask for confirmation if needed
 
 ## RESPONSE STRUCTURE
+
+**For Specific Information Requests about Duration/Price:**
+The [duration/price] for [Course Name] is:
+
+[Only the specific information requested, presented concisely]
+
+**For Topic/Curriculum Requests:**
+The [Course Name] curriculum includes the following topics/modules:
+
+1. **[Module 1]**: [Description]
+2. **[Module 2]**: [Description]
+3. **[Module 3]**: [Description]
+[Include ALL modules, no abbreviation]
 
 **For All Courses Listing:**
 Hello there! Welcome to BigClasses.AI! We have a fantastic range of courses designed to boost your career.
