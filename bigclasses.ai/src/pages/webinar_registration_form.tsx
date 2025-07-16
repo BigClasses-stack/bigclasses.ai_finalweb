@@ -31,7 +31,7 @@ const WebinarRegistrationForm: React.FC<WebinarRegistrationFormProps> = ({ onSuc
     setLoading(true);
 
     try {
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxv4rWqJ-OF4Db76JNW-8Q3XyupgUdMyizyK2iiuXv4e9VQPXkuq-SfnRLMsD04UdE4/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxrXTT2YfbndCPBSiiOEer17Za4n3azHQJlgOw0ayu_quzw1X0r9R_xPRj6AoZrNm-8ZA/exec';
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
