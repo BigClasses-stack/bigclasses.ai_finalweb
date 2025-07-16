@@ -120,7 +120,7 @@ const DataEngineerWebinar = () => {
             <div className="flex flex-wrap gap-3 sm:gap-4 text-base sm:text-lg text-gray-700 font-medium">
               <div className="flex items-center gap-2">
                 <Calendar className="text-blue-600" size={22} />
-                <span>12th & 13th July 2025</span>
+                <span>19th & 20th July 2025</span>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="text-blue-600" size={22} />

@@ -1,0 +1,1083 @@
+{
+  "records": [
+    {
+      "id": "course_1_overview",
+      "courseId": 1,
+      "text": "Python Programming (6 weeks): Basics of Python Programming, Data Structures and Algorithms, Object-Oriented Programming (OOP). $12.5, 150% hike, 500+ ...",
+      "type": "overview",
+      "metadata": {
+        "title": "Python Programming",
+        "duration": "6 weeks",
+        "package": "12.5"
+      }
+    },
+    {
+      "id": "course_1_duration",
+      "courseId": 1,
+      "text": "Python Programming duration 6 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Python Programming",
+        "duration": "6 weeks"
+      }
+    },
+    {
+      "id": "course_1_pricing",
+      "courseId": 1,
+      "text": "Python Programming price $12.5, salary hike 150%, job transitions 500+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Python Programming",
+        "package": "12.5"
+      }
+    },
+    {
+      "id": "course_1_module_0",
+      "courseId": 1,
+      "text": "Python Programming module: Basics of Python Programming - Basic Python covers variables, data types, loops, functions, and I/O....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Python Programming"
+      }
+    },
+    {
+      "id": "course_1_module_1",
+      "courseId": 1,
+      "text": "Python Programming module: Data Structures and Algorithms - DSA focuses on efficient data storage and problem-solving methods....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Python Programming"
+      }
+    },
+    {
+      "id": "course_1_module_2",
+      "courseId": 1,
+      "text": "Python Programming module: Object-Oriented Programming (OOP) - OOP is a programming style based on classes and objects....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Python Programming"
+      }
+    },
+    {
+      "id": "course_1_module_3",
+      "courseId": 1,
+      "text": "Python Programming module: File Handling and Exceptions - File handling manages data files; exceptions handle runtime errors....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Python Programming"
+      }
+    },
+    {
+      "id": "course_1_module_4",
+      "courseId": 1,
+      "text": "Python Programming module: Advanced Python - Advanced Python includes decorators, generators, and context managers....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Python Programming"
+      }
+    },
+    {
+      "id": "course_2_overview",
+      "courseId": 2,
+      "text": "Machine Learning (6 weeks): Introduction to Machine Learning, Supervised Learning, Unsupervised Learning. $15.5, 180% hike, 600+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "Machine Learning",
+        "duration": "6 weeks",
+        "package": "15.5"
+      }
+    },
+    {
+      "id": "course_2_duration",
+      "courseId": 2,
+      "text": "Machine Learning duration 6 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Machine Learning",
+        "duration": "6 weeks"
+      }
+    },
+    {
+      "id": "course_2_pricing",
+      "courseId": 2,
+      "text": "Machine Learning price $15.5, salary hike 180%, job transitions 600+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Machine Learning",
+        "package": "15.5"
+      }
+    },
+    {
+      "id": "course_2_module_0",
+      "courseId": 2,
+      "text": "Machine Learning module: Introduction to Machine Learning - Getting started with algorithms that enable data-driven predictions....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Machine Learning"
+      }
+    },
+    {
+      "id": "course_2_module_1",
+      "courseId": 2,
+      "text": "Machine Learning module: Supervised Learning - Learning from labeled data to predict outcomes....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Machine Learning"
+      }
+    },
+    {
+      "id": "course_2_module_2",
+      "courseId": 2,
+      "text": "Machine Learning module: Unsupervised Learning - Identifying patterns in unlabeled data....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Machine Learning"
+      }
+    },
+    {
+      "id": "course_2_module_3",
+      "courseId": 2,
+      "text": "Machine Learning module: Model Evaluation and Optimization - Enhancing model performance through evaluation and fine-tuning....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Machine Learning"
+      }
+    },
+    {
+      "id": "course_2_module_4",
+      "courseId": 2,
+      "text": "Machine Learning module: Deployment - Delivering models for real-world use....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Machine Learning"
+      }
+    },
+    {
+      "id": "course_3_overview",
+      "courseId": 3,
+      "text": "Deep Learning (4 weeks): Basics of Neural Networks, Convolutional Neural Networks (CNNs), Recurrent Neural Networks (RNNs). $18.5, 200% hike, 400+ tra...",
+      "type": "overview",
+      "metadata": {
+        "title": "Deep Learning",
+        "duration": "4 weeks",
+        "package": "18.5"
+      }
+    },
+    {
+      "id": "course_3_duration",
+      "courseId": 3,
+      "text": "Deep Learning duration 4 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Deep Learning",
+        "duration": "4 weeks"
+      }
+    },
+    {
+      "id": "course_3_pricing",
+      "courseId": 3,
+      "text": "Deep Learning price $18.5, salary hike 200%, job transitions 400+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Deep Learning",
+        "package": "18.5"
+      }
+    },
+    {
+      "id": "course_3_module_0",
+      "courseId": 3,
+      "text": "Deep Learning module: Basics of Neural Networks - Basics of neural networks cover layers, neurons, and learning processes....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Deep Learning"
+      }
+    },
+    {
+      "id": "course_3_module_1",
+      "courseId": 3,
+      "text": "Deep Learning module: Convolutional Neural Networks (CNNs) - CNNs are neural networks specialized for image processing tasks....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Deep Learning"
+      }
+    },
+    {
+      "id": "course_3_module_2",
+      "courseId": 3,
+      "text": "Deep Learning module: Recurrent Neural Networks (RNNs) - RNNs are neural networks designed for sequential data and time series....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Deep Learning"
+      }
+    },
+    {
+      "id": "course_3_module_3",
+      "courseId": 3,
+      "text": "Deep Learning module: Transformers - Transformers are models that use attention to process sequence data efficiently....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Deep Learning"
+      }
+    },
+    {
+      "id": "course_3_module_4",
+      "courseId": 3,
+      "text": "Deep Learning module: Deployment and Real-World Applications - Deployment and real-world applications involve launching models for practical us...",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Deep Learning"
+      }
+    },
+    {
+      "id": "course_4_overview",
+      "courseId": 4,
+      "text": "Natural Language Processing (8-12 weeks): Text Preprocessing, Classical NLP Approaches, Advanced NLP Techniques. $17, 190% hike, 350+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "Natural Language Processing",
+        "duration": "8-12 weeks",
+        "package": "17"
+      }
+    },
+    {
+      "id": "course_4_duration",
+      "courseId": 4,
+      "text": "Natural Language Processing duration 8-12 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Natural Language Processing",
+        "duration": "8-12 weeks"
+      }
+    },
+    {
+      "id": "course_4_pricing",
+      "courseId": 4,
+      "text": "Natural Language Processing price $17, salary hike 190%, job transitions 350+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Natural Language Processing",
+        "package": "17"
+      }
+    },
+    {
+      "id": "course_4_module_0",
+      "courseId": 4,
+      "text": "Natural Language Processing module: Text Preprocessing - Preparing text data for analysis and modeling....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Natural Language Processing"
+      }
+    },
+    {
+      "id": "course_4_module_1",
+      "courseId": 4,
+      "text": "Natural Language Processing module: Classical NLP Approaches - Traditional methods for text analysis using statistical and rule-based technique...",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Natural Language Processing"
+      }
+    },
+    {
+      "id": "course_4_module_2",
+      "courseId": 4,
+      "text": "Natural Language Processing module: Advanced NLP Techniques - Cutting-edge methods like transformers for deep text understanding....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Natural Language Processing"
+      }
+    },
+    {
+      "id": "course_4_module_3",
+      "courseId": 4,
+      "text": "Natural Language Processing module: Applications of NLP - Real-world uses of NLP, including chatbots, sentiment analysis, and translation....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Natural Language Processing"
+      }
+    },
+    {
+      "id": "course_4_module_4",
+      "courseId": 4,
+      "text": "Natural Language Processing module: Deployment and Integration - Implementing models into systems for seamless real-world use....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Natural Language Processing"
+      }
+    },
+    {
+      "id": "course_5_overview",
+      "courseId": 5,
+      "text": "Generative AI (4-8 weeks): Fundamentals of Generative AI, Text Generation, Image and Video Generation. $20, 210% hike, 300+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "Generative AI",
+        "duration": "4-8 weeks",
+        "package": "20"
+      }
+    },
+    {
+      "id": "course_5_duration",
+      "courseId": 5,
+      "text": "Generative AI duration 4-8 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Generative AI",
+        "duration": "4-8 weeks"
+      }
+    },
+    {
+      "id": "course_5_pricing",
+      "courseId": 5,
+      "text": "Generative AI price $20, salary hike 210%, job transitions 300+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Generative AI",
+        "package": "20"
+      }
+    },
+    {
+      "id": "course_5_module_0",
+      "courseId": 5,
+      "text": "Generative AI module: Fundamentals of Generative AI - Exploring models like GANs, VAEs, and Diffusion for generative tasks....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Generative AI"
+      }
+    },
+    {
+      "id": "course_5_module_1",
+      "courseId": 5,
+      "text": "Generative AI module: Text Generation - Text generation is creating written content using AI models....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Generative AI"
+      }
+    },
+    {
+      "id": "course_5_module_2",
+      "courseId": 5,
+      "text": "Generative AI module: Image and Video Generation - Image and video generation use AI to create visual content....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Generative AI"
+      }
+    },
+    {
+      "id": "course_5_module_3",
+      "courseId": 5,
+      "text": "Generative AI module: Multi-Modal Models - Multi-modal models process and combine different data types like text and images...",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Generative AI"
+      }
+    },
+    {
+      "id": "course_5_module_4",
+      "courseId": 5,
+      "text": "Generative AI module: Real-World Applications and Deployment - Real-world applications and deployment bring AI models into practical use....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Generative AI"
+      }
+    },
+    {
+      "id": "course_6_overview",
+      "courseId": 6,
+      "text": "LangChain (4 weeks): Introduction to LangChain, Working with Language Models, Building Knowledge-Based Systems. $16, 170% hike, 320+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "LangChain",
+        "duration": "4 weeks",
+        "package": "16"
+      }
+    },
+    {
+      "id": "course_6_duration",
+      "courseId": 6,
+      "text": "LangChain duration 4 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "LangChain",
+        "duration": "4 weeks"
+      }
+    },
+    {
+      "id": "course_6_pricing",
+      "courseId": 6,
+      "text": "LangChain price $16, salary hike 170%, job transitions 320+",
+      "type": "pricing",
+      "metadata": {
+        "title": "LangChain",
+        "package": "16"
+      }
+    },
+    {
+      "id": "course_6_module_0",
+      "courseId": 6,
+      "text": "LangChain module: Introduction to LangChain - Overview of LangChain for building language model-powered applications....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "LangChain"
+      }
+    },
+    {
+      "id": "course_6_module_1",
+      "courseId": 6,
+      "text": "LangChain module: Working with Language Models - Using language models to generate, understand, and analyze text....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "LangChain"
+      }
+    },
+    {
+      "id": "course_6_module_2",
+      "courseId": 6,
+      "text": "LangChain module: Building Knowledge-Based Systems - Developing intelligent systems using structured data and rules....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "LangChain"
+      }
+    },
+    {
+      "id": "course_6_module_3",
+      "courseId": 6,
+      "text": "LangChain module: Deployment and Scaling - Launching applications and expanding capacity to handle growth....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "LangChain"
+      }
+    },
+    {
+      "id": "course_6_module_4",
+      "courseId": 6,
+      "text": "LangChain module: Advanced Features of LangChain - Creating systems that leverage structured information for intelligent responses....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "LangChain"
+      }
+    },
+    {
+      "id": "course_7_overview",
+      "courseId": 7,
+      "text": "LangGraph (4 weeks): Fundamentals of LangGraph, Advanced Graph-Based Workflows, Integration with External Services. $15, 160% hike, 290+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "LangGraph",
+        "duration": "4 weeks",
+        "package": "15"
+      }
+    },
+    {
+      "id": "course_7_duration",
+      "courseId": 7,
+      "text": "LangGraph duration 4 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "LangGraph",
+        "duration": "4 weeks"
+      }
+    },
+    {
+      "id": "course_7_pricing",
+      "courseId": 7,
+      "text": "LangGraph price $15, salary hike 160%, job transitions 290+",
+      "type": "pricing",
+      "metadata": {
+        "title": "LangGraph",
+        "package": "15"
+      }
+    },
+    {
+      "id": "course_7_module_0",
+      "courseId": 7,
+      "text": "LangGraph module: Fundamentals of LangGraph - LangGraph fundamentals cover building and managing AI workflows with graph-based...",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "LangGraph"
+      }
+    },
+    {
+      "id": "course_7_module_1",
+      "courseId": 7,
+      "text": "LangGraph module: Advanced Graph-Based Workflows - Advanced Graph-Based Workflows....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "LangGraph"
+      }
+    },
+    {
+      "id": "course_7_module_2",
+      "courseId": 7,
+      "text": "LangGraph module: Integration with External Services - Integration with external services connects AI workflows to APIs and third-party...",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "LangGraph"
+      }
+    },
+    {
+      "id": "course_7_module_3",
+      "courseId": 7,
+      "text": "LangGraph module: Complex Graph Applications - Complex graph applications solve intricate problems using advanced graph structu...",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "LangGraph"
+      }
+    },
+    {
+      "id": "course_7_module_4",
+      "courseId": 7,
+      "text": "LangGraph module: Deployment and Monitoring - Deployment and monitoring ensure AI models run smoothly and perform well in prod...",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "LangGraph"
+      }
+    },
+    {
+      "id": "course_8_overview",
+      "courseId": 8,
+      "text": "MLOps (8-12 weeks): Introduction to MLOps, Introduction to MLflow, MLflow Tracking component. $19, 210% hike, 380+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "MLOps",
+        "duration": "8-12 weeks",
+        "package": "19"
+      }
+    },
+    {
+      "id": "course_8_duration",
+      "courseId": 8,
+      "text": "MLOps duration 8-12 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "MLOps",
+        "duration": "8-12 weeks"
+      }
+    },
+    {
+      "id": "course_8_pricing",
+      "courseId": 8,
+      "text": "MLOps price $19, salary hike 210%, job transitions 380+",
+      "type": "pricing",
+      "metadata": {
+        "title": "MLOps",
+        "package": "19"
+      }
+    },
+    {
+      "id": "course_8_module_0",
+      "courseId": 8,
+      "text": "MLOps module: Introduction to MLOps - Introduction to MLOps covers the basics of deploying and managing machine learni...",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_1",
+      "courseId": 8,
+      "text": "MLOps module: Introduction to MLFlow - Getting started with MLflow for tracking and managing ML experiments....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_2",
+      "courseId": 8,
+      "text": "MLOps module: MLflow Tracking Components - MLflow Tracking lets you log and manage experiments with APIs, a central server,...",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_3",
+      "courseId": 8,
+      "text": "MLOps module: MLflow Logging Functions - MLflow logging functions record experiment data like parameters, metrics, tags, ...",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_4",
+      "courseId": 8,
+      "text": "MLOps module: Launch Multiple Experiments and Runs - MLflow allows launching multiple experiments and runs to track and compare diffe...",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_5",
+      "courseId": 8,
+      "text": "MLOps module: Autologging in MLflow - MLflow autologging automatically logs parameters, metrics, and artifacts during ...",
+      "type": "module",
+      "chunkIndex": 5,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_6",
+      "courseId": 8,
+      "text": "MLOps module: Tracking Server of MLflow - The MLflow Tracking Server stores and manages experiment runs, parameters, metri...",
+      "type": "module",
+      "chunkIndex": 6,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_7",
+      "courseId": 8,
+      "text": "MLOps module: MLflow Model Component - The MLflow Model component packages machine learning models for easy deployment ...",
+      "type": "module",
+      "chunkIndex": 7,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_8",
+      "courseId": 8,
+      "text": "MLOps module: Handling Customized Models in MLflow - MLflow handles custom models by packaging and logging them with their code and d...",
+      "type": "module",
+      "chunkIndex": 8,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_9",
+      "courseId": 8,
+      "text": "MLOps module: MLflow Model Evaluation - MLflow Model Evaluation tracks and compares model performance using logged metri...",
+      "type": "module",
+      "chunkIndex": 9,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_10",
+      "courseId": 8,
+      "text": "MLOps module: Git and GitHub - Git and GitHub enable efficient version control and collaboration for software d...",
+      "type": "module",
+      "chunkIndex": 10,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_11",
+      "courseId": 8,
+      "text": "MLOps module: Docker - Docker simplifies application deployment by containerizing applications and thei...",
+      "type": "module",
+      "chunkIndex": 11,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_12",
+      "courseId": 8,
+      "text": "MLOps module: Kubernetes - Kubernetes orchestrates containerized applications, providing scalability, avail...",
+      "type": "module",
+      "chunkIndex": 12,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_13",
+      "courseId": 8,
+      "text": "MLOps module: Terraform - Terraform enables Infrastructure as Code (IaC), allowing declarative provisionin...",
+      "type": "module",
+      "chunkIndex": 13,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_8_module_14",
+      "courseId": 8,
+      "text": "MLOps module: Azure Essentials - Introduction to Azure cloud platform....",
+      "type": "module",
+      "chunkIndex": 14,
+      "metadata": {
+        "title": "MLOps"
+      }
+    },
+    {
+      "id": "course_9_overview",
+      "courseId": 9,
+      "text": "LLMOps (4-8 weeks): Basics of LLMOps, Data Management for LLMs, Model Training and Optimization. $22, 220% hike, 410+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "LLMOps",
+        "duration": "4-8 weeks",
+        "package": "22"
+      }
+    },
+    {
+      "id": "course_9_duration",
+      "courseId": 9,
+      "text": "LLMOps duration 4-8 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "LLMOps",
+        "duration": "4-8 weeks"
+      }
+    },
+    {
+      "id": "course_9_pricing",
+      "courseId": 9,
+      "text": "LLMOps price $22, salary hike 220%, job transitions 410+",
+      "type": "pricing",
+      "metadata": {
+        "title": "LLMOps",
+        "package": "22"
+      }
+    },
+    {
+      "id": "course_9_module_0",
+      "courseId": 9,
+      "text": "LLMOps module: Basics of LLMOps - Managing and optimizing workflows for large language models....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "LLMOps"
+      }
+    },
+    {
+      "id": "course_9_module_1",
+      "courseId": 9,
+      "text": "LLMOps module: Data Management for LLMs - Data management for LLMs involves organizing and processing data for effective m...",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "LLMOps"
+      }
+    },
+    {
+      "id": "course_9_module_2",
+      "courseId": 9,
+      "text": "LLMOps module: Model Training and Optimization - Model training and optimization focus on improving AI performance through data a...",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "LLMOps"
+      }
+    },
+    {
+      "id": "course_9_module_3",
+      "courseId": 9,
+      "text": "LLMOps module: Deployment and Monitoring - Deployment and monitoring ensure AI models run reliably and stay effective over ...",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "LLMOps"
+      }
+    },
+    {
+      "id": "course_9_module_4",
+      "courseId": 9,
+      "text": "LLMOps module: Advanced MLOps Practices - Advanced MLOps practices automate, scale, and secure AI workflows for production...",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "LLMOps"
+      }
+    },
+    {
+      "id": "course_10_overview",
+      "courseId": 10,
+      "text": "AI Agents (4 weeks): Basics of Agents, Reinforcement Learning for Agents, Multi-Agent Systems. $24, 230% hike, 350+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "AI Agents",
+        "duration": "4 weeks",
+        "package": "24"
+      }
+    },
+    {
+      "id": "course_10_duration",
+      "courseId": 10,
+      "text": "AI Agents duration 4 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "AI Agents",
+        "duration": "4 weeks"
+      }
+    },
+    {
+      "id": "course_10_pricing",
+      "courseId": 10,
+      "text": "AI Agents price $24, salary hike 230%, job transitions 350+",
+      "type": "pricing",
+      "metadata": {
+        "title": "AI Agents",
+        "package": "24"
+      }
+    },
+    {
+      "id": "course_10_module_0",
+      "courseId": 10,
+      "text": "AI Agents module: Basics of Agents - Understanding autonomous programs that perform tasks independently....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "AI Agents"
+      }
+    },
+    {
+      "id": "course_10_module_1",
+      "courseId": 10,
+      "text": "AI Agents module: Reinforcement Learning for Agents - Training agents to learn optimal actions through rewards and feedback....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "AI Agents"
+      }
+    },
+    {
+      "id": "course_10_module_2",
+      "courseId": 10,
+      "text": "AI Agents module: Multi-Agent Systems - Coordinating multiple agents to solve complex tasks collaboratively....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "AI Agents"
+      }
+    },
+    {
+      "id": "course_10_module_3",
+      "courseId": 10,
+      "text": "AI Agents module: Autonomous Decision-Making - Enabling systems to make choices without human intervention....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "AI Agents"
+      }
+    },
+    {
+      "id": "course_10_module_4",
+      "courseId": 10,
+      "text": "AI Agents module: Agent Deployment - Launching and managing agents in real-world environments....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "AI Agents"
+      }
+    },
+    {
+      "id": "course_11_overview",
+      "courseId": 11,
+      "text": "AI Ethics (4 weeks): Introduction to AI Ethics, Responsible AI Development, Scaling AI Systems. $13, 140% hike, 450+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "AI Ethics",
+        "duration": "4 weeks",
+        "package": "13"
+      }
+    },
+    {
+      "id": "course_11_duration",
+      "courseId": 11,
+      "text": "AI Ethics duration 4 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "AI Ethics",
+        "duration": "4 weeks"
+      }
+    },
+    {
+      "id": "course_11_pricing",
+      "courseId": 11,
+      "text": "AI Ethics price $13, salary hike 140%, job transitions 450+",
+      "type": "pricing",
+      "metadata": {
+        "title": "AI Ethics",
+        "package": "13"
+      }
+    },
+    {
+      "id": "course_11_module_0",
+      "courseId": 11,
+      "text": "AI Ethics module: Introduction to AI Ethics - Exploring moral principles guiding responsible AI development and use....",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "AI Ethics"
+      }
+    },
+    {
+      "id": "course_11_module_1",
+      "courseId": 11,
+      "text": "AI Ethics module: Responsible AI Development - Building AI systems that are fair, transparent, and accountable....",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "AI Ethics"
+      }
+    },
+    {
+      "id": "course_11_module_2",
+      "courseId": 11,
+      "text": "AI Ethics module: Scaling AI Systems - Expanding AI capabilities to handle larger data and users efficiently....",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "AI Ethics"
+      }
+    },
+    {
+      "id": "course_11_module_3",
+      "courseId": 11,
+      "text": "AI Ethics module: AI in High-Stakes Applications - Applying AI responsibly in critical areas like healthcare and finance....",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "AI Ethics"
+      }
+    },
+    {
+      "id": "course_11_module_4",
+      "courseId": 11,
+      "text": "AI Ethics module: Future of Ethical AI - Advancing AI with fairness, transparency, and societal benefit in mind....",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "AI Ethics"
+      }
+    },
+    {
+      "id": "course_12_overview",
+      "courseId": 12,
+      "text": "Data Analytics (8-12 weeks): Excel with Project, SQL Server with Project, PowerBI with Project. $13, 140% hike, 450+ transitions.",
+      "type": "overview",
+      "metadata": {
+        "title": "Data Analytics",
+        "duration": "8-12 weeks",
+        "package": "13"
+      }
+    },
+    {
+      "id": "course_12_duration",
+      "courseId": 12,
+      "text": "Data Analytics duration 8-12 weeks",
+      "type": "duration",
+      "metadata": {
+        "title": "Data Analytics",
+        "duration": "8-12 weeks"
+      }
+    },
+    {
+      "id": "course_12_pricing",
+      "courseId": 12,
+      "text": "Data Analytics price $13, salary hike 140%, job transitions 450+",
+      "type": "pricing",
+      "metadata": {
+        "title": "Data Analytics",
+        "package": "13"
+      }
+    },
+    {
+      "id": "course_12_module_0",
+      "courseId": 12,
+      "text": "Data Analytics module: Excel with Project - Learn the fundamentals of Microsoft Excel through hands-on projects, mastering d...",
+      "type": "module",
+      "chunkIndex": 0,
+      "metadata": {
+        "title": "Data Analytics"
+      }
+    },
+    {
+      "id": "course_12_module_1",
+      "courseId": 12,
+      "text": "Data Analytics module: SQL Server with Project - Learn the fundamentals of SQL Server through hands-on projects, covering databas...",
+      "type": "module",
+      "chunkIndex": 1,
+      "metadata": {
+        "title": "Data Analytics"
+      }
+    },
+    {
+      "id": "course_12_module_2",
+      "courseId": 12,
+      "text": "Data Analytics module: PowerBI with Project - Gain hands-on experience in data analysis and visualization by learning Power BI...",
+      "type": "module",
+      "chunkIndex": 2,
+      "metadata": {
+        "title": "Data Analytics"
+      }
+    },
+    {
+      "id": "course_12_module_3",
+      "courseId": 12,
+      "text": "Data Analytics module: Python with Project - Learn Python fundamentals through hands-on coding and build a complete project t...",
+      "type": "module",
+      "chunkIndex": 3,
+      "metadata": {
+        "title": "Data Analytics"
+      }
+    },
+    {
+      "id": "course_12_module_4",
+      "courseId": 12,
+      "text": "Data Analytics module: Interview Preparation - This module provides essential strategies and practical skills to help you confi...",
+      "type": "module",
+      "chunkIndex": 4,
+      "metadata": {
+        "title": "Data Analytics"
+      }
+    }
+  ],
+  "index_info": {
+    "dimension": 384,
+    "total_courses": 12,
+    "total_records": 106,
+    "version": "1.0.0",
+    "optimized_for": "minimal_token_usage"
+  }
+}
