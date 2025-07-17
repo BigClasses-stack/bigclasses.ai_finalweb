@@ -23,9 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent # This evaluates to bigclasses
 
 SECRET_KEY = 'django-insecure--a3hg3b78#qfw!a4=n5ip9c#^@)pn28#v6t44s!*9gbuioxb*n'
 
+# IMPORTANT: Set DEBUG to False in production for security and performance!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+# IMPORTANT: In production, explicitly list your domains (e.g., "bigclasses.ai", "www.bigclasses.ai")
+# Do NOT use "*" in production, as it's a security risk.
+ALLOWED_HOSTS = ["*", "bigclasses.ai", "www.bigclasses.ai", "stage.bigclasses.ai", "13.204.9.172"]
 
 
 INSTALLED_APPS = [
@@ -42,7 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',    
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,42 +55,39 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# When CORS_ALLOW_ALL_ORIGINS is True, CORS_ALLOWED_ORIGINS is ignored for allowing requests.
+# However, it's good practice to list your allowed origins here for clarity and
+# if you decide to set CORS_ALLOW_ALL_ORIGINS to False in the future.
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://13.204.9.172:3001",  # or wherever your React app runs
-    "http://localhost:3001",
+    "http://13.204.9.172:3001", # Your development/staging IP with HTTP
+    "http://localhost:3001",    # Your local development
+    "https://bigclasses.ai",    # Your production domain (HTTPS)
+    "https://www.bigclasses.ai",# Your www production domain (HTTPS)
+    "https://stage.bigclasses.ai", # Your staging domain (HTTPS)
 ]
 
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF_TRUSTED_ORIGINS needs to list the domains from which your frontend will make requests.
+# Include both HTTP (for local/dev) and HTTPS (for production/staging).
 CSRF_TRUSTED_ORIGINS = [
     "http://13.204.9.172:3001",
     "http://localhost:3001",
+    "https://bigclasses.ai",
+    "https://www.bigclasses.ai",
+    "https://stage.bigclasses.ai",
 ]
 
 ROOT_URLCONF = 'backend.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [os.path.join(BASE_DIR,  'templates')],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             # Corrected path based on your exact structure
-            os.path.join(BASE_DIR, 'templates'), 
+            os.path.join(BASE_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -163,15 +163,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 if not os.path.exists(MEDIA_ROOT):
     os.makedirs(MEDIA_ROOT, exist_ok=True)
-    os.chmod(MEDIA_ROOT, 0o777)
+    os.chmod(MEDIA_ROOT, 0o777) # Be cautious with 777 in production, better to use proper user/group permissions.
 
 # Create curricula directory structure if it doesn't exist
 CURRICULA_DIR = os.path.join(MEDIA_ROOT, 'curricula')
 if not os.path.exists(CURRICULA_DIR):
     os.makedirs(CURRICULA_DIR, exist_ok=True)
-    os.chmod(CURRICULA_DIR, 0o777)
-
-# Replace with your company admin email
+    os.chmod(CURRICULA_DIR, 0o777) # Be cautious with 777 in production, better to use proper user/group permissions.
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -234,3 +232,20 @@ LOGGING = {
         }
     }
 }
+
+
+# --- IMPORTANT: ADDED SETTINGS FOR PROXY PROTOCOL HANDLING ---
+# This tells Django to trust the X-Forwarded-Proto header from your Nginx proxy
+# and assume the original request protocol was HTTPS if the header is present and 'https'.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# This is also good practice when using a proxy, as it tells Django to use the
+# X-Forwarded-Host header for hostname resolution, especially if your domain
+# names are handled by the proxy.
+USE_X_FORWARDED_HOST = True
+
+# Consider adding these for enhanced security in production:
+# SECURE_SSL_REDIRECT = True # Redirects all HTTP requests to HTTPS (Nginx should handle this too)
+# SESSION_COOKIE_SECURE = True # Ensures session cookies are only sent over HTTPS
+# CSRF_COOKIE_SECURE = True # Ensures CSRF cookies are only sent over HTTPS
+# --- END ADDED SETTINGS ---
