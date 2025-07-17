@@ -1,4 +1,3 @@
-
 name: Deploy to prod
 
 on:
@@ -19,6 +18,11 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
+          cd /home/ubuntu/prod
+          sudo rm -rf bigclasses.ai_finalweb
+          git clone https://github.com/BigClasses-stack/bigclasses.ai_finalweb.git
           cd /home/ubuntu/prod/bigclasses.ai_finalweb
+          git checkout prod
           git pull origin prod
+          chmod +x deploy.sh
           ./deploy.sh

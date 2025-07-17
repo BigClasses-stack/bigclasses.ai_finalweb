@@ -6,6 +6,16 @@ cd /home/ubuntu/prod/bigclasses.ai_finalweb
 # Pull latest code from prod branch
 git config pull.rebase false
 git pull origin prod
+cd /home/ubuntu/prod/bigclasses.ai_finalweb/bigclasses.ai
+rm -rf node_modules package-lock.json
+cd ..
+
+# Fix file permissions to avoid Docker build errors
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+
+# Remove all Python __pycache__ directories to avoid Docker context errors
+find . -type d -name "__pycache__" -exec rm -rf {} +
 
 # Bring down only the STAGING containers
 docker-compose -f docker-compose.prod.yml -p prod down
