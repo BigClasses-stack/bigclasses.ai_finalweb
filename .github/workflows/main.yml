@@ -1,10 +1,10 @@
 
-name: Deploy to stage
+name: Deploy to prod
 
 on:
   push:
     branches:
-      - stage
+      - prod
 
 jobs:
   deploy:
@@ -19,6 +19,6 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.SSH_KEY }}
         script: |
-          cd /home/ubuntu/stage/bigclasses.ai_finalweb
-          git pull origin stage
+          cd /home/ubuntu/prod/bigclasses.ai_finalweb
+          git pull origin prod
           ./deploy.sh
