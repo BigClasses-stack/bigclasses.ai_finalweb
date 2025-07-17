@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, Users, Award, CheckCircle, Star, Play, Globe, Shield, TrendingUp, BookOpen, MessageCircle } from 'lucide-react';
-import GenerativeAIRegistrationForm from 'src/pages/Webinar_registration_form_generativeai';
+// import GenerativeAIRegistrationForm from 'src/pages/Webinar_registration_form_generativeai.tsx';
+import GenerativeAIRegistrationForm from "./Webinar_registration_form_generativeai";
+
 
 const SuccessModal = ({ open, onClose }) => {
   if (!open) return null;
